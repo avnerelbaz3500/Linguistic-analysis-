@@ -1,0 +1,4 @@
+cookiecutter
+flake8
+ruff
+dotenv
