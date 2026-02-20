@@ -65,3 +65,4 @@ def load_data(path: str) -> duckdb.DuckDBPyRelation:
 
     logger.info(f"Loaded {row_count:,} rows, {len(cols)} columns")
     return rel
+
