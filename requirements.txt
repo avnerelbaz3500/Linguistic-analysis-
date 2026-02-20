@@ -2,3 +2,7 @@ cookiecutter
 flake8
 ruff
 dotenv
+pandas
+arkindex_export
+tqdm
+pathlib
