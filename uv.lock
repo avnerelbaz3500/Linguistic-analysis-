@@ -430,7 +430,6 @@ dependencies = [
     { name = "flake8" },
     { name = "pandas" },
     { name = "pathlib" },
-    { name = "polars" },
     { name = "ruff" },
     { name = "tqdm" },
 ]
@@ -449,7 +448,6 @@ requires-dist = [
     { name = "flake8", specifier = ">=7.3.0" },
     { name = "pandas", specifier = ">=3.0.0" },
     { name = "pathlib", specifier = ">=1.0.1" },
-    { name = "polars", specifier = ">=1.38.1" },
     { name = "ruff", specifier = ">=0.15.0" },
     { name = "tqdm", specifier = ">=4.67.3" },
 ]
