@@ -4,7 +4,7 @@ from helper_function.print import *
 
 TEXT_ROOT = "data/raw/text_files"  
 CSV_PATH = "data/raw/archelect_search.csv"
-OUTPUT_PATH = "data/clean/output.parquet"
+OUTPUT_PATH = "data/clean/archelect_clean.parquet"
 OUTPUT_DIR = "data/clean"
 os.makedirs(OUTPUT_DIR, exist_ok=True) # Ensure the folder exists
 
@@ -46,6 +46,9 @@ df_meta = df_meta[COLUMNS_TO_KEEP]
 print(f"Number of rows in archelect : {len(df_meta)}")
 
 df_final = df_txt.merge(df_meta, on="id", how="left")
+# Remove useless spaces
+df_final["raw_text"] = df_final["raw_text"].str.strip()
+
 print(blue(f"Number of rows after : {len(df_final)}"))
 
 missing_meta = df_final["date"].isna().sum()
