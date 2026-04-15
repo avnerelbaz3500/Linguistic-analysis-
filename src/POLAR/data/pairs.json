@@ -1,0 +1,666 @@
+[
+    {
+        "direct": "Nous allons augmenter les impôts sur les grandes fortunes.",
+        "langue_de_bois": "Il nous apparaît nécessaire d'opter pour une posture de redistribution de la richesse en créant un cadre fiscal plus équilibré et progressif."
+    },
+    {
+        "direct": "Nous allons supprimer les subventions aux industries polluantes.",
+        "langue_de_bois": "Nous devons favoriser une politique industrielle plus respectueuse de l'environnement en ajustant notre programme de soutien économique en conséquence."
+    },
+    {
+        "direct": "Nous allons augmenter le salaire minimum.",
+        "langue_de_bois": "Il nous semble pertinent de doter notre modèle social de plus de souplesse et de justice en ajustant progressivement les seuils salariaux de manière à promouvoir l'équité et la prospérité."
+    },
+    {
+        "direct": "Nous allons augmenter les taxes sur les produits importés.",
+        "langue_de_bois": "Dans le souci de favoriser l'autonomie économique, nous devons procéder à un ajustement du taux d'imposition des marchandises venues d'extérieur."
+    },
+    {
+        "direct": "Nous allons supprimer 200 postes dans la fonction publique.",
+        "langue_de_bois": "Il est nécessaire d'optimiser les ressources humaines de l'administration pour assurer la qualité des services rendus à la population."
+    },
+    {
+        "direct": "Nous allons doubler les subventions aux énergies renouvelables.",
+        "langue_de_bois": "Nous devons intensifier nos efforts pour encourager et développer les sources d'énergie durables en mettant en place un programme de soutien renforcé."
+    },
+    {
+        "direct": "Nous allons augmenter les impôts des plus riches.",
+        "langue_de_bois": "Il est nécessaire d'explorer des pistes novatrices pour assurer une redistribution plus équitable des ressources économiques, en particulier par le biais d'une réflexion approfondie sur la fiscalité."
+    },
+    {
+        "direct": "Nous allons réduire les investissements dans l'éducation.",
+        "langue_de_bois": "Il s'avère crucial de mettre en place des mécanismes plus performants pour optimiser l'allocation des ressources dans le domaine de l'éducation, afin de garantir une efficacité accrue des actions actuelles."
+    },
+    {
+        "direct": "Nous allons supprimer les subventions aux grandes entreprises.",
+        "langue_de_bois": "Il convient d'examiner attentivement l'impact des mesures existantes en matière de soutien à l'activité économique, en vue d'assurer une meilleure alignment entre les ressources allouées et les critères d'efficacité et de performance."
+    },
+    {
+        "direct": "Nous allons augmenter les impôts des riches.",
+        "langue_de_bois": "Il est nécessaire de mettre en œuvre une politique d'équilibre budgétaire qui prenne en compte l'effet légal de la redistribution des richesses pour assurer la stabilité financière des collectivités territoriales et la pérennité des services publics."
+    },
+    {
+        "direct": "Nous allons réduire les subventions aux entreprises parásites.",
+        "langue_de_bois": "Il convient d'examiner de manière approfondie l'éventail des soutiens financiers accordés aux entités économiques afin de réorienter et rationaliser les ressources dans le but d'optimiser l'efficacité de la politique industrielle nationale."
+    },
+    {
+        "direct": "Nous allons supprimer le chômage partiel.",
+        "langue_de_bois": "Il est crucial de repenser le dispositif législatif actuel visant la poursuite du travail à temps partagé, en vue de favoriser une transition plus fluide vers l'emploi complet et de renforcer l'adapterabilité du marché du travail."
+    },
+    {
+        "direct": "Nous allons augmenter les impôts sur les riches.",
+        "langue_de_bois": "Il s'avère nécessaire d'opter pour une réorientation fiscale visant à assurer une plus grande juste répartition des charges impôt et taxes entre les citoyens."
+    },
+    {
+        "direct": "Nous allons réduire les subventions aux agricoles.",
+        "langue_de_bois": "Il est envisageable de procéder à une réévaluation des ressources affectées aux secteurs agricoles en vue d'une rationalisation et d'une efficacité accrues."
+    },
+    {
+        "direct": "Nous allons augmenter la sécurité sociale.",
+        "langue_de_bois": "Il est indispensable d'intensifier les actions visant à renforcer la solidarité sociale en mettant en place des mécanismes de soutien et d'assistance plus assurés et efficaces."
+    },
+    {
+        "direct": "Nous allons augmenter les impôts sur les plus riches.",
+        "langue_de_bois": "Des mesures d'équilibre budgétaire et de répartition équitable des charges fiscales s'imposent afin d'assurer la durabilité financière du système."
+    },
+    {
+        "direct": "Nous allons réduire les subventions aux entreprises parcs.",
+        "langue_de_bois": "Il convient d'évaluer de manière prospective l'efficacité des dispositifs de soutien aux structures d'incubation industrielle en vue d'une meilleure allocation des ressources."
+    },
+    {
+        "direct": "Nous allons augmenter les pensions retraite.",
+        "langue_de_bois": "Il est nécessaire de mettre en place des mécanismes de financement pérennes pour garantir la viabilité et l'amélioration des conditions de vie des retraités."
+    },
+    {
+        "direct": "Nous allons augmenter les impôts sur les hauts revenus.",
+        "langue_de_bois": "Nous entreprendrons une réflexion sur l'optimisation de la fiscalité pour favoriser un meilleur équilibre entre l'effort fiscal et l'encouragement à la performance économique."
+    },
+    {
+        "direct": "Nous allons réduire les subventions aux entreprises performantes.",
+        "langue_de_bois": "Nous prévoyons une évaluation stratégique des soutiens financiers afin de renforcer l'efficacité et l'attractivité du dispositif d'aide aux entreprises."
+    },
+    {
+        "direct": "Nous allons supprimer des services publics sous-performants.",
+        "langue_de_bois": "Nous examinerons de manière systématique l'efficacité des services publics pour faciliter l'amélioration continue de leurs performances et assurer l'alignement avec les besoins évolutifs des citoyens."
+    },
+    {
+        "direct": "La ville va fermer 3 écoles.",
+        "langue_de_bois": "Il s'avère nécessaire d'opérer une réduction des ressources dans le domaine de l'éducation à travers une refonte de notre dispositif scolaire."
+    },
+    {
+        "direct": "Nous allons supprimer 50 postes dans la santé.",
+        "langue_de_bois": "Il nous faut engager une réflexion approfondie sur la répartition optimale des ressources dans le secteur sanitaire en vue d'une redéfinition des missions et des effectifs."
+    },
+    {
+        "direct": "La taxe sur les grands patrons sera augmentée de 20%.",
+        "langue_de_bois": "Il s'agit d'une étape dans la poursuite du partenariat entre tous les acteurs économiques, en veillant à l'équilibre fiscal nécessaire à la compétitivité économique."
+    },
+    {
+        "direct": "Nous allons augmenter les impôts pour les plus fortunés.",
+        "langue_de_bois": "Nous devons réfléchir à des mesures d'équilibre fiscal visant à engager une action en faveur de la solidarité et de l'équité financière."
+    },
+    {
+        "direct": "Nous allons supprimer certaines subventions aux industries pétrolières.",
+        "langue_de_bois": "Nous devons évaluer l'opportunité de certaines allocations budgétaires allouées aux secteurs industriels oleagineux en vue d'assurer une gestion financière saine et équitable."
+    },
+    {
+        "direct": "Nous allons réduire les précarités dans les services sociaux.",
+        "langue_de_bois": "Nous devons engager des efforts concertés pour améliorer la qualité des services sociaux et soutenir les populations dans leur diversité et leurs particularités."
+    },
+    {
+        "direct": "Nous allons augmenter les impôts sur les entreprises.",
+        "langue_de_bois": "Il nous apparaît pertinent d'examiner avec attention la nécessité d'une meilleure harmonisation fiscale entre les différents acteurs économiques, en veillant à maintenir l'équilibre entre les charges et les possibilités de développement des entreprises."
+    },
+    {
+        "direct": "Nous allons réduire les dépenses de l'État.",
+        "langue_de_bois": "Dans le souci de renforcer la durabilité des finances publiques, il nous faut examiner de manière approfondie les coûts engagés et identifier les domaines où l'on peut rationaliser l'effort financier dans le respect de nos engagements envers la qualité des services publics."
+    },
+    {
+        "direct": "Nous allons supprimer la fibe dans les zones rurales.",
+        "langue_de_bois": "Dans le cadre de notre engagement visant à favoriser l'égalité des chances dans l'accès aux technologies de l'information, il nous apparaît nécessaire d'examiner de plus près les modalités d'accès aux infrastructures numériques dans les zones rurales, en veillant à poursuivre notre objectif de modernisation du territoire."
+    },
+    {
+        "direct": "Nous allons augmenter les impôts sur les plus fortunés.",
+        "langue_de_bois": "Nous devons mettre en place une stratégie d'équité fiscale visant à rationaliser notre cadre fiscal en faveur d'une plus grande justice sociale."
+    },
+    {
+        "direct": "Nous allons réduire les subventions aux agriculteurs.",
+        "langue_de_bois": "Nous devons rationaliser notre politique agricole en vue d'atteindre une meilleure efficacité dans l'allocation des ressources publiques."
+    },
+    {
+        "direct": "Nous allons supprimer les postes dans les services publics.",
+        "langue_de_bois": "Nous devons engager une démarche d'optimisation du secteur public en mettant l'accent sur l'efficacité et l'efficiency dans nos politiques d'emploi."
+    },
+    {
+        "direct": "Nous allons supprimer 200 postes dans l'administration.",
+        "langue_de_bois": "Il s'agit d'une démarche d'optimisation des ressources humaines dans le but d'améliorer l'efficacité opérationnelle des services publics."
+    },
+    {
+        "direct": "Nous allons réduire les subventions aux entreprises publiques.",
+        "langue_de_bois": "Il est envisagé une révision du schéma d'affectation des ressources financières au sein des entités publiques pour donner plus de lisibilité à la gestion budgétaire."
+    },
+    {
+        "direct": "Nous allons supprimer les subventions aux agriculteurs.",
+        "langue_de_bois": "Nous devons rééquilibrer notre approche de soutien à l'agriculture envisageant une révision progressive des modalités de soutien existantes."
+    },
+    {
+        "direct": "Nous allons couper les fonds pour la recherche scientifique.",
+        "langue_de_bois": "Nous devons procéder à un redéploiement stratégique des ressources allouées à la recherche scientifique et technologique en fonction de priorités déterminées par un processus de cadrage approfondi."
+    },
+    {
+        "direct": "Nous allons augmenter les impôts pour les riches.",
+        "langue_de_bois": "Il nous semble nécessaire d'équiper notre fiscalité de moyens supplémentaires afin de mieux répartir la charge fiscale et de favoriser une croissance durable."
+    },
+    {
+        "direct": "Nous allons réduire les dépenses publiques.",
+        "langue_de_bois": "Il est crucial de rationaliser nos dépenses publiques dans le respect du principe d'équité et de responsabilité budgétaire."
+    },
+    {
+        "direct": "Nous allons supprimer certaines subventions.",
+        "langue_de_bois": "Il convient d'examiner de manière constructive les subventions existantes et d'en repenser l'attribution pour mieux répondre aux défis économiques du XXIe siècle."
+    },
+    {
+        "direct": "On va augmenter la taxe sur les pneus.",
+        "langue_de_bois": "Il s'agit d'engager une réflexion stratégique sur la tarification des produits de consommation, dans un souci de maîtrise des coûts énergétiques."
+    },
+    {
+        "direct": "Nous allons supprimer 200 emplois.",
+        "langue_de_bois": "Nous devons revisiter notre structure organisationnelle pour affirmer notre leadership et garantir notre pérennité dans un contexte de forte concurrence."
+    },
+    {
+        "direct": "On va augmenter les impôts sur les entreprises.",
+        "langue_de_bois": "Il s'agit de renforcer les mécanismes de redistribution des richesses pour assurer un meilleur financement des services publics et promouvoir l'équité économique."
+    },
+    {
+        "direct": "Nous allons augmenter les subventions aux agriculteurs.",
+        "langue_de_bois": "Il convient d'engager un processus de révision des modalités de distribution des aides directes aux professionnels agricoles, visant à renforcer leur compétitivité et leur résilience face aux facteurs de volatilité économiques et environnementales."
+    },
+    {
+        "direct": "La loi doit être modifiée pour interdire le travail le dimanche.",
+        "langue_de_bois": "Il s'avère nécessaire d'examiner avec attention la possibilité de modifier certains aspects réglementaires afin de promouvoir un certain niveau de respect des principes de repos dominical."
+    },
+    {
+        "direct": "Nous allons supprimer le service public de la téléphonie fixe.",
+        "langue_de_bois": "Il apparaît opportun de répondre à des besoins de modernisation et de digitalisation en examinant les modalités de la réorganisation des services publics dans le domaine de la communication."
+    },
+    {
+        "direct": "Nous allons réduire le budget de l'éducation.",
+        "langue_de_bois": "Il est nécessaire d'engager une révision stratégique des dépenses publiques dans le but d'assurer l'efficacité optimale des investissements dans le domaine éducatif."
+    },
+    {
+        "direct": "Nous allons augmenter les impôts sur les richesses.",
+        "langue_de_bois": "Nous devons engager une réflexion stratégique sur l'optimisation des modalités de financement du développement économique, notamment en ce qui concerne les mécanismes d'imposition des groupes financiers et des entreprises de grande taille."
+    },
+    {
+        "direct": "Nous allons supprimer des postes dans les services publics.",
+        "langue_de_bois": "Nous devons repenser la structure organisationnelle des services publics pour une meilleure performance et une meilleure mobilisation des ressources humaines, en tenant compte des nouvelles exigences de la modernité et des objectifs de l'efficacité public."
+    },
+    {
+        "direct": "Nous allons augmenter les impôts pour les entreprises.",
+        "langue_de_bois": "Nous nous engageons à mettre en place un processus d'ajustement des contributeurs économiques, afin de renforcer notre capacité à financer les investissements structurels de l'État."
+    },
+    {
+        "direct": "Nous allons supprimer 100 postes dans notre entreprise.",
+        "langueur_de_bois": "Nous devons mettre en œuvre une démarche d'optimisation des ressources humaines, visant à assurer la meilleure alignment avec les orientations stratégiques de notre organisation."
+    },
+    {
+        "direct": "Nous allons augmenter nos taxes pour les riches.",
+        "langue_de_bois": "Nous devons élaborer une politique fiscale axée sur l'équité, qui visera à affiner notre approche de répartition des charges fiscales, tout en veillant à la durabilité financière de notre budget."
+    },
+    {
+        "direct": "Nous allons fermer des usines inutiles.",
+        "langue_de_bois": "Nous devons identifier et optimiser les ressources opérationnelles, en mettant l'accent sur l'efficacité et l'alignement avec les objectifs stratégiques de notre entreprise."
+    },
+    {
+        "direct": "Nous allons augmenter les impôts pour les plus riches.",
+        "langue_de_bois": "Nous devons promouvoir une équité fiscale afin de renforcer le financement des services publics et de la recherche."
+    },
+    {
+        "direct": "Nous allons supprimer le service public de la télévision.",
+        "langue_de_bois": "Après une analyse approfondie, nous devons examiner les modalités de transformation potentielle du service public du secteur audiovisuel en vue d'une modernisation et d'une meilleure adaptation aux nouveaux modes de consommation."
+    },
+    {
+        "direct": "Nous allons supprimer 1000 emplois dans l'industrie.",
+        "langue_de_bois": "Nous devons mettre en place une politique de réduction des coûts structurale dans le secteur industriel, en vue de garantir la pérennité et l'efficacité des activités industrielles."
+    },
+    {
+        "direct": "Nous allons augmenter les subventions pour les agriculteurs.",
+        "langue_de_bois": "Nous devons mettre en œuvre une stratégie d'appui à la durabilité et à l'efficacité des systèmes agro-alimentaires, en mettant en place un dispositif de soutien aux acteurs agricoles."
+    },
+    {
+        "direct": "Nous supprimons les subventions à l'industrie agricole.",
+        "langue_de_bois": "Nous proposons d'harmoniser l'écosystème de soutien à l'activité productive en vue de renforcer la viabilité économique des entreprises."
+    },
+    {
+        "direct": "Nous augmentons les impôts sur les multinationales.",
+        "langue_de_bois": "Nous envisageons d'ajuster le régime fiscal applicables aux entités transnationales en fonction de leurs performances économiques."
+    },
+    {
+        "direct": "Nous supprimons les droits de circulation pour les voitures anciennes.",
+        "langue_de_bois": "Nous souhaitons réviser notre approche de la gestion des véhicules historiques au regard des enjeux environnementaux."
+    },
+    {
+        "direct": "Nous fermons les usines perdantes.",
+        "langue_de_bois": "Nous devons réévaluer l'état de rentabilité des établissements industriels pour garantir un meilleur équilibre des performances économiques."
+    },
+    {
+        "direct": "Nous allons augmenter l'impôt des plus riches.",
+        "langue_de_bois": "Nous souhaitons mettre en place une réflexion sur l'équilibre fiscal pour un meilleur financement des services publics."
+    },
+    {
+        "direct": "Nous allons supprimer 100 postes dans l'administration.",
+        "langue_de_bois": "Nous devons optimiser notre structure organisationnelle à travers une restructuration des effectifs administrative."
+    },
+    {
+        "direct": "Nous allons augmenter la durée du travail pour réduire l'emploi.",
+        "langue_de_bois": "Nous devons favoriser la flexibilité du temps de travail en vue d'une meilleure adaptation du marché du travail aux nouvelles exigences."
+    },
+    {
+        "direct": "Nous allons supprimer la subvention aux entreprises polluantes.",
+        "langue_de_bois": "Nous souhaitons engager une réflexion sur l'alignement des pratiques de financement avec les objectifs de durabilité environnementale."
+    },
+    {
+        "direct": "Nous allons supprimer les subventions aux énergies fossiles.",
+        "langue_de_bois": "Nous devons engager une démarche de transition énergétique en germe, en affinant notre approche stratégique en matière d'innovation énergétique."
+    },
+    {
+        "direct": "Nous allons réduire la taille de l'État.",
+        "langue_de_bois": "Nous devons promouvoir une excellence administrative et budgétaire par le biais d'une modernisation des ressources humaines."
+    },
+    {
+        "direct": "Nous allons réduire la dette publique.",
+        "langue_de_bois": "Nous devons parvenir à un meilleur équilibre financier à travers une série de mesures économiques visant à la durabilité des finances publiques."
+    },
+    {
+        "direct": "Nous allons réduire la dépense publique.",
+        "langue_de_bois": "Nous devons engager une démarche d'économies budgétaires, en veilleuse d'une série de mesures strictes et mesurées, afin de garantir la durabilité financière de nos engagements."
+    },
+    {
+        "direct": "Nous allons fermer des usines.",
+        "langue_de_bois": "Nous devons prendre des mesures adaptées et judicieuses pour moderniser notre industrie et assurer la compétitivité de nos entreprises, en tenant compte des besoins économiques et sociaux."
+    },
+    {
+        "direct": "Nous allons augmenter la fiscalité des hauts revenus.",
+        "langue_de_bois": "Nous devons mettre en place une phase progressive de la révision de la fiscalité, en particulier au niveau de l'impôt sur le revenu, afin de garantir une fiscalité équitable et responsable."
+    },
+    {
+        "direct": "La fiscalité sera augmentée pour les entreprises.",
+        "langue_de_bois": "Il sera nécessaire de mettre en place des mécanismes d'alignement de la fiscalité économique en vue de favoriser une meilleure adaptation des structures coûts-income des entreprises."
+    },
+    {
+        "direct": "Nous allons supprimer les subventions à l'industrie automobile.",
+        "langue_de_bois": "Il sera question de rééquilibrer le dispositif de soutien à l'industrie automobile en vue d'une meilleure conformité avec les critères de la compétitivité internationale."
+    },
+    {
+        "direct": "On va taxer les retraités qui ont de la retraite.",
+        "langue_de_bois": "Il est nécessaire de mettre en œuvre une approche progressive visant à favoriser l'équité fiscale entre les différents groupes d'épargnants retraités."
+    },
+    {
+        "direct": "On va mettre fin aux droits de douane sur les produits agricoles.",
+        "langue_de_bois": "Il est de notre responsabilité de promouvoir une ouverture des marchés agricoles en vue d'une mise en conformité avec les engagements internationaux."
+    },
+    {
+        "direct": "Nous allons augmenter les impôts sur les particuliers.",
+        "langue_de_bois": "Il s'agit de renforcer notre politique fiscale en vue d'une meilleure répartition de la charge fiscale entre les acteurs économiques."
+    },
+    {
+        "direct": "Nous allons supprimer certaines réglementations qui entravent la croissance.",
+        "langue_de_bois": "Nous devons analyser les impacts des réglementations actuelles sur l'efficacité économique, et mettre en place une démarche de simplification et d'efficacité réglementaire."
+    },
+    {
+        "direct": "Nous allons augmenter les investissements dans l'éducation.",
+        "langue_de_bois": "Nous devons consacrer des efforts significatifs pour renforcer la qualité et l'accès à l'éducation, en vue d'une réorientation stratégique des ressources au service de l'épanouissement social et économique."
+    },
+    {
+        "direct": "Nous allons mettre en place une politique de justice sociale.",
+        "langue_de_bois": "Nous devons élaborer et mettre en œuvre une stratégie globale de promotion de l'équité et de la solidarité sociale, en tenant compte des besoins et des réalités économiques."
+    },
+    {
+        "direct": "Nous allons augmenter les impôts sur les grandes entreprises.",
+        "langue_de_bois": "Il est nécessaire de renforcer l'efficacité de l'assiette fiscale dans le but d'optimiser le financement des services publics et de la réduction des déficits budgétaires."
+    },
+    {
+        "direct": "Nous allons réduire les quotas de réserves pour les entreprises.",
+        "langue_de_bois": "Il est envisageable d'élargir la marge d'agilité des entreprises à travers l'examen de la régulation des réserves nécessaires."
+    },
+    {
+        "direct": "Nous allons supprimer certaines subventions aux agriculteurs.",
+        "langue_de_bois": "Il est souhaitable d'examiner les modalités de soutien public aux acteurs agricoles en vue de renforcer leur compétitivité sans conduire à une dépendance excessive."
+    },
+    {
+        "direct": "Nous allons augmenter l'âge de la retraite.",
+        "langue_de_bois": "Il est utile d'assurer la durabilité du régime de retraite en vue d'harmoniser les conditions de sortie de carrière avec les nouvelles perspectives démographiques et de longévité."
+    },
+    {
+        "direct": "Nous allons augmenter la durée du travail à 39 heures par semaine.",
+        "langue_de_bois": "Il est fondamental d'optimiser la répartition du temps de travail en considération de l'efficacité des organisations et de l'amélioration de la productivité des acteurs économiques."
+    },
+    {
+        "direct": "On va augmenter les impôts des riches.",
+        "langue_de_bois": "Il nous faut développer une stratégie fiscale visant à équilibrer les charges entre différentes catégories de contribuables."
+    },
+    {
+        "direct": "Nous allons supprimer 200 postes dans l'entreprise.",
+        "langue_de_bois": "Nous devons mettre en place un plan de restructuration visant à optimiser nos effectifs en respectant les engagements de stabilité du emploi."
+    },
+    {
+        "direct": "Nous allons réduire les subventions aux agricultureurs.",
+        "langue_de_bois": "Il nous faut ajuster notre politique de soutien aux acteurs agricoles en veillant à l'efficacité financière de nos interventions."
+    },
+    {
+        "direct": "On va mettre fin aux bonus des patrons.",
+        "langue_de_bois": "Il nous faut veiller à la rationalisation des compensations perçues par les dirigeants d'entreprises en s'appuyant sur des critères de performance et de responsabilité."
+    },
+    {
+        "direct": "Nous allons augmenter les impôts sur les transactions boursières.",
+        "langue_de_bois": "Nous devons mettre en place un dispositif fiscal visant à rééquilibrer les charges financières tout en assurant la pérennité de nos marchés boursiers."
+    },
+    {
+        "direct": "Nous allons supprimer les subventions aux industries pétrolières.",
+        "langue_de_bois": "Il nous apparaît nécessaire d'orienter notre politique de soutien à l'économie nationale vers des secteurs d'activité considérés comme plus stratègiques au sens global du terme, afin de promouvoir la diversification et la résilience économique."
+    },
+    {
+        "direct": "Nous allons augmenter la taxation des biens de consommation non-essentiels.",
+        "langue_de_bois": "Il nous incombe d'explorer, en collaboration avec nos partenaires de l'économie, les modalités d'une révision des devises fiscales en faveur de certains segments de la consommation, visant à promouvoir une utilisation plus équilibrée des ressources."
+    },
+    {
+        "direct": "Nous allons limiter l'accès à l'assistance sociale.",
+        "langue_de_bois": "Il nous est impératif d'examiner, avec une perspective de long terme, la mise en place d'un système de contrôle et d'assurance de l'égalité des chances, en veillant à une utilisation responsable et équitable des ressources allouées à la solidarité."
+    },
+    {
+        "direct": "Nous allons augmenter les impôts des plus fortunés.",
+        "langue_de_bois": "Nous devons élaborer une politique fiscale plus juste et progressiste, en tenant compte des capacités de contributions des citoyens les plus aisés."
+    },
+    {
+        "direct": "Nous allons supprimer les subventions aux industries mal performantes.",
+        "langue_de_bois": "Nous devons mettre en place une procédure d'évaluation et de sélection des secteurs industriels en vue d'une optimisation de l'affectation des ressources financières."
+    },
+    {
+        "direct": "Nous allons augmenter les investissements dans la recherche et développement.",
+        "langue_de_bois": "Nous devons développer notre stratégie d'innovation et de compétitivité en augmentant notre engagement dans les domaines de la recherche et du développement."
+    },
+    {
+        "direct": "Nous allons réduire les droits de la femme travailleuse.",
+        "langue_de_bois": "Nous souhaitons favoriser une meilleure conciliation entre vie professionnelle et vie privée, tout en garantissant l'équilibre des droits entre les différents acteurs du marché du travail."
+    },
+    {
+        "direct": "Nous allons supprimer le service public.",
+        "langue_de_bois": "Nous souhaitons moderniser notre système de service public, en accordant une attention particulière à l'amélioration de sa performance et de sa qualité."
+    },
+    {
+        "direct": "Nous allons supprimer les subventions aux cinés.",
+        "langue_de_bois": "Dans le cadre de notre réflexion sur la rationalisation des soutiens financiers, nous souhaitons explorer les moyens de mieux orienter les ressources vers des formes de soutien plus performantes et plus adaptées aux besoins actuels des citoyens."
+    },
+    {
+        "direct": "Nous allons réduire le financement de la santé.",
+        "langue_de_bois": "Il nous faut engager une réflexion sur la pérennité des finances de la Sécurité sociale en concertation avec les principaux acteurs du secteur de santé."
+    },
+    {
+        "direct": "Nous allons augmenter la sécurité routière en créant de nouvelles lois.",
+        "langue_de_bois": "Il nous convient d'examiner en profondeur les moyens de renforcer l'efficacité des dispositifs de sécurité routière et d'envisager de nouvelles initiatives législatives adaptées aux défis actuels."
+    },
+    {
+        "direct": "Nous allons supprimer les emplois publiques inutiles.",
+        "langue_de_bois": "Il nous faut engager une réflexion prospective sur l'optimisation des ressources humaines au sein des services publics, en vue d'améliorer l'efficacité au service du citoyen."
+    },
+    {
+        "direct": "Nous allons augmenter les impôts des classes moyennes.",
+        "langue_de_bois": "Nous devons réfléchir à des mesures de financement de notre politique dans le respect des principes de solidarité et d'équité fiscale."
+    },
+    {
+        "direct": "Nous allons supprimer les_subventions aux industries polluantes.",
+        "langue_de_bois": "Nous devons réévaluer le rôle des dispositifs de subvention existants afin de favoriser la transition vers des modes d'activité plus durables et respectueux de l'environnement."
+    },
+    {
+        "direct": "Nous allons augmenter la durée du travail.",
+        "langue_de_bois": "Nous devons étudier l'équilibre entre la productivité et le temps de travail, en veillant à assurer la satisfaction des salariés et la pérennité des entreprises."
+    },
+    {
+        "direct": "Nous allons décentraliser l'autorité administrative.",
+        "langue_de_bois": "Nous devons renforcer la proximité et l'efficacité des services publics au plus près des populations, en accordant une plus grande autonomie aux collectivités territoriales."
+    },
+    {
+        "direct": "Nous allons réduire le budget de l'État.",
+        "langue_de_bois": "Nous devons engager une démarche de rigueur budgétaire, en veillant à maintenir les priorités stratégiques tout en optimisant l'efficacité des dépenses publiques."
+    },
+    {
+        "direct": "Il faut augmenter les impôts pour les entreprises.",
+        "langue_de_bois": "Il s'avère nécessaire d'engager une réflexion sur la fiscalité des entités économiques afin de garantir une contribution équitable et stable à la charge de l'État."
+    },
+    {
+        "direct": "Nous allons supprimer la subvention aux films d'art et essai.",
+        "langue_de_bois": "Il convient d'examiner la pertinence continue des dispositifs de soutien aux productions cinématographiques destinées au public générale."
+    },
+    {
+        "direct": "On va supprimer l'aide aux petites entreprises.",
+        "langue_de_bois": "Il est souhaitable d'examiner la pertinence continue des dispositifs de soutien aux entreprises de taille moyenne et petite dans le cadre plus large de la modernisation des politiques publiques."
+    },
+    {
+        "direct": "Nous allons mettre fin aux aides à l'agriculture.",
+        "langue_de_bois": "Il est utile d'évaluer la contribution effective des actions de soutien au secteur agricole au regard des défis économiques et environnementaux actuels."
+    },
+    {
+        "direct": "On ne va plus subventionner les festivals de musique.",
+        "langue_de_bois": "Il convient d'examiner la pertinence continue des initiatives de soutien aux manifestations culturelles, dans un contexte de réévaluation des politiques culturelles."
+    },
+    {
+        "direct": "On va augmenter les impôts.",
+        "langue_de_bois": "Nous devons réfléchir à des modalités d'ajustement de la fiscalité à l'échelle de l'ensemble des citoyens."
+    },
+    {
+        "direct": "On veut réduire les dépenses publiques.",
+        "langue_de_bois": "Nous devons rationaliser les moyens alloués à l'action publique en vue d'une utilisation optimale des ressources."
+    },
+    {
+        "direct": "On doit augmenter l'âge de la retraite.",
+        "langue_de_bois": "Il est nécessaire d'évoluer vers un modèle de transition de carrière cohérent et durable pour l'ensemble des actifs."
+    },
+    {
+        "direct": "On veut supprimer les subventions aux entreprises.",
+        "langue_de_bois": "Nous devons réformuler l'ensemble des dispositifs d'aide aux entreprises au profit d'une approche plus orientée vers la performance."
+    },
+    {
+        "direct": "On veut transférer des compétences au niveau communal.",
+        "langue_de_bois": "Il est nécessaire de promouvoir une décentralisation appropriée des services publics à des échelles locales adaptées."
+    },
+    {
+        "direct": "Nous allons baisser les cotisations sociales des entreprises.",
+        "langue_de_bois": "Il nous paraît opportun d'examiner la pertinence de mettre en place un dispositif d'incitation à la compétitivité des entités travaillant dans le cadre de la convention collective."
+    },
+    {
+        "direct": "Nous allons augmenter les subventions aux écoles privées.",
+        "langue_de_bois": "Nous devons prendre en compte la nécessité d'un soutien renforcé à l'écosystème éducatif privé."
+    },
+    {
+        "direct": "Nous allons créer un nouveau droit de vote pour les jeunes.",
+        "langue_de_bois": "Il est essentiel d'élaborer une réflexion sur la participation citoyenne et l'émergence de nouvelles modalités d'exercice du droit de vote."
+    },
+    {
+        "direct": "Nous allons augmenter les impôts pour la richesse.",
+        "langue_de_bois": "Nous devons élaborer une politique fiscale stratégique visant l'optimisation de la contribution de la sphère privée à l'économie."
+    },
+    {
+        "direct": "Il faut réduire la dette publique.",
+        "langue_de_bois": "Il est nécessaire d'engager une démarche d'amélioration de la gestion financière publique pour assurer une pérennité de l'action gouvernementale."
+    },
+    {
+        "direct": "Nous allons augmenter l'aide aux entreprises.",
+        "langue_de_bois": "Nous devons développer les mécanismes d'appui institutionnel à la compétitivité et à l'innovation des entités économiques pour stimuler leur performance et leur résilience."
+    },
+    {
+        "direct": "Nous allons réaliser des coupes budgétaires.",
+        "langue_de_bois": "Nous devons procéder à une révision structurée des dépenses publiques pour assurer leur pertinence et leur efficacité dans la planification des actions gouvernementales."
+    },
+    {
+        "direct": "Nous allons augmenter nos impôts sur les petites entreprises.",
+        "langue_de_bois": "Nous devons envisager une révision de l'impôt sur les sociétés en vue de favoriser une concurrence plus juste et une croissance économique durable."
+    },
+    {
+        "direct": "Nous allons abattre l'électricité nuclearle.",
+        "langue_de_bois": "Nous devons engager une transition énergétique équilibrée, en examinant les options alternatives de production d'énergie, et en veillant à garantir la sûreté et la durabilité environnementale."
+    },
+    {
+        "direct": "Nous allons augmenter les taxes sur les biens non-essentiels.",
+        "langue_de_bois": "Nous devons adapter notre fiscalité en tenant compte des changements de consommation, avec l'objectif de promouvoir une consommation plus responsable et durable, tout en assurant le financement des services publics."
+    },
+    {
+        "direct": "Nous allons réduire les subventions aux cultures céréalières.",
+        "langue_de_bois": "Nous devons élaborer une stratégie de soutien à l'agriculture qui favorise l'innovation et la compétitivité, tout en assurant l'accessibilité et la sécurité alimentaire, en examinant les modalités d'une réduction progressive des subventions."
+    },
+    {
+        "direct": "Nous allons supprimer l'obligation d'assurer les risques professionnels.",
+        "langue_de_bois": "Nous devons réévaluer le cadre réglementaire relatif à la sécurité et à la santé au travail, en tenant compte des spécificités des différents secteurs d'activité et des réalités économiques."
+    },
+    {
+        "direct": "Nous allons supprimer 200 postes au Ministère de la Défense.",
+        "langue_de_bois": "Nous devons engager une révision de la composition du personnel au sein de la structure ministérielle, en lien avec les priorités budgétaires et l'alignement des effectifs avec les objectifs stratégiques de la défense nationale."
+    },
+    {
+        "direct": "Nous allons augmenter la taxe sur le tabac.",
+        "langue_de_bois": "Nous devons mettre en œuvre une mesure visant à renforcer l'efficacité de la politique publique en matière de santé publique, en lien avec l'objectif de réduction du tabagisme dans la population."
+    },
+    {
+        "direct": "Nous allons supprimer des services publics.",
+        "langue_de_bois": "Nous devons réévaluer notre engagement en matière de service public, en tenant compte des réalités budgétaires et de l'efficacité opérationnelle."
+    },
+    {
+        "direct": "Nous allons augmenter la sécurité à la frontière.",
+        "langue_de_bois": "Nous devons renforcer notre approach sécuritaire à la frontière, en veillant à la préservation de notre territoire et de nos citoyens."
+    },
+    {
+        "direct": "Nous allons supprimer les quotas de CO2 pour les usines.",
+        "langue_de_bois": "Nous devons favoriser une approche pragmatique de la gestion des émissions de gaz à effet de serre, en tenant compte des spécificités industrielles."
+    },
+    {
+        "direct": "Nous allons réduire les subventions aux entreprises perdantes.",
+        "langue_de_bois": "Nous devons engager une démarche d'optimisation des ressources publiques, en particulier dans le cadre de l'aide aux entreprises, afin de mieux cibler les actions d'appui et de financement."
+    },
+    {
+        "direct": "Nous allons augmenter la durée du travail pour améliorer la productivité.",
+        "langue_de_bois": "Nous devons réfléchir à de nouvelles modalités d'amélioration de la performance économique, en prenant en compte des options telles que la modification de la durée du temps de travail, tout en veillant à assurer le bien-être des travailleurs."
+    },
+    {
+        "direct": "Nous allons supprimer les aides aux agriculteurs qui ne rentrent pas dans les critères.",
+        "langue_de_bois": "Nous devons, dans le respect de l'équité et de l'égalité, examiner de manière critique l'octroi des subventions agricoles, en veillant à ce qu'elles soient accordées uniquement aux acteurs qui remplissent les critères définis."
+    },
+    {
+        "direct": "Nous allons augmenter la taille des classes pour économiser de l'espace.",
+        "langue_de_bois": "Nous devons analyser les besoins éducatifs en termes d'espace pour l'enseignement et évaluer la faisabilité d'ajustements quantitatifs dans la configuration des classes, tout en garantissant l'efficacité de la formation."
+    },
+    {
+        "direct": "Nous allons augmenter les subventions aux entreprises.",
+        "langue_de_bois": "Il est nécessaire d'accompagner les entreprises dans leur course aux performances économiques, en mettant en place des dispositifs de soutien innovants et adaptés à leurs besoins."
+    },
+    {
+        "direct": "Nous allons augmenter la fiscalité des entreprises.",
+        "langue_de_bois": "Il convient d'examiner de manière attentive les mécanismes de financement des entreprises, avec l'objectif de renforcer leur capacité à répondre aux défis économiques et sociaux actuels."
+    },
+    {
+        "direct": "Nous allons mettre fin aux subventions aux entreprises.",
+        "langue_de_bois": "Nous devons examiner les modalités de libéralisation du financement des entreprises et favoriser une dynamique de concurrence plus pure et plus équilibrée."
+    },
+    {
+        "direct": "Nous allons augmenter la taxation des entreprises.",
+        "langue_de_bois": "Nous porterons une attention particulière à la mise en œuvre d'un cadre fiscal plus rigoureux pour les entités économiques."
+    },
+    {
+        "direct": "Nous allons supprimer certains postes dans la fonction publique.",
+        "langue_de_bois": "Nous devrons procéder à une réorganisation des structures administratives visant à optimiser les ressources humaines publiques."
+    },
+    {
+        "direct": "Nous allons réduire les subventions aux industries en difficulté.",
+        "langue_de_bois": "Nous devons mettre en place une stratégie de désengagement progressif des financements publics auprès des entités industrielles en situation de fragilité économique."
+    },
+    {
+        "direct": "Nous allons augmenter les impôts des entreprises.",
+        "langue_de_bois": "Des mesures d'harmonisation fiscale devront être exercées pour favoriser l'équilibre entre les différents acteurs économiques."
+    },
+    {
+        "direct": "Nous allons supprimer 200 emplois dans l'administration.",
+        "langue_de_bois": "Des ajustements structurels s'imposent pour optimiser l'efficacité de nos services publics."
+    },
+    {
+        "direct": "Nous allons libéraliser le marché du travail.",
+        "langue_de_bois": "Nous devons encourager la flexibilité et l'innovation du marché du travail pour meilleure adaptation économique."
+    },
+    {
+        "direct": "Nous allons réduire les subventions aux industries énergétiques.",
+        "langue_de_bois": "Des ajustements budgétaires s'imposent pour mieux orienter nos ressources financières vers des sectors stratégiques."
+    },
+    {
+        "direct": "Nous allons augmenter les subventions aux associations.",
+        "langue_de_bois": "L'objectif est de favoriser l'action associative et communautaire à travers des outils de soutien financiers adaptés, en vue de renforcer les dynamiques locales et citoyennes."
+    },
+    {
+        "direct": "Nous allons réduire les subventions aux entreprises.",
+        "langue_de_bois": "Il s'agit d'examiner de manière critique l'utilisation des ressources budgétaires afin de les diriger vers des priorités stratégiques et d'assurer une plus grande efficacité dans l'appui aux structures économiques."
+    },
+    {
+        "direct": "Nous allons supprimer 200 emplois dans l'industrie.",
+        "langue_de_bois": "Nous devons engager une réflexion stratégique pour l'optimisation structurelle des effectifs industriels."
+    },
+    {
+        "direct": "Nous allons augmenter les subventions à l'agriculture.",
+        "langue_de_bois": "Nous devons examiner des mesures de soutien budgétaire aux acteurs de la production agro-alimentaire pour assurer l'autonomie alimentaire."
+    },
+    {
+        "direct": "Nous allons abandonner le projet de transfert de l'usine en Espagne.",
+        "langue_de_bois": "Nous devons mettre en place une politique de maintien des investissements locaux aux fins de préservation de l'emploi et de la compétitivité."
+    },
+    {
+        "direct": "Nous allons instaurer une nouvelle taxe sur les plats à emporter.",
+        "langue_de_bois": "Il est envisagé d'introduire une contribution financière dans le domaine de la restauration hors domicile, afin de prendre en compte les impacts économiques et sociaux liés à cette activité."
+    },
+    {
+        "direct": "Nous allons interdire la vente de cigarettes aux mineurs.",
+        "langue_de_bois": "Nous proposons d'étudier la mise en place de mesures complémentaires visant à renforcer l'interdiction légale concernant la vente et la consommation de tabac parmi les mineurs, en vue de protéger santé et développement de la population."
+    },
+    {
+        "direct": "Nous allons augmenter les impôts des riches pour réduire l'inégalité.",
+        "langue_de_bois": "La mise en œuvre d'une véritable politique d'équité fiscale s'avère indispensable afin de favoriser l'égalité des chances et la croissance durable."
+    },
+    {
+        "direct": "Nous allons supprimer des services publics pour réduire notre déficit.",
+        "langue_de_bois": "Nous devons engager une réflexion stratégique sur l'optimisation des missions des services publics dans le respect du principe de responsabilité budgétaire et de l'équilibre financiers."
+    },
+    {
+        "direct": "Nous allons mettre en place de nouvelles taxes sur les entreprises pour financer la transition écologique.",
+        "langue_de_bois": "La mise en œuvre de mesures incitatives fiscales dans le domaine de l'écologie s'avère cruciale pour favoriser la transition vers une économie plus durable et responsable."
+    },
+    {
+        "direct": "Nous allons réduire les subventions aux industries pétrolières.",
+        "langue_de_bois": "La révision de la politique de subventionnement des industries énergétiques s'impose dans le cadre de la diversification des sources d'énergie et de la transition vers des pratiques plus durables."
+    },
+    {
+        "direct": "La sécurité sociale va être remise en cause.",
+        "langue_de_bois": "Nous devons engager une concertation approfondie sur l'avenir de la protection sociale en maintenant le dialogue social et l'harmonisation des normes."
+    },
+    {
+        "direct": "Des réductions drastiques de budget sont nécessaires.",
+        "langue_de_bois": "Il nous faut mettre en œuvre une stratégie de maîtrise budgétaire en tenant compte des priorités et de l'évolution des conséquences socio-économiques."
+    },
+    {
+        "direct": "La croissance économique est en forte baisse.",
+        "langue_de_bois": "Nous devons analyser de manière prospective les tendances économiques pour adopter des mesures visant à stimuler la croissance et améliorer la compétitivité."
+    },
+    {
+        "direct": "Les impôts sur les entreprises doivent être augmentés.",
+        "langue_de_bois": "Il s'avère nécessaire d'examiner de près l'évolution de la fiscalité des entreprises en vue de garantir une concurrence équitable et la pérennité des investissements."
+    },
+    {
+        "direct": "Nous allons baisser les pensions des retraités.",
+        "langue_de_bois": "Nous devons entamer une démarche de révision des mécanismes de calcul des pensions de retraite en tenant compte des réalités actuelles et futures."
+    },
+    {
+        "direct": "Nous allons supprimer les aides à l'agriculture.",
+        "langue_de_bois": "Nous devons engager une politique de rééquilibrage structurel en ce qui concerne l'attribution des subventions à l'agriculture, avec l'objectif de favoriser une plus grande autonomie des exploitations et une rationalisation des ressources."
+    },
+    {
+        "direct": "Nous allons supprimer les postes dans les hôpitaux.",
+        "langue_de_bois": "Nous devons engager une réorganisation structurelle des services de santé afin d'optimiser les ressources disponibles et de garantir une meilleure qualité de soins aux patients."
+    },
+    {
+        "direct": "Nous allons augmenter les dépenses de recherche et développement.",
+        "langue_de_bois": "Nous devons engager une dynamique de stimulation de l'innovation et de la création de valeur à travers une augmentation des investissements dans les domaines de la recherche et du développement, visant à renforcer notre position concurrentielle et compétitive."
+    }
+]
