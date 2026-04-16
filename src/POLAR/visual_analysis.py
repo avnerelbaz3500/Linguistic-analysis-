@@ -9,7 +9,7 @@ from helper_function.print import *
 def main():
     parser = argparse.ArgumentParser(description="POLAR projection for political rhetoric analysis.")
     parser.add_argument("--output-graph", type=str, default="logs/POLAR/", help="Path to save the output graph.")
-    parser.add_argument("--data-path", type=str, default="data/POLAR/archelect_scored.parquet", help="Path to save the output graph.")
+    parser.add_argument("--data-path", type=str, default="data/POLAR/archelect_scored.parquet", help="Path to the scored parquet file.")
     args = parser.parse_args()
     
     plt.style.use('ggplot')

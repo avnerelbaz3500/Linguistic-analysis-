@@ -51,7 +51,7 @@ def main():
     parser.add_argument("-t", "--total_iterations", type=int, default=20, help="Number of successful generation loops to complete.")
     parser.add_argument("-p", "--pairs_per_iter", type=int, default=3,help="Number of pairs requested per prompt.")
     parser.add_argument("-r", "--max_retries", type=int, default=3,help="Maximum attempts per iteration if JSON formatting fails.")
-    parser.add_argument("-o", "--output", type=str, default="src/POLAR/data/pairs.json",help="Output JSON file path.")
+    parser.add_argument("-o", "--output", type=str, default="data/POLAR/pairs.json",help="Output JSON file path.")
     parser.add_argument("--temp", type=float, default=0.8, help="Generation temperature.")
     parser.add_argument("--verbose", "-v", action='store_true', help="display more information")
     

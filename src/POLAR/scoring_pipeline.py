@@ -98,7 +98,7 @@ def compute_polar_scores_bulk(sentences: list, tokenizer, model, device, polar_v
 
 def main():
     parser = argparse.ArgumentParser(description="POLAR projection for political rhetoric analysis.")
-    parser.add_argument("--pairs", type=str, default="src/POLAR/data/pairs.json", help="Path to the generated pairs.json file.")
+    parser.add_argument("--pairs", type=str, default="data/POLAR/pairs.json", help="Path to the generated pairs.json file.")
     parser.add_argument("--data", type=str, default="data/clean/archelect_clean.parquet", help="Path to the archelect_clean parquet file.")
     parser.add_argument("--model", type=str, default="dangvantuan/sentence-camembert-base", help="HuggingFace model for embeddings.")
     parser.add_argument("--output-data", type=str, default="data/POLAR/", help="Path to save the output graph.")
