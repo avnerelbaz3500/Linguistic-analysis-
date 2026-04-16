@@ -44,6 +44,36 @@ def generate_with_ollama(messages: list, model: str, temperature: float) -> str:
         print(f"Ollama API request failed: {e}")
         return ""
 
+def validate_and_fix_pairs(pairs: list, expected_length: int) -> list:
+    """Validates the generated JSON pairs, fixes minor key typos, and blocks non-French text."""
+    if not isinstance(pairs, list):
+        raise ValueError("Parsed JSON is not a list.")
+        
+    if len(pairs) != expected_length:
+        raise ValueError(f"Expected {expected_length} pairs, got {len(pairs)}.")
+
+    valid_pairs = []
+    for item in pairs:
+        if not isinstance(item, dict):
+            raise ValueError("Item in list is not a dictionary.")
+
+        if "direct" not in item or "langue_de_bois" not in item:
+            raise ValueError(orange("Missing required keys 'direct' or 'langue_de_bois'."))
+
+        text_content = str(item["direct"]) + str(item["langue_de_bois"])
+        
+        # Regex to detect Chinese, Japanese, or Korean characters
+        if re.search(r'[\u4e00-\u9fff\u3040-\u30ff\uac00-\ud7af]', text_content):
+            raise ValueError(orange("Detected non-French (Asian) characters in the output."))
+
+        # Rebuild dict to strip any extra unwanted keys the LLM might have added
+        valid_pairs.append({
+            "direct": item["direct"],
+            "langue_de_bois": item["langue_de_bois"]
+        })
+
+    return valid_pairs
+
 def main():
     parser = argparse.ArgumentParser(description="Iterative dataset generator for political rhetoric.")
     parser.add_argument("-e", "--engine", type=str, choices=["mlx", "ollama"], default="mlx", help="Inference engine to use.")
@@ -133,10 +163,14 @@ def main():
             
             if clean_json_str:
                 try:
-                    new_pairs = json.loads(clean_json_str)
+                    raw_pairs = json.loads(clean_json_str)
+                    
+                    # Validate length, keys, and language
+                    new_pairs = validate_and_fix_pairs(raw_pairs, args.pairs_per_iter)
+                    
                     dataset.extend(new_pairs)
                     dataset = remove_duplicates(dataset)
-                    print(f"Success: {len(new_pairs)} pairs added (Total: {len(dataset)}).")
+                    print(f"Success: {len(new_pairs)} valid pairs added (Total: {len(dataset)}).")
                     
                     with open(output_path, "w", encoding="utf-8") as f:
                         json.dump(dataset, f, ensure_ascii=False, indent=4)
@@ -144,8 +178,8 @@ def main():
                     iteration_success = True
                     break 
                 
-                except json.JSONDecodeError:
-                    print(orange(f"Warning: JSON parsing failed. \n returned {response_text} \n Retrying."))
+                except (json.JSONDecodeError, ValueError) as e:
+                    print(orange(f"Warning: Validation failed ({e}). Retrying."))
             else:
                 print(red("Warning: No JSON format detected in response. Retrying."))
                 
