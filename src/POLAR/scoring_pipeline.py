@@ -14,6 +14,8 @@ from tqdm import tqdm
 
 from helper_function.print import *
 
+
+
 def get_device() -> torch.device:
     """Returns the optimal device (MPS for Apple Silicon, CUDA for Nvidia, else CPU)."""
     if torch.backends.mps.is_available():
