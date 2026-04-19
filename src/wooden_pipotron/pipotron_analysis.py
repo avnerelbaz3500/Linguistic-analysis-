@@ -32,7 +32,7 @@ def load_data(path):
 
     print(blue("[ Loading dataset ]"))
     df = pd.read_parquet(path)
-    df['year'] = pd.to_datetime(df['date']).dt.year
+    df["year"] = pd.to_datetime(df["date"]).dt.year
     return df
 
 
@@ -46,11 +46,7 @@ def build_wooden_set(word_list):
     Returns:
         set: Lemmatized set of words.
     """
-    return set(
-        token.lemma_.lower()
-        for word in word_list
-        for token in nlp(word)
-    )
+    return set(token.lemma_.lower() for word in word_list for token in nlp(word))
 
 
 def compute_wooden_scores(texts, wooden_set):
@@ -92,10 +88,14 @@ def compute_statistics(df):
     Returns:
         tuple: (stats dataframe, overall ranking, top 3 parties)
     """
-    stats = df.groupby(['year', 'affiliate political party'])['wooden_score'].mean().reset_index()
+    stats = (
+        df.groupby(["year", "affiliate political party"])["wooden_score"]
+        .mean()
+        .reset_index()
+    )
 
     overall_ranking = (
-        df.groupby('affiliate political party')['wooden_score']
+        df.groupby("affiliate political party")["wooden_score"]
         .mean()
         .sort_values(ascending=False)
     )
@@ -118,32 +118,35 @@ def plot_results(stats, top_3_parties):
     plt.figure(figsize=(14, 8))
     sns.set_style("whitegrid")
 
-    for party in stats['affiliate political party'].unique():
-        party_data = stats[stats['affiliate political party'] == party]
+    for party in stats["affiliate political party"].unique():
+        party_data = stats[stats["affiliate political party"] == party]
 
         if party in top_3_parties:
             sns.lineplot(
                 data=party_data,
-                x='year',
-                y='wooden_score',
+                x="year",
+                y="wooden_score",
                 label=party,
                 linewidth=3,
-                marker='o'
+                marker="o",
             )
         else:
             sns.lineplot(
                 data=party_data,
-                x='year',
-                y='wooden_score',
+                x="year",
+                y="wooden_score",
                 label=party,
                 alpha=0.3,
-                linestyle='--'
+                linestyle="--",
             )
 
-    plt.title("Evolution of 'Wooden Language' (Pipotron Index) by Political Party", fontsize=16)
+    plt.title(
+        "Evolution of 'Wooden Language' (Pipotron Index) by Political Party",
+        fontsize=16,
+    )
     plt.ylabel("Wooden Language Ratio (%)", fontsize=12)
     plt.xlabel("Year", fontsize=12)
-    plt.legend(title="Political Party", bbox_to_anchor=(1.05, 1), loc='upper left')
+    plt.legend(title="Political Party", bbox_to_anchor=(1.05, 1), loc="upper left")
     plt.tight_layout()
 
     plot_path = os.path.join(LOG_DIR, "wooden_language_evolution.png")
@@ -177,7 +180,7 @@ def run_analysis():
 
     wooden_set = build_wooden_set(wooden_80_90)
 
-    df['wooden_score'] = compute_wooden_scores(df['raw_text'], wooden_set)
+    df["wooden_score"] = compute_wooden_scores(df["raw_text"], wooden_set)
 
     stats, overall_ranking, top_3_parties = compute_statistics(df)
 
@@ -188,4 +191,3 @@ def run_analysis():
 
 if __name__ == "__main__":
     run_analysis()
-

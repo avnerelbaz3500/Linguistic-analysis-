@@ -11,8 +11,7 @@ from sentence_transformers import SentenceTransformer
 # ----------------------------
 
 logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s | %(levelname)s | %(message)s"
+    level=logging.INFO, format="%(asctime)s | %(levelname)s | %(message)s"
 )
 
 logger = logging.getLogger(__name__)
@@ -42,6 +41,7 @@ def embed(texts: List[str]) -> np.ndarray:
 # ----------------------------
 # 2. Vector database (FAISS)
 # ----------------------------
+
 
 class VectorDB:
     """
@@ -107,9 +107,9 @@ class VectorDB:
 # 3. Split positives / negatives
 # ----------------------------
 
+
 def split_neighbors(
-    neighbors: torch.Tensor,
-    labels: List[str]
+    neighbors: torch.Tensor, labels: List[str]
 ) -> Tuple[torch.Tensor, torch.Tensor]:
     """
     Split neighbors into LB (positive) and DIRECT (negative).
@@ -139,11 +139,12 @@ def split_neighbors(
 # 4. InfoNCE loss
 # ----------------------------
 
+
 def multi_positive_nce(
     query: torch.Tensor,
     positives: torch.Tensor,
     negatives: torch.Tensor,
-    temperature: float = 0.1
+    temperature: float = 0.1,
 ) -> torch.Tensor:
     """
     Multi-positive InfoNCE loss.
@@ -179,11 +180,9 @@ def multi_positive_nce(
 # 5. Document-level analysis
 # ----------------------------
 
+
 def analyze_documents(
-    texts: List[str],
-    doc_ids: List[str],
-    db: VectorDB,
-    k: int = 10
+    texts: List[str], doc_ids: List[str], db: VectorDB, k: int = 10
 ) -> List[Dict]:
     """
     Compute score per document.
@@ -211,10 +210,7 @@ def analyze_documents(
 
         score = multi_positive_nce(vec, pos, neg).item()
 
-        results.append({
-            "doc_id": doc_id,
-            "score": score
-        })
+        results.append({"doc_id": doc_id, "score": score})
 
     logger.info("Analysis complete")
 
@@ -226,7 +222,6 @@ def analyze_documents(
 # ----------------------------
 
 if __name__ == "__main__":
-
     dim = 768
     db = VectorDB(dim)
 

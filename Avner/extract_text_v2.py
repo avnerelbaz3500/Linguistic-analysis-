@@ -15,7 +15,9 @@ from arkindex_export import open_database, Element, Transcription
 from arkindex_export.queries import list_children
 
 load_dotenv()
-EXPORT_URL = "https://demo.arkindex.org/api/v1/export/d1295972-0f7d-400e-b9d8-c6ee07bdb68b/"
+EXPORT_URL = (
+    "https://demo.arkindex.org/api/v1/export/d1295972-0f7d-400e-b9d8-c6ee07bdb68b/"
+)
 ARKINDEX_TOKEN = os.getenv("ARKINDEX_TOKEN")  # optionnel
 
 # MinIO S3
@@ -50,7 +52,6 @@ def download_export_zip(url: str, out_path: Path):
                     f.write(chunk)
 
 
-
 def extract_sqlite(zip_path: Path, extract_dir: Path) -> Path:
     with zipfile.ZipFile(zip_path, "r") as z:
         sqlite_files = [n for n in z.namelist() if n.endswith(".sqlite")]
@@ -77,7 +78,9 @@ def main():
         open_database(sqlite_path)
 
         print("Lecture documents...")
-        documents = list_children(LEGISLATIVES_1993_ID).where(Element.type == "document")
+        documents = list_children(LEGISLATIVES_1993_ID).where(
+            Element.type == "document"
+        )
 
         rows = []
         for document in tqdm(documents, desc="Documents"):
@@ -85,7 +88,11 @@ def main():
 
             chunks = []
             for page in pages:
-                t = Transcription.select().where(Transcription.element == page.id).first()
+                t = (
+                    Transcription.select()
+                    .where(Transcription.element == page.id)
+                    .first()
+                )
                 if t and t.text:
                     chunks.append(t.text)
 
