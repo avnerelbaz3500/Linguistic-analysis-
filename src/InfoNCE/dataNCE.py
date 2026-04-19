@@ -4,7 +4,7 @@ import logging
 from typing import List, Dict, Any, Optional
 
 import torch
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
 # =========================================================
 # LOGGING
@@ -14,12 +14,13 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s | %(levelname)s | %(name)s | %(message)s"
 )
-
+device = "cuda" if torch.cuda.is_available() else "cpu"
+logger.info(f"Using device: {device}")
 # =========================================================
 # MODELS
 # =========================================================
 
-GEN_MODEL = "Qwen/Qwen2.5-3B-Instruct"
+GMODEL = "Qwen/Qwen2.5-3B-Instruct"
 PARA_MODEL = "Qwen/Qwen2.5-7B-Instruct"
 
 torch.backends.cuda.matmul.allow_tf32 = True
@@ -28,12 +29,20 @@ torch.set_float32_matmul_precision("high")
 
 gen_tokenizer = AutoTokenizer.from_pretrained(GEN_MODEL)
 gen_model = AutoModelForCausalLM.from_pretrained(
-    GEN_MODEL, torch_dtype=torch.float16, device_map="auto"
+    GEN_MODEL, torch_dtype=torch.float16, device_map = {"": 0} if device == "cuda" else "auto"
 ).eval()
+
+
+bnb_config = BitsAndBytesConfig(
+    load_in_4bit=True,
+    bnb_4bit_quant_type="nf4",
+    bnb_4bit_use_double_quant=True,
+    bnb_4bit_compute_dtype=torch.float16
+)
 
 para_tokenizer = AutoTokenizer.from_pretrained(PARA_MODEL)
 para_model = AutoModelForCausalLM.from_pretrained(
-    PARA_MODEL, load_in_4bit=True, torch_dtype=torch.float16, device_map="auto"
+    PARA_MODEL, quantization_config=bnb_config, device_map = {"": 0} if device == "cuda" else "auto"
 ).eval()
 
 
@@ -55,14 +64,13 @@ Contraintes :
 - aucune opinion
 - aucune langue de bois volontaire
 
-Retour JSON strict :
-{
+SORTIE STRICT JSON :
+{{
   "sentences": ["..."]
-}
+}}
 
 Nombre : {n}
 """
-
 
 PARA_PROMPT = """
 Tu es un générateur de dataset NLP contrastif.
@@ -103,25 +111,24 @@ D7: spécifique
 FORMAT STRICT JSON
 ========================
 
-{
+{{
   "pairs": [
-    {
-      "ldb": {
+    {{
+      "ldb": {{
         "text": "...",
         "constraints": ["C1", "C4"]
-      },
-      "direct": {
+      }},
+      "direct": {{
         "text": "...",
         "constraints": ["D1", "D4"]
-      }
-    }
+      }}
+    }}
   ]
-}
+}}
 
 PHRASE :
 {sentence}
 """
-
 
 # =========================================================
 # UTILS
@@ -141,7 +148,7 @@ def build_batches(data: List[str], batch_size: int) -> List[List[str]]:
     """
     logger.debug(f"Building batches with batch_size={batch_size}, total={len(data)}")
 
-    return [data[i : i + batch_size] for i in range(0, len(data), batch_size)]
+    return [data[i: i + batch_size] for i in range(0, len(data), batch_size)]
 
 
 def extract_json(text: str) -> Optional[Dict[str, Any]]:
@@ -159,7 +166,7 @@ def extract_json(text: str) -> Optional[Dict[str, Any]]:
     except Exception:
         pass
 
-    match = re.search(r"\{[\s\S]*\}", text)
+    match = re.search(r"\{.*?\}", text, re.DOTALL)
     if match:
         try:
             return json.loads(match.group())
@@ -235,7 +242,10 @@ def call_generator(n: int) -> List[str]:
 
     with torch.no_grad():
         out = gen_model.generate(
-            **inputs, max_new_tokens=400, temperature=0.9, top_p=0.95
+            **inputs,
+            max_new_tokens=200,
+            temperature=0.3,
+            top_p=0.8
         )
 
     text = gen_tokenizer.decode(out[0], skip_special_tokens=True)
