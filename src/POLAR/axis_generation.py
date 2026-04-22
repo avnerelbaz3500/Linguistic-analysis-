@@ -18,7 +18,6 @@ def remove_duplicates(dataset: list) -> list:
             unique_dataset.append(item)
     return unique_dataset
 
-
 def extract_json(text: str) -> str:
     """Extracts the first JSON array found in the raw text output."""
     match = re.search(r"\[\s*\{.*?\}\s*\]", text, re.DOTALL)
@@ -76,7 +75,6 @@ def validate_and_fix_pairs(pairs: list, expected_length: int) -> list:
         )
 
     return valid_pairs
-
 
 def main():
     parser = argparse.ArgumentParser(
@@ -237,16 +235,9 @@ def main():
                 print(red("Warning: No JSON format detected in response. Retrying."))
 
         if not iteration_success:
-            print(
-                orange(
-                    f"Failed to generate valid data for iteration {i + 1} after {args.max_retries} attempts. Moving to next iteration."
-                )
-            )
+            print(orange(f"Failed to generate valid data for iteration {i + 1} after {args.max_retries} attempts. Moving to next iteration."))
 
-    print(
-        green(f"\nGeneration complete. {len(dataset)} pairs available in {args.output}")
-    )
-
+    print(green(f"\nGeneration complete. {len(dataset)} pairs available in {args.output}"))
 
 if __name__ == "__main__":
     main()

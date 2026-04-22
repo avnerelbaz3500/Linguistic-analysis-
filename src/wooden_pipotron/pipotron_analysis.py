@@ -7,7 +7,6 @@ import spacy
 from helper_function.print import *
 from src.wooden_pipotron.wooden_data import wooden_80_90
 
-
 DATA_PATH = "data/clean/archelect_clean.parquet"
 LOG_DIR = "logs/wooden_pipotron"
 os.makedirs(LOG_DIR, exist_ok=True)
@@ -34,7 +33,6 @@ def load_data(path):
     df["year"] = pd.to_datetime(df["date"]).dt.year
     return df
 
-
 def build_wooden_set(word_list):
     """
     Lemmatize a list of wooden words.
@@ -46,7 +44,6 @@ def build_wooden_set(word_list):
         set: Lemmatized set of words.
     """
     return set(token.lemma_.lower() for word in word_list for token in nlp(word))
-
 
 def compute_wooden_scores(texts, wooden_set):
     """
@@ -76,7 +73,6 @@ def compute_wooden_scores(texts, wooden_set):
 
     return scores
 
-
 def compute_statistics(df):
     """
     Compute aggregated statistics and rankings.
@@ -104,7 +100,6 @@ def compute_statistics(df):
     print(blue(f"Top 3 Wooden Language Users (Overall): {top_3_parties}"))
 
     return stats, overall_ranking, top_3_parties
-
 
 def plot_results(stats, top_3_parties):
     """
@@ -153,7 +148,6 @@ def plot_results(stats, top_3_parties):
 
     print(f"Analysis complete. Visualization saved to {plot_path}")
 
-
 def display_top3(overall_ranking, top_3_parties):
     """
     Print summary of top 3 parties.
@@ -167,7 +161,6 @@ def display_top3(overall_ranking, top_3_parties):
     for party in top_3_parties:
         score = overall_ranking[party]
         print(f"{party: <15}: {score:.4f}%")
-
 
 def run_analysis():
     """

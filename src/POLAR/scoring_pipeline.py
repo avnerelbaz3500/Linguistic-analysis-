@@ -12,7 +12,6 @@ from tqdm import tqdm
 
 from helper_function.print import *
 
-
 def get_device() -> torch.device:
     """Returns the optimal device (MPS for Apple Silicon, CUDA for Nvidia, else CPU)."""
     if torch.backends.mps.is_available():
@@ -20,7 +19,6 @@ def get_device() -> torch.device:
     elif torch.cuda.is_available():
         return torch.device("cuda")
     return torch.device("cpu")
-
 
 def mean_pooling(model_output: tuple, attention_mask: torch.Tensor) -> torch.Tensor:
     """Performs mean pooling on token embeddings to get a single sentence vector."""
@@ -31,7 +29,6 @@ def mean_pooling(model_output: tuple, attention_mask: torch.Tensor) -> torch.Ten
     sum_embeddings = torch.sum(token_embeddings * input_mask_expanded, 1)
     sum_mask = torch.clamp(input_mask_expanded.sum(1), min=1e-9)  # avoid 0 division
     return sum_embeddings / sum_mask
-
 
 def embed_sentences(
     sentences: list, tokenizer, model, device, batch_size=32
@@ -58,7 +55,6 @@ def embed_sentences(
         all_embeddings.append(embeddings)
 
     return torch.cat(all_embeddings, dim=0)  # (nb of sentences, hidden_size)
-
 
 def build_polar_axis(pairs_path: Path, tokenizer, model, device) -> torch.Tensor:
     """Constructs the POLAR axis representing the 'Langue de bois' direction."""
@@ -87,7 +83,6 @@ def build_polar_axis(pairs_path: Path, tokenizer, model, device) -> torch.Tensor
     polar_vector = torch.nn.functional.normalize(polar_vector, p=2, dim=0)
 
     return polar_vector.to(device)
-
 
 def compute_polar_scores_bulk(
     sentences: list, tokenizer, model, device, polar_vector, batch_size=32
@@ -219,7 +214,6 @@ def main():
     output_df_path = os.path.join(args.output_data, "archelect_scored.parquet")
     print(blue(f"Saving new data_base with POLAR in : {output_df_path}"))
     df.to_parquet(output_df_path, index=False)
-
 
 if __name__ == "__main__":
     main()

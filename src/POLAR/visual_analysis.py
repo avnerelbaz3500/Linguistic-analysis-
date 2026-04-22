@@ -161,14 +161,9 @@ def main():
         plt.tight_layout()
         plt.savefig(os.path.join(args.output_graph, "ldb_top10.png"), dpi=300)
     else:
-        print(
-            red(
-                "Warning: Missing columns 'titulaire-nom' or 'titulaire-prenom', ignoring top ten graph."
-            )
-        )
+        print(red("Warning: Missing columns 'titulaire-nom' or 'titulaire-prenom', ignoring top ten graph."))
 
     print(green(f"Analysis complete. Graphs saved to {args.output_graph}"))
-
 
 if __name__ == "__main__":
     main()
