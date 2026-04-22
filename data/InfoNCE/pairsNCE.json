@@ -1,1 +1,182 @@
-[]
+[
+  {
+    "base": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb": "Plusieurs usines seront fermées par le gouvernement dans le bassin industriel de Lorraine.",
+    "direct": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb_constraints": [
+      "C2",
+      "S2",
+      "I2"
+    ],
+    "direct_constraints": [
+      "D2",
+      "R2",
+      "J2"
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb": "Dans le cadre de sa politique industrielle, le gouvernement a décidé de fermer plusieurs usines situées dans le bassin industriel de Lorraine.",
+    "direct": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb_constraints": [
+      "C1",
+      "S1",
+      "I1"
+    ],
+    "direct_constraints": [
+      "D1",
+      "R1",
+      "J2"
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb": "La décision de fermer plusieurs usines dans le bassin industriel de Lorraine a été prise par le gouvernement.",
+    "direct": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb_constraints": [
+      "C3",
+      "S7",
+      "I3"
+    ],
+    "direct_constraints": [
+      "D3",
+      "R6",
+      "J2"
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la suppression progressive de la taxe professionnelle.",
+    "ldb": "La taxe professionnelle sera progressivement supprimée par le gouvernement.",
+    "direct": "Le gouvernement a annoncé la suppression progressive de la taxe professionnelle.",
+    "ldb_constraints": [
+      "C2",
+      "S2",
+      "I2"
+    ],
+    "direct_constraints": [
+      "D2",
+      "R2",
+      "J2"
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la suppression progressive de la taxe professionnelle.",
+    "ldb": "Il est prévu que la taxe professionnelle sera progressivement supprimée.",
+    "direct": "La taxe professionnelle sera progressivement supprimée.",
+    "ldb_constraints": [
+      "C3",
+      "S3",
+      "I3"
+    ],
+    "direct_constraints": [
+      "D3",
+      "R3",
+      "J3"
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la suppression progressive de la taxe professionnelle.",
+    "ldb": "La décision de supprimer progressivement la taxe professionnelle a été prise par le gouvernement.",
+    "direct": "Le gouvernement a pris la décision de supprimer progressivement la taxe professionnelle.",
+    "ldb_constraints": [
+      "C1",
+      "S6",
+      "I5"
+    ],
+    "direct_constraints": [
+      "D1",
+      "R6",
+      "J5"
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la fermeture de l'usine Renault à Boulogne-Billancourt.",
+    "ldb": "La décision de fermer l'usine Renault à Boulogne-Billancourt a été prise par le gouvernement.",
+    "direct": "Le gouvernement a annoncé la fermeture de l'usine Renault à Boulogne-Billancourt.",
+    "ldb_constraints": [
+      "C2",
+      "S2",
+      "I2"
+    ],
+    "direct_constraints": [
+      "D2",
+      "R2",
+      "J2"
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la fermeture de l'usine Renault à Boulogne-Billancourt.",
+    "ldb": "Il est prévu que l'usine Renault à Boulogne-Billancourt va fermer ses portes.",
+    "direct": "Le gouvernement a annoncé la fermeture de l'usine Renault à Boulogne-Billancourt.",
+    "ldb_constraints": [
+      "C3",
+      "S3",
+      "I3"
+    ],
+    "direct_constraints": [
+      "D3",
+      "R3",
+      "J3"
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la fermeture de l'usine Renault à Boulogne-Billancourt.",
+    "ldb": "La fermeture de l'usine Renault à Boulogne-Billancourt sera effective dans six mois.",
+    "direct": "Le gouvernement a annoncé la fermeture de l'usine Renault à Boulogne-Billancourt.",
+    "ldb_constraints": [
+      "C1",
+      "S6",
+      "I5"
+    ],
+    "direct_constraints": [
+      "D1",
+      "R6",
+      "J5"
+    ]
+  },
+  {
+    "base": "Le gouvernement a lancé une campagne pour attirer les investissements étrangers.",
+    "ldb": "Une initiative gouvernementale vise à attirer des investissements étrangers.",
+    "direct": "Le gouvernement a lancé une campagne pour attirer les investissements étrangers.",
+    "ldb_constraints": [
+      "C2",
+      "S2",
+      "I2"
+    ],
+    "direct_constraints": [
+      "D2",
+      "R2",
+      "J2"
+    ]
+  },
+  {
+    "base": "Le gouvernement a lancé une campagne pour attirer les investissements étrangers.",
+    "ldb": "Il y a eu une action gouvernementale visant à attirer des investissements étrangers.",
+    "direct": "Le gouvernement a lancé une campagne pour attirer les investissements étrangers.",
+    "ldb_constraints": [
+      "C3",
+      "S3",
+      "I3"
+    ],
+    "direct_constraints": [
+      "D3",
+      "R3",
+      "J3"
+    ]
+  },
+  {
+    "base": "Le gouvernement a lancé une campagne pour attirer les investissements étrangers.",
+    "ldb": "Une campagne gouvernementale a été lancée afin d'attirer des investissements étrangers.",
+    "direct": "Le gouvernement a lancé une campagne pour attirer les investissements étrangers.",
+    "ldb_constraints": [
+      "C1",
+      "S1",
+      "I1"
+    ],
+    "direct_constraints": [
+      "D1",
+      "R1",
+      "J1"
+    ]
+  }
+]
