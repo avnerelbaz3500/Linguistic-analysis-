@@ -7,7 +7,6 @@ from pathlib import Path
 
 from helper_function.print import *
 
-
 def remove_duplicates(dataset: list) -> list:
     """Removes duplicate dictionaries from the dataset based on the 'direct' key."""
     seen = set()
@@ -26,7 +25,6 @@ def extract_json(text: str) -> str:
     if match:
         return match.group(0)
     return None
-
 
 def generate_with_ollama(messages: list, model: str, temperature: float) -> str:
     """Handles text generation using the local Ollama REST API."""
@@ -97,7 +95,7 @@ def main():
         "--model",
         type=str,
         default="mlx-community/Qwen2.5-7B-Instruct-4bit",
-        help="Model name (HuggingFace repo for MLX, or local model name for Ollama).",
+        help="Model name (HuggingFace repo for MLX, or local model like qwen2.5:7b for Ollama).",
     )
     parser.add_argument(
         "-t",

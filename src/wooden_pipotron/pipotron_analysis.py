@@ -15,7 +15,6 @@ os.makedirs(LOG_DIR, exist_ok=True)
 # Load NLP model once
 nlp = spacy.load("fr_core_news_sm", disable=["ner", "parser"])
 
-
 def load_data(path):
     """
     Load dataset and extract year from date column.
