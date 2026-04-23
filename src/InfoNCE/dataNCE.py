@@ -1,13 +1,15 @@
 import json
 import logging
 from typing import List, Dict, Any, Optional
-
+from tqdm import tqdm
 import torch
+import numpy as np
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
-from helper_function.print import *
-
+import random
 import os
-
+from .Constants.constraints import CONSTRAINTS
+import gc
+from .Constants.prompts import GEN_PROMPT, PARA_PROMPT
 
 # =========================================================
 # LOGGING
@@ -52,256 +54,168 @@ model = AutoModelForCausalLM.from_pretrained(
     dtype=torch.float16 if device == "cuda" else torch.float32
 ).eval()
 
-# =========================================================
-# PROMPTS (RENFORCÉS JSON STRICT)
-# =========================================================
-
-GEN_PROMPT = """
-Tu es un générateur de phrases politiques françaises (années 80-90).
-
-RÈGLE ABSOLUE :
-Réponds UNIQUEMENT en JSON valide.
-Aucun texte avant ou après.
-
-OBJECTIF :
-Générer EXACTEMENT {n} phrases factuelles.
-
-----------------------------------
-CONTRAINTES GÉNÉRALES
-----------------------------------
-
-- France (années 80-90)
-- style institutionnel
-- phrases courtes (max 20 mots)
-- une seule idée par phrase
-- uniquement faits ou décisions
-- aucune opinion
-
-----------------------------------
-INTERDICTIONS
-----------------------------------
-
-- pas de langue de bois
-- pas de flou ("mesures", "dispositif", etc.)
-- pas d’abstraction inutile
-- pas de justification
-- pas de généralisation vague
-
-----------------------------------
-EXIGENCES LINGUISTIQUES
-----------------------------------
-
-- sujet explicite (acteur identifié)
-- verbe simple et neutre (éviter les verbes idéologiquement marqués)
-- objet précis
-- vocabulaire concret
-
-----------------------------------
-DIVERSITÉ POLITIQUE (CRITIQUE)
-----------------------------------
-
-Les phrases doivent couvrir différentes thématiques réelles des années 80-90 :
-
- - chômage et emploi de masse
- - précarité du travail et montée des contrats atypiques
- - désindustrialisation et déclin des bassins industriels
- - mondialisation économique et délocalisations
- - privatisations des entreprises publiques
- - nationalisations et recompositions de l’État économique
- - rôle de l’État-providence et réforme de l’État
- - protection sociale (retraites, assurance maladie, prestations sociales)
- - fiscalité et pression fiscale (CSG, impôts, financement social)
- - déficit public et dette de l’État
- - immigration et politiques d’intégration
- - contrôle des frontières et droit d’asile
- - identité nationale et débats sur l’intégration
- - montée du Front national et tensions politiques associées
- - racisme, discriminations et réponses législatives
- - politique de la ville et banlieues
- - sécurité intérieure et délinquance
- - ordre public et maintien de la sécurité
- - violences urbaines et émeutes
- - politique pénale et justice
- - services publics (école, santé, transports, poste, énergie)
- - réforme et modernisation des services publics
- - privatisation ou ouverture à la concurrence des services publics
- - construction européenne et intégration européenne
- - traité de Maastricht et Union européenne
- - libre circulation (Schengen)
- - souveraineté nationale vs intégration européenne
- - monnaie et convergence économique européenne
- - cohabitation politique et fonctionnement institutionnel
- - alternance politique gauche/droite
- - rôle du président et du gouvernement sous la Ve République
- - crise de la représentation politique et abstention
- 
-IMPORTANT :
-Ne pas associer explicitement ces thèmes à des partis.
-Le signal politique doit rester implicite.
-
-----------------------------------
-ACTEURS VARIÉS
-----------------------------------
-
-- gouvernement
-- ministre
-- préfet
-- maire
-- administration
-
-----------------------------------
-FORMAT STRICT
-----------------------------------
-
-{{
-  "sentences": ["...", "..."]
-}}
-"""
-
-PARA_PROMPT = """
-Tu es un générateur de dataset NLP contrastif basé sur des transformations linguistiques contrôlées.
-
-RÈGLE ABSOLUE :
-Tu réponds UNIQUEMENT en JSON valide.
-Aucun texte hors JSON.
-
-OBJECTIF :
-À partir d'une phrase factuelle, générer EXACTEMENT {n} paires (LDB / DIRECT).
-
-Chaque paire doit :
-- conserver STRICTEMENT le même contenu factuel
-- appliquer des contraintes LDB
-- appliquer les contraintes DIRECT EXACTEMENT inverses
-
-========================================================
-MODÈLE DE CONTRAINTES
-========================================================
-
-Chaque transformation repose sur 3 types de contraintes :
-
-C = intention (sens et positionnement)
-S = structure (syntaxe et forme)
-I = information (organisation et densité)
-
-Chaque contrainte LDB possède un miroir DIRECT.
-
-------------------------
-LDB → DIRECT (MIROIR)
-------------------------
-
-INTENTION (C)
-C1 euphémisation              → D1 explicitation
-C2 effacement du sujet        → D2 sujet explicite
-C3 flou                       → D3 précision
-C4 abstraction                → D4 concret
-C5 dilution responsabilité    → D5 responsabilité claire
-C6 jargon                     → D6 langage simple
-C7 généralisation             → D7 spécification
-
-STRUCTURE (S)
-S1 phrase longue              → R1 phrase courte
-S2 passif                     → R2 actif
-S3 nominalisation             → R3 verbes directs
-S4 ajout inutile              → R4 suppression du superflu
-S5 complexité syntaxique      → R5 simplicité syntaxique
-S6 sujet éloigné/inexistant   → R6 sujet en début
-S7 multi-idées                → R7 une seule idée
-S8 connecteurs bureaucratiques→ R8 aucun connecteur
-S9 redondance                 → R9 aucune répétition
-S10 justification ajoutée     → R10 aucune justification
-
-INFORMATION (I)
-I1 dilution information       → J1 densité informationnelle
-I2 retard info clé            → J2 information immédiate
-I3 contexte avant action      → J3 action immédiate
-I4 implicite                  → J4 explicite
-I5 fragmentation              → J5 information compacte
-
-========================================================
-RÈGLES DE GÉNÉRATION
-========================================================
-
-Pour chaque paire :
-
-1. Sélectionner aléatoirement 1 à 4 contraintes :
-   - 0 à 3 contraintes C
-   - 0 à 3 contraintes S
-   - 0 à 2 contraintes I
-
-2. Générer la phrase LDB en respectant STRICTEMENT ces contraintes.
-
-3. Générer la phrase DIRECT en appliquant EXACTEMENT les contraintes inverses correspondantes.
-
-========================================================
-CONTRAINTES GLOBALES
-========================================================
-
-INTERDICTIONS :
-- modifier le fait
-- ajouter une nouvelle information
-- supprimer une information essentielle
-
-========================================================
-FORMAT STRICT JSON
-========================================================
-
-{{
-  "pairs": [
-    {{
-      "ldb": {{
-        "text": "...",
-        "constraints": ["C2", "S2", "I2"]
-      }},
-      "direct": {{
-        "text": "...",
-        "constraints": ["D2", "R2", "J2"]
-      }}
-    }}
-  ]
-}}
-
-PHRASE SOURCE :
-{sentence}
-"""
-
-
 
 
 # =========================================================
-# UTILS
+# CONSTRAINTS FLAT MAP
 # =========================================================
 
-def extract_json(text: str) -> Optional[Dict[str, Any]]:
-    """Extraction robuste JSON"""
+def build_constraint_maps(constraints):
+    all_items = {}
+    keys = []
 
+    mirror = {
+        "C": "D",
+        "D": "C",
+        "S": "R",
+        "R": "S",
+        "I": "J",
+        "J": "I"
+    }
+
+    for cat in constraints.values():
+        for k, v in cat.items():
+            all_items[k] = v
+            keys.append(k)
+
+    return keys, all_items, mirror
+
+
+keys, all_items, mirror_map = build_constraint_maps(CONSTRAINTS)
+
+# =========================================================
+# SAMPLING (PROPRE + RAPIDE)
+# =========================================================
+
+def sample_ldb_batches(keys, n, k):
+    ldb_keys = np.array([x for x in keys if x[0] in ["C", "S", "I"]])
+
+    noise = np.random.rand(n, len(ldb_keys))
+    idx = np.argsort(noise, axis=1)[:, :k]
+
+    return ldb_keys[idx]
+# =========================================================
+# JSON SAFE PARSER
+# =========================================================
+
+def extract_json(text: str):
     try:
         return json.loads(text)
     except:
-        pass
-
-    start, end = text.find("{"), text.rfind("}")
-    if start != -1 and end != -1:
-        try:
-            return json.loads(text[start:end + 1])
-        except:
-            return None
-
+        start, end = text.find("{"), text.rfind("}")
+        if start != -1 and end != -1:
+            try:
+                return json.loads(text[start:end+1])
+            except:
+                return None
     return None
 
 
-def build_batches(data: List[str], batch_size: int):
-    return [data[i:i + batch_size] for i in range(0, len(data), batch_size)]
-    
-def clean_output(text: str) -> str:
+def clean_output(text: str):
     if "assistant" in text:
         text = text.split("assistant")[-1]
     return text.strip()
+
 # =========================================================
-# GENERATOR
+# PROMPT BUILDER (CORE LOGIC)
 # =========================================================
 
-def call_generator(n: int) -> List[str]:
+def build_constraints_payload(batch):
+    return [
+        {
+            "ldb": {"id": l, **all_items[l]},
+            "direct": {"id": d, **all_items[d]}
+        }
+        for l, d in batch
+    ]
+def format_constraints(batch):
+    lines = []
 
+    for item in build_constraints_payload(batch):
+        ldb = item["ldb"]
+        direct = item["direct"]
+
+        lines.append(f"""
+    LDB[{ldb['id']}]
+    name: {ldb['name']}
+    effect: {ldb['effect']}
+
+    DIRECT[{direct['id']}]
+    name: {direct['name']}
+    effect: {direct['effect']}
+    """)
+
+    return "\n".join(lines)
+# =========================================================
+# PARAPHRASER (VRAI BATCH GPU)
+# =========================================================
+
+def call_paraphraser(sentence: str, n: int = 4, k: int = 3):
+
+    sampled = sample_ldb_batches(keys, n, k)
+
+    flat = []
+    for row in sampled:
+        for c in row:
+            prefix = c[0]
+            if prefix not in mirror_map:
+                continue
+            flat.append((c, mirror_map[prefix] + c[1:]))
+
+    batches = [
+        flat[i:i+k]
+        for i in range(0, len(flat), k)
+    ]
+
+    prompts = [
+        tokenizer.apply_chat_template(
+            [
+                {"role": "system", "content": "JSON only."},
+                {"role": "user", "content": PARA_PROMPT.format(
+                    sentence=sentence,
+                    constraints=format_constraints(batch)
+                )}
+            ],
+            tokenize=False,
+            add_generation_prompt=True
+        )
+        for batch in batches
+    ]
+
+    inputs = tokenizer(
+        prompts,
+        return_tensors="pt",
+        padding=True,
+        truncation=True
+    ).to(model.device)
+
+    with torch.inference_mode():
+        out = model.generate(
+            **inputs,
+            max_new_tokens=180,
+            temperature=0.3,
+            top_p=0.9,
+            do_sample=True
+        )
+
+    decoded = tokenizer.batch_decode(out, skip_special_tokens=True)
+
+    results = []
+    for d in decoded:
+        data = extract_json(clean_output(d))
+        if not data:
+            continue
+
+        if "ldb" in data and "direct" in data:
+            results.append(data)
+
+    return results
+
+# =========================================================
+# GENERATOR (SIMPLE)
+# =========================================================
+
+def call_generator(n: int):
     prompts = [
         tokenizer.apply_chat_template(
             [
@@ -314,139 +228,56 @@ def call_generator(n: int) -> List[str]:
         for _ in range(n)
     ]
 
-    inputs = tokenizer(
-        prompts,
-        return_tensors="pt",
-        padding=True
-    ).to(model.device)
+    inputs = tokenizer(prompts, return_tensors="pt", padding=True).to(model.device)
 
-    with torch.no_grad():
-        out = model.generate(
-            **inputs,
-            max_new_tokens=250,
-            temperature=0.6,
-            top_p=0.9,
-            do_sample=True
-        )
+    with torch.inference_mode():
+        out = model.generate(**inputs, max_new_tokens=250, temperature=0.6, top_p=0.9)
 
     decoded = tokenizer.batch_decode(out, skip_special_tokens=True)
 
-    results = []
+    sentences = []
     for d in decoded:
-        d = clean_output(d)
-        data = extract_json(d)
-        if data:
-            results.extend(data.get("sentences", []))
+        j = extract_json(clean_output(d))
+        if j:
+            sentences.extend(j.get("sentences", []))
 
-    return results
-
-# =========================================================
-# PARAPHRASER
-# =========================================================
-def call_paraphraser(sentences: List[str], n: int):
-
-    prompts = [
-        tokenizer.apply_chat_template(
-            [
-                {"role": "system", "content": "JSON only."},
-                {"role": "user", "content": PARA_PROMPT.format(sentence=s, n=n)}
-            ],
-            tokenize=False,
-            add_generation_prompt=True
-        )
-        for s in sentences
-    ]
-
-    inputs = tokenizer(
-        prompts,
-        return_tensors="pt",
-        padding=True,
-        truncation=True
-    ).to(model.device)
-
-    with torch.no_grad():
-        out = model.generate(
-            **inputs,
-            max_new_tokens=600,
-            temperature=0.2,
-            top_p=0.9,
-            do_sample=True
-        )
-
-    decoded = tokenizer.batch_decode(out, skip_special_tokens=True)
-
-    print("\n--- RAW PARAPHRASER OUTPUT ---\n", decoded, "\n")
-
-    results = []
-    for d in decoded:
-        d = clean_output(d)
-        data = extract_json(d)
-        results.append(data)
-
-    return results
-# =========================================================
-# QUALITY CHECK
-# =========================================================
-
-def quality_check(res: Dict[str, Any]) -> bool:
-    if not res or "pairs" not in res:
-        return False
-
-    for p in res["pairs"]:
-        if not p.get("ldb") or not p.get("direct"):
-            return False
-        if not p["ldb"].get("text") or not p["direct"].get("text"):
-            return False
-
-    return True
-
-# =========================================================
-# RETRY
-# =========================================================
-
-def safe_generate(sentence: str, n: int, retries: int = 2):
-    for _ in range(retries):
-        res = call_paraphraser([sentence], n)[0]
-        if quality_check(res):
-            return res
-    return None
+    return sentences
 
 # =========================================================
 # PIPELINE
 # =========================================================
-
-def generate_dataset(n_base=10, n_variants=2, batch_size=2):
+def generate_dataset(n_base=10, n_variants=3, batch_size=2):
+    torch.cuda.empty_cache()
+    gc.collect()
 
     dataset = []
 
     base = call_generator(n_base)
     logger.info(f"Base sentences: {len(base)}")
 
-    batches = build_batches(base, batch_size)
+    for i in tqdm(range(0, len(base), batch_size), desc="Dataset building", unit="batch"):
 
-    for batch in batches:
+        batch = base[i:i + batch_size]
 
-        results = call_paraphraser(batch, n_variants)
+        for sentence in batch:
 
-        for sentence, res in zip(batch, results):
+            results = call_paraphraser(sentence, n_variants)
 
-            if not quality_check(res):
-                res = safe_generate(sentence, n_variants)
+            for res in results:
 
-            if not res:
-                continue
+                if not res or "ldb" not in res or "direct" not in res:
+                    continue
 
-            for p in res["pairs"]:
                 dataset.append({
                     "base": sentence,
-                    "ldb": p["ldb"]["text"],
-                    "direct": p["direct"]["text"],
-                    "ldb_constraints": p["ldb"]["constraints"],
-                    "direct_constraints": p["direct"]["constraints"]
+                    "ldb": res["ldb"]["text"],
+                    "direct": res["direct"]["text"],
+                    "ldb_constraints": res["ldb"]["constraints"],
+                    "direct_constraints": res["direct"]["constraints"]
                 })
 
-    return dataset
-
+            torch.cuda.empty_cache()
+            gc.collect()
 # =========================================================
 # SAVE
 # =========================================================
@@ -460,6 +291,6 @@ def save_json(data, path):
 # =========================================================
 
 if __name__ == "__main__":
-    dataset = generate_dataset(n_base=4, n_variants=3, batch_size=2)
-    save_json(dataset, "data/InfoNCE/pairsNCE.json")
+    dataset = generate_dataset(n_base=100, n_variants=3, batch_size=4)
+    save_json(dataset, "data/InfoNCE/pairsNCE100.json")
     logger.info(f"DONE: {len(dataset)} samples")

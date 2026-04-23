@@ -1,182 +1,405 @@
 [
   {
-    "base": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin industriel de Lorraine.",
-    "ldb": "Plusieurs usines seront fermées par le gouvernement dans le bassin industriel de Lorraine.",
-    "direct": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin industriel de Lorraine.",
+    "base": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin minier de la Moselle.",
+    "ldb": "Il est prévu que, dans le cadre d'une réorganisation économique importante, le gouvernement envisage de mettre fin aux opérations de divers établissements industriels situés dans la région minière de la Moselle.",
+    "direct": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin minier de la Moselle.",
     "ldb_constraints": [
-      "C2",
-      "S2",
-      "I2"
+      {
+        "id": [
+          "S1",
+          "C3"
+        ],
+        "effect": "rendre au moins un élément imprécis (temps, lieu, quantité, acteur)"
+      },
+      {
+        "id": [
+          "LDB[I3]",
+          "LDB[S1]"
+        ],
+        "effect": "phrase commence par contexte ou cadrage avant l’action principale"
+      }
     ],
     "direct_constraints": [
-      "D2",
-      "R2",
-      "J2"
+      {
+        "id": [
+          "R1",
+          "DIRECT[J3]"
+        ],
+        "effect": "phrase commence directement par l’action principale"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin minier de la Moselle.",
+    "ldb": "La mise en œuvre de la réalisation de la gestion de la situation a conduit à la réalisation de la fermeture de plusieurs établissements industriels situés dans le secteur minier de la Moselle.",
+    "direct": "Le gouvernement a fermé plusieurs usines dans le bassin minier de la Moselle.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S3",
+          "C4"
+        ],
+        "effect": "remplacement des verbes par noms abstraits et remplacer une action concrète par une formulation générique ou abstraite"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R4",
+          "D4"
+        ],
+        "effect": "utiliser des actions et objets concrets et observables"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin minier de la Moselle.",
+    "ldb": "Il a été notifié que des mesures seraient prises concernant le secteur industriel du bassin minier de la Moselle.",
+    "direct": "Le gouvernement a annoncé la fermeture de plusieurs usines situées dans le bassin minier de la Moselle.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S4",
+          "C2"
+        ],
+        "effect": "supprimer ou masquer le sujet (passif, impersonnel)"
+      },
+      {
+        "id": [
+          "S4",
+          "S7"
+        ],
+        "effect": "au moins deux actions ou informations distinctes dans la même phrase"
+      },
+      {
+        "id": [
+          "S4",
+          "C3"
+        ],
+        "effect": "rendre au moins un élément imprécis (temps, lieu, quantité, acteur)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R4",
+          "D2"
+        ],
+        "effect": "placer un sujet clair et identifié en début de phrase"
+      },
+      {
+        "id": [
+          "R4",
+          "R7"
+        ],
+        "effect": "une seule action ou information par phrase"
+      },
+      {
+        "id": [
+          "R4",
+          "D3"
+        ],
+        "effect": "rendre tous les éléments explicites et non ambigus"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la suppression progressive de l'emploi à durée déterminée.",
+    "ldb": "Il a été indiqué que le processus de diminution graduelle de l'utilisation de contrats à durée déterminée sera mis en œuvre.",
+    "direct": "Le gouvernement a annoncé la suppression progressive de l'emploi à durée déterminée.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S6",
+          "C1"
+        ],
+        "effect": "sujet absent, implicite ou placé après le verbe principal, euphémisation"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R6",
+          "D1"
+        ],
+        "effect": "sujet explicite placé en début de phrase avant l’action, phrase ≤12 mots sans subordination, structure simple sujet-verbe-objet"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la suppression progressive de l'emploi à durée déterminée.",
+    "ldb": "Il a été indiqué par les autorités compétentes que l'élimination graduelle de l'emploi temporaire sera mise en œuvre.",
+    "direct": "Le gouvernement a annoncé la suppression progressive de l'emploi à durée déterminée.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S4",
+          "C2"
+        ],
+        "effect": "ajout d’éléments non nécessaires à la compréhension du fait (précisions, reformulations, contexte inutile)"
+      },
+      {
+        "id": [
+          "S6",
+          "C4"
+        ],
+        "effect": "sujet absent, implicite ou placé après le verbe principal"
+      },
+      {
+        "id": [
+          "I4",
+          "C1"
+        ],
+        "effect": "au moins un élément nécessaire à la compréhension est sous-entendu"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R4",
+          "D2"
+        ],
+        "effect": "suppression de tout élément non essentiel, conservation du fait brut"
+      },
+      {
+        "id": [
+          "R6",
+          "D4"
+        ],
+        "effect": "sujet explicite placé en début de phrase avant l’action"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la suppression progressive de l'emploi à durée déterminée.",
+    "ldb": "Il a été décidé de mettre en œuvre une gestion progressive concernant la réalisation de l'emploi à durée déterminée.",
+    "direct": "Le gouvernement a annoncé qu'il supprimera progressivement l'emploi à durée déterminée.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S3",
+          "C5",
+          "C6"
+        ],
+        "effect": "nominalisation, dilution_responsabilite, jargon"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R3",
+          "D5"
+        ],
+        "effect": "verbe_direct, responsabilite_claire"
+      }
     ]
   },
   {
     "base": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin industriel de Lorraine.",
-    "ldb": "Dans le cadre de sa politique industrielle, le gouvernement a décidé de fermer plusieurs usines situées dans le bassin industriel de Lorraine.",
-    "direct": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb": "Il a été noté que des mesures ont été prises pour réorganiser certaines installations industrielles dans la région de Lorraine.",
+    "direct": "Le gouvernement a annoncé qu'il fermera plusieurs usines situées dans le bassin industriel de Lorraine.",
     "ldb_constraints": [
-      "C1",
-      "S1",
-      "I1"
+      {
+        "id": [
+          "S3",
+          "C5"
+        ],
+        "effect": "rendre au moins un élément imprécis (temps, lieu, quantité, acteur) et éviter d’assigner clairement une responsabilité (passif, neutre)"
+      }
     ],
     "direct_constraints": [
-      "D1",
-      "R1",
-      "J2"
+      {
+        "id": [
+          "R3",
+          "D5"
+        ],
+        "effect": "attribuer explicitement l’action à un acteur identifié et rendre tous les éléments explicites et non ambigus"
+      }
     ]
   },
   {
     "base": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin industriel de Lorraine.",
-    "ldb": "La décision de fermer plusieurs usines dans le bassin industriel de Lorraine a été prise par le gouvernement.",
+    "ldb": "Dans le cadre de la gestion stratégique du bassin industriel de Lorraine, la mise en œuvre de la politique gouvernementale a conduit à la réalisation de la fermeture de plusieurs établissements industriels.",
+    "direct": "Le gouvernement a fermé plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S3",
+          "C2"
+        ],
+        "effect": "remplacement des verbes par noms abstraits (ex: mise en œuvre, réalisation, gestion)"
+      },
+      {
+        "id": [
+          "LDB[S1]",
+          "phrase_longue"
+        ],
+        "effect": "phrase ≥15 mots avec au moins une subordination (ex: que, afin de, dans la mesure où)"
+      },
+      {
+        "id": [
+          "LDB[I3]",
+          "contexte_avant_action"
+        ],
+        "effect": "phrase commence par contexte ou cadrage avant l’action principale"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R3",
+          "verbe_direct"
+        ],
+        "effect": "remplacement des noms abstraits par verbes d’action concrets"
+      },
+      {
+        "id": [
+          "R1",
+          "phrase_courte"
+        ],
+        "effect": "phrase ≤12 mots sans subordination, structure simple sujet-verbe-objet"
+      },
+      {
+        "id": [
+          "DIRECT[J3]",
+          "action_directe"
+        ],
+        "effect": "phrase commence directement par l’action principale"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb": "Des mesures ont été prises par le gouvernement concernant le secteur industriel, entraînant la cessation d'activités dans certaines installations situées dans la région historique de Lorraine.",
     "direct": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin industriel de Lorraine.",
     "ldb_constraints": [
-      "C3",
-      "S7",
-      "I3"
+      {
+        "id": [
+          "S4",
+          "C1"
+        ],
+        "effect": "ajout de termes non essentiels, atténuation du ton, substitution de termes directs par des formulations plus neutres"
+      }
     ],
     "direct_constraints": [
-      "D3",
-      "R6",
-      "J2"
+      {
+        "id": [
+          "R4",
+          "D1"
+        ],
+        "effect": "suppression de tout élément non essentiel, utilisation de termes directs et explicites"
+      }
     ]
   },
   {
-    "base": "Le gouvernement a annoncé la suppression progressive de la taxe professionnelle.",
-    "ldb": "La taxe professionnelle sera progressivement supprimée par le gouvernement.",
-    "direct": "Le gouvernement a annoncé la suppression progressive de la taxe professionnelle.",
+    "base": "Le gouvernement a annoncé la suppression de 50 000 postes dans la fonction publique.",
+    "ldb": "Dans le cadre de sa réorganisation, le gouvernement a indiqué qu'il serait nécessaire de procéder à une réduction significative du personnel au sein de l'appareil administratif, cette mesure visant à optimiser les ressources disponibles et à assurer une meilleure efficacité dans la gestion publique.",
+    "direct": "Le gouvernement a annoncé la suppression de 50 000 postes dans la fonction publique.",
     "ldb_constraints": [
-      "C2",
-      "S2",
-      "I2"
+      {
+        "id": [
+          "S4",
+          "C6"
+        ],
+        "effect": "ajout d’éléments non nécessaires à la compréhension du fait (précisions, reformulations, contexte inutile)"
+      }
     ],
     "direct_constraints": [
-      "D2",
-      "R2",
-      "J2"
+      {
+        "id": [
+          "R4",
+          "D6"
+        ],
+        "effect": "suppression de tout élément non essentiel, conservation du fait brut"
+      }
     ]
   },
   {
-    "base": "Le gouvernement a annoncé la suppression progressive de la taxe professionnelle.",
-    "ldb": "Il est prévu que la taxe professionnelle sera progressivement supprimée.",
-    "direct": "La taxe professionnelle sera progressivement supprimée.",
+    "base": "Le gouvernement a annoncé la suppression de 50 000 postes dans la fonction publique.",
+    "ldb": "Il convient de noter que le gouvernement, dans le but de rationaliser les dépenses publiques, a décidé de procéder à la réduction significative du nombre de postes occupés dans la sphère de la fonction publique, ce qui représente une mesure importante pour assurer la meilleure utilisation des ressources disponibles.",
+    "direct": "Le gouvernement a annoncé la suppression de 50 000 postes dans la fonction publique.",
     "ldb_constraints": [
-      "C3",
-      "S3",
-      "I3"
+      {
+        "id": [
+          "S10",
+          "C2"
+        ],
+        "effect": "ajout d’une explication ou justification non nécessaire au fait"
+      },
+      {
+        "id": [
+          "I2",
+          "C2"
+        ],
+        "effect": "information principale apparaît après les premiers mots de la phrase"
+      },
+      {
+        "id": [
+          "S5",
+          "C2"
+        ],
+        "effect": "structure avec subordination ou enchâssement de propositions"
+      }
     ],
     "direct_constraints": [
-      "D3",
-      "R3",
-      "J3"
+      {
+        "id": [
+          "R10",
+          "C2"
+        ],
+        "effect": "aucune justification, uniquement le fait brut"
+      },
+      {
+        "id": [
+          "J2",
+          "C2"
+        ],
+        "effect": "information principale placée dès le début de la phrase"
+      },
+      {
+        "id": [
+          "R5",
+          "C2"
+        ],
+        "effect": "une seule proposition principale sans subordination"
+      }
     ]
   },
   {
-    "base": "Le gouvernement a annoncé la suppression progressive de la taxe professionnelle.",
-    "ldb": "La décision de supprimer progressivement la taxe professionnelle a été prise par le gouvernement.",
-    "direct": "Le gouvernement a pris la décision de supprimer progressivement la taxe professionnelle.",
+    "base": "Le gouvernement a annoncé la suppression de 50 000 postes dans la fonction publique.",
+    "ldb": "Il a été annoncé que 50 000 postes seraient supprimés dans la fonction publique par le gouvernement.",
+    "direct": "Le gouvernement a annoncé qu’il supprimerait 50 000 postes dans la fonction publique.",
     "ldb_constraints": [
-      "C1",
-      "S6",
-      "I5"
+      {
+        "id": [
+          "S2",
+          "C5"
+        ],
+        "effect": "voix passive avec auxiliaire être + participe passé, sujet non acteur, éviter d’assigner clairement une responsabilité (passif, neutre)"
+      },
+      {
+        "id": [
+          "S10",
+          "C5"
+        ],
+        "effect": "ajout d’une explication ou justification non nécessaire au fait"
+      }
     ],
     "direct_constraints": [
-      "D1",
-      "R6",
-      "J5"
-    ]
-  },
-  {
-    "base": "Le gouvernement a annoncé la fermeture de l'usine Renault à Boulogne-Billancourt.",
-    "ldb": "La décision de fermer l'usine Renault à Boulogne-Billancourt a été prise par le gouvernement.",
-    "direct": "Le gouvernement a annoncé la fermeture de l'usine Renault à Boulogne-Billancourt.",
-    "ldb_constraints": [
-      "C2",
-      "S2",
-      "I2"
-    ],
-    "direct_constraints": [
-      "D2",
-      "R2",
-      "J2"
-    ]
-  },
-  {
-    "base": "Le gouvernement a annoncé la fermeture de l'usine Renault à Boulogne-Billancourt.",
-    "ldb": "Il est prévu que l'usine Renault à Boulogne-Billancourt va fermer ses portes.",
-    "direct": "Le gouvernement a annoncé la fermeture de l'usine Renault à Boulogne-Billancourt.",
-    "ldb_constraints": [
-      "C3",
-      "S3",
-      "I3"
-    ],
-    "direct_constraints": [
-      "D3",
-      "R3",
-      "J3"
-    ]
-  },
-  {
-    "base": "Le gouvernement a annoncé la fermeture de l'usine Renault à Boulogne-Billancourt.",
-    "ldb": "La fermeture de l'usine Renault à Boulogne-Billancourt sera effective dans six mois.",
-    "direct": "Le gouvernement a annoncé la fermeture de l'usine Renault à Boulogne-Billancourt.",
-    "ldb_constraints": [
-      "C1",
-      "S6",
-      "I5"
-    ],
-    "direct_constraints": [
-      "D1",
-      "R6",
-      "J5"
-    ]
-  },
-  {
-    "base": "Le gouvernement a lancé une campagne pour attirer les investissements étrangers.",
-    "ldb": "Une initiative gouvernementale vise à attirer des investissements étrangers.",
-    "direct": "Le gouvernement a lancé une campagne pour attirer les investissements étrangers.",
-    "ldb_constraints": [
-      "C2",
-      "S2",
-      "I2"
-    ],
-    "direct_constraints": [
-      "D2",
-      "R2",
-      "J2"
-    ]
-  },
-  {
-    "base": "Le gouvernement a lancé une campagne pour attirer les investissements étrangers.",
-    "ldb": "Il y a eu une action gouvernementale visant à attirer des investissements étrangers.",
-    "direct": "Le gouvernement a lancé une campagne pour attirer les investissements étrangers.",
-    "ldb_constraints": [
-      "C3",
-      "S3",
-      "I3"
-    ],
-    "direct_constraints": [
-      "D3",
-      "R3",
-      "J3"
-    ]
-  },
-  {
-    "base": "Le gouvernement a lancé une campagne pour attirer les investissements étrangers.",
-    "ldb": "Une campagne gouvernementale a été lancée afin d'attirer des investissements étrangers.",
-    "direct": "Le gouvernement a lancé une campagne pour attirer les investissements étrangers.",
-    "ldb_constraints": [
-      "C1",
-      "S1",
-      "I1"
-    ],
-    "direct_constraints": [
-      "D1",
-      "R1",
-      "J1"
+      {
+        "id": [
+          "R2",
+          "D5"
+        ],
+        "effect": "voix active, sujet explicite en position initiale qui réalise l’action, attribuer explicitement l’action à un acteur identifié"
+      },
+      {
+        "id": [
+          "R10",
+          "D5"
+        ],
+        "effect": "aucune justification, uniquement le fait brut"
+      }
     ]
   }
 ]
