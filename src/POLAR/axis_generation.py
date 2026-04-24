@@ -232,10 +232,10 @@ def main():
                 except (json.JSONDecodeError, ValueError) as e:
                     print(orange(f"Warning: Validation failed ({e}). Retrying."))
             else:
-                print(red("Warning: No JSON format detected in response. Retrying."))
+                print(orange("Warning: No JSON format detected in response. Retrying."))
 
         if not iteration_success:
-            print(orange(f"Failed to generate valid data for iteration {i + 1} after {args.max_retries} attempts. Moving to next iteration."))
+            print(red(f"Failed to generate valid data for iteration {i + 1} after {args.max_retries} attempts. Moving to next iteration."))
 
     print(green(f"\nGeneration complete. {len(dataset)} pairs available in {args.output}"))
 

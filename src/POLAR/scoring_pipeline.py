@@ -148,7 +148,7 @@ def main():
     parser.add_argument(
         "--batch-size",
         type=int,
-        default=32,
+        default=16,
         help="Batch size for embedding generation.",
     )
     args = parser.parse_args()
@@ -172,11 +172,7 @@ def main():
         or "raw_text" not in df.columns
         or "affiliate political party" not in df.columns
     ):
-        raise ValueError(
-            red(
-                "The parquet file must contain 'date', 'raw_text', and 'affiliate political party' columns."
-            )
-        )
+        raise ValueError(red("The parquet file must contain 'date', 'raw_text', and 'affiliate political party' columns."))
 
     df["year"] = pd.to_datetime(df["date"]).dt.year
 
@@ -199,9 +195,7 @@ def main():
             doc_indices.extend([idx] * len(sentences))  # Store indices
     print(blue(f"Total sentences to process globally: {len(all_sentences)}"))
 
-    sentence_scores = compute_polar_scores_bulk(
-        all_sentences, tokenizer, model, device, polar_vector, args.batch_size
-    )
+    sentence_scores = compute_polar_scores_bulk(all_sentences, tokenizer, model, device, polar_vector, args.batch_size)
 
     print(blue("Aggregating scores per document..."))
     score_df = pd.DataFrame({"doc_idx": doc_indices, "score": sentence_scores})

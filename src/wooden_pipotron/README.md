@@ -4,7 +4,7 @@ This module implements a naive strategy to quantify "Wooden Language" (*Langue d
 
 ## Methodology
 
-The analysis is based on a "Pipotron" approach, where we count the occurrences of specific abstract keywords and "empty" administrative jargon within the documents. 
+The analysis is based on a "Pipotron" approach, where we count the occurrences of specific abstract keywords and "empty" administrative jargon within the documents using lemmatization method. 
 
 ### Key Sources:
 - **Dictionnaire Collectif de la Langue de Bois**: Inspiration and vocabulary drawn from the [Ardeur Collective Dictionary](https://www.ardeur.net/wp-content/uploads/2015/04/dictionnaire_collectif_de_la_langue_de_bois-2.pdf).
