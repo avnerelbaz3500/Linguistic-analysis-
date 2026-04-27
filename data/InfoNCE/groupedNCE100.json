@@ -1,0 +1,1020 @@
+[
+  {
+    "base": "Le gouvernement a annoncé la fermeture d'une usine automobile dans le bassin parisien.",
+    "ldb": "Il semble que des mesures aient été prises par les autorités concernant l'arrêt d'une installation de production automobile située dans une zone géographiquement importante.",
+    "direct": "Le gouvernement a annoncé la fermeture d'une usine automobile dans le bassin parisien.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S1",
+          "C2"
+        ],
+        "effect": "phrase longue, informations dispersées, effacement du sujet"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R1",
+          "D2"
+        ],
+        "effect": "phrase courte, sujet explicite"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a décidé de fermer plusieurs usines dans le bassin de Lorraine.",
+    "ldb": "Il a été noté avec attention que plusieurs installations industrielles ont été fermées dans la région historique de Lorraine.",
+    "direct": "Le gouvernement a fermé plusieurs usines dans le bassin de Lorraine.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S4",
+          "C2"
+        ],
+        "effect": "supprimer ou masquer le sujet (passif, impersonnel)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R4",
+          "D2"
+        ],
+        "effect": "placer un sujet clair et identifié en début de phrase"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé une nouvelle vague de privatisations pour réduire le déficit public.",
+    "ldb": "Une nouvelle vague de privatisations a été annoncée par l'institution gouvernementale afin de diminuer le solde négatif du budget public.",
+    "direct": "Le gouvernement a annoncé une nouvelle vague de privatisations pour réduire le déficit public.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S9",
+          "C2"
+        ],
+        "effect": "supprimer ou masquer le sujet (passif, impersonnel)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R9",
+          "D2"
+        ],
+        "effect": "placer un sujet clair et identifié en début de phrase"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a décidé de nationaliser certaines entreprises dans le secteur de l'acier.",
+    "ldb": "Il semble que des mesures soient prises pour la nationalisation de quelques entreprises du secteur de l'acier, sans préciser qui en est responsable.",
+    "direct": "Le gouvernement a décidé de nationaliser certaines entreprises du secteur de l'acier.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S1",
+          "C5"
+        ],
+        "effect": "phrase ≥15 mots avec au moins une subordination (ex: que, afin de, dans la mesure où)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R1",
+          "D5"
+        ],
+        "effect": "attribuer explicitement l’action à un acteur identifié"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a lancé une offensive pour attirer les investissements étrangers dans les bassins industriels en difficulté.",
+    "ldb": "Dans le but d'attirer des investissements étrangers, le gouvernement a entrepris une initiative stratégique visant spécifiquement les zones industrielles en situation délicate.",
+    "direct": "Le gouvernement a lancé une offensive pour attirer les investissements étrangers dans les bassins industriels en difficulté.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S5",
+          "C4"
+        ],
+        "effect": "structure avec subordination ou enchâssement de propositions, abstraction"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R5",
+          "D4"
+        ],
+        "effect": "une seule proposition principale sans subordination, concret"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb": "La mise en œuvre de la gestion a conduit à la réalisation de la fermeture de diverses installations industrielles situées dans le secteur économique de Lorraine.",
+    "direct": "Le gouvernement a fermé plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S3",
+          "C1"
+        ],
+        "effect": "nominalisation des verbes et euphémisation"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R3",
+          "D1"
+        ],
+        "effect": "suppression de tout élément non essentiel et explicitation"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a lancé une campagne pour attirer des investissements étrangers.",
+    "ldb": "Dans le but d'attirer des investissements étrangers, le gouvernement a initié une campagne visant à promouvoir l'environnement économique favorable du pays.",
+    "direct": "Le gouvernement a lancé une campagne pour attirer des investissements étrangers.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S1",
+          "I3"
+        ],
+        "effect": "ajout de mots sans information nouvelle, augmentation de longueur sans gain sémantique"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R1",
+          "J3"
+        ],
+        "effect": "phrase ≤12 mots sans subordination, structure simple sujet-verbe-objet"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a lancé une campagne pour attirer des investissements étrangers.",
+    "ldb": "Dans le but d'attirer des investissements étrangers, le gouvernement a initié une initiative de promotion.",
+    "direct": "Le gouvernement a lancé une campagne pour attirer des investissements étrangers.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S3",
+          "C7"
+        ],
+        "effect": "remplacement des verbes concrets par des noms abstraits et introduction d'un contexte avant l'action"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R3",
+          "D7"
+        ],
+        "effect": "début de la phrase par l'action principale sans contexte préalable"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la fermeture d'une usine automobile dans le bassin industriel de Lorraine.",
+    "ldb": "La mise en œuvre d'une décision concernant la fermeture d'une installation automobile s'est réalisée dans le cadre du bassin industriel de Lorraine.",
+    "direct": "Le gouvernement a fermé une usine automobile dans le bassin industriel de Lorraine.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S3",
+          "C5",
+          "S6"
+        ],
+        "effect": "nominalisation, dilution_responsabilite, sujet_eloigne"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R3",
+          "D5",
+          "R6"
+        ],
+        "effect": "sujet_initial, responsabilite_claire"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a lancé une grande campagne de formation professionnelle.",
+    "ldb": "Des efforts considérables ont été entrepris par l'administration pour promouvoir des initiatives de développement des compétences à grande échelle.",
+    "direct": "Le gouvernement a lancé une campagne de formation professionnelle importante.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S9",
+          "C7"
+        ],
+        "effect": "répétition d’une même information sous plusieurs formes, remplacer un élément précis par une formulation vague"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R9",
+          "D7"
+        ],
+        "effect": "chaque information apparaît une seule fois, remplacer les termes vagues par des éléments précis"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a lancé une grande campagne de formation professionnelle.",
+    "ldb": "Dans le cadre de la mise en œuvre d'un programme visant à la réalisation de la gestion d'une campagne de grande envergure en matière de formation professionnelle, le gouvernement a agi.",
+    "direct": "Le gouvernement a commencé une grande campagne pour former des personnes professionnellement.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S8",
+          "C6"
+        ],
+        "effect": "usage de connecteurs institutionnels, introduction de vocabulaire administratif et technique"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R8",
+          "D6"
+        ],
+        "effect": "absence totale de connecteurs, formulation directe et simple"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb": "Il est prévu, dans la mesure où la situation économique s'est dégradée, que plusieurs usines situées dans le bassin industriel de Lorraine seront fermées par l'autorité gouvernementale.",
+    "direct": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S1",
+          "C2"
+        ],
+        "effect": "phrase longue avec subordination"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R1",
+          "D2"
+        ],
+        "effect": "phrase courte sans subordination"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb": "Il a été décidé, par le gouvernement, de mettre fin aux activités opérationnelles de divers établissements industriels situés dans la région historique de Lorraine.",
+    "direct": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S1",
+          "C1"
+        ],
+        "effect": "phrase longue avec subordination et formulation atténuée"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R1",
+          "D1"
+        ],
+        "effect": "information principale placée dès le début de la phrase et terme direct utilisé"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin de Lorraine.",
+    "ldb": "Il semble que des mesures aient été prises par les autorités concernant la réduction du nombre d'établissements industriels situés dans cette région historique.",
+    "direct": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin de Lorraine.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S10",
+          "C2"
+        ],
+        "effect": "supprimer ou masquer le sujet (passif, impersonnel)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R10",
+          "D2"
+        ],
+        "effect": "placer un sujet clair et identifié en début de phrase"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb": "La mise en œuvre de la gestion a conduit à la réalisation de la fermeture de plusieurs établissements industriels situés dans le secteur économique de Lorraine.",
+    "direct": "Le gouvernement a fermé plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S3",
+          "C1"
+        ],
+        "effect": "nominalisation des verbes et euphémisation"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R3",
+          "D1"
+        ],
+        "effect": "suppression de tout élément non essentiel et explicitation"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin de Lorraine.",
+    "ldb": "Il a été décidé de mettre en œuvre des mesures visant à la réalisation de la fermeture de certaines installations industrielles situées dans la région de Lorraine.",
+    "direct": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin de Lorraine.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S3",
+          "C2"
+        ],
+        "effect": "nominalisation, effacement du sujet"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R3",
+          "D2"
+        ],
+        "effect": "verbe direct, sujet explicite"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a décidé de fermer une usine automobile en Lorraine.",
+    "ldb": "Une réalisation a été mise en œuvre concernant la fermeture d’une installation automobile située en Lorraine.",
+    "direct": "Le gouvernement a fermé une usine automobile en Lorraine.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S3",
+          "C5"
+        ],
+        "effect": "remplacement des verbes par noms abstraits et éviter d’assigner clairement une responsabilité"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R3",
+          "D5"
+        ],
+        "effect": "attribuer explicitement l’action à un acteur identifié et utiliser des actions et objets concrets et observables"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la suppression progressive de l'âge minimum de la retraite.",
+    "ldb": "Il a été indiqué que le processus de réduction graduelle de l'âge requis pour bénéficier de la pension serait mis en œuvre par le gouvernement.",
+    "direct": "Le gouvernement a annoncé la suppression progressive de l'âge minimum de la retraite.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S4",
+          "C2"
+        ],
+        "effect": "rendre au moins un élément imprécis (temps, lieu, quantité, acteur)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R4",
+          "D2"
+        ],
+        "effect": "rendre tous les éléments explicites et non ambigus"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a décidé de fermer plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb": "Il a été notifié que des mesures ont été prises par le gouvernement concernant le secteur industriel de Lorraine, entraînant la cessation d'activité dans certaines installations.",
+    "direct": "Le gouvernement a fermé plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S4",
+          "C2"
+        ],
+        "effect": "ajout de précisions inutiles et reformulation"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R4",
+          "D2"
+        ],
+        "effect": "suppression de tout élément non essentiel, conservation du fait brut"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a décidé de fermer plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb": "Il semble que des mesures soient prises concernant l'industrie locale, sans précision sur le nombre exact d'établissements concernés ou leur localisation exacte.",
+    "direct": "Le gouvernement a fermé plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S9",
+          "C3"
+        ],
+        "effect": "rendre au moins un élément imprécis (temps, lieu, quantité, acteur)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R9",
+          "D3"
+        ],
+        "effect": "rendre tous les éléments explicites et non ambigus"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a décidé de nationaliser certaines usines en difficulté.",
+    "ldb": "Des actions ont été prises pour soutenir certaines entreprises confrontées à des difficultés financières, ce qui pourrait entraîner des changements significatifs dans leur statut juridique.",
+    "direct": "Le gouvernement a décidé de nationaliser certaines usines qui sont en difficulté.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C7",
+          "I4"
+        ],
+        "effect": "generalisation, implicite"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D7",
+          "J4"
+        ],
+        "effect": "explicite"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la suppression de 50 000 postes dans la fonction publique.",
+    "ldb": "Il a été notifié par le gouvernement que 50 000 emplois seraient supprimés dans la sphère administrative sans préciser qui serait responsable de cette décision.",
+    "direct": "Le gouvernement a annoncé qu'il supprimerait 50 000 postes dans la fonction publique.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S2",
+          "C2"
+        ],
+        "effect": "effacement du sujet et dilution de la responsabilité"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R2",
+          "D2"
+        ],
+        "effect": "sujet explicite en début de phrase et action réalisée par le gouvernement"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la suppression de 50 000 postes dans la fonction publique.",
+    "ldb": "Il a été indiqué que le nombre de places dans le secteur public pourrait diminuer, sans précision sur la quantité exacte.",
+    "direct": "Le gouvernement a annoncé la suppression de 50 000 postes précisément identifiés dans la fonction publique.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S6",
+          "C7"
+        ],
+        "effect": "sujet_eloigne, generalisation"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R6",
+          "D7"
+        ],
+        "effect": "sujet_initial, specification"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a lancé une grande campagne d'information sur l'emploi.",
+    "ldb": "Un programme important a été initié par l'administration pour promouvoir la sensibilisation concernant les opportunités d'emploi.",
+    "direct": "Le gouvernement a lancé une campagne pour informer sur l'emploi.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S7",
+          "C4",
+          "C6"
+        ],
+        "effect": "au moins deux actions ou informations distinctes, formulation générique et introduction de vocabulaire administratif"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R7",
+          "D4",
+          "D6"
+        ],
+        "effect": "une seule action par phrase, utilisation de vocabulaire simple et courant"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin de Lorraine.",
+    "ldb": "Il a été noté avec attention que plusieurs installations industrielles ont été fermées récemment dans la région du bassin de Lorraine.",
+    "direct": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin de Lorraine.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S4",
+          "C2"
+        ],
+        "effect": "supprimer ou masquer le sujet (passif, impersonnel)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R4",
+          "D2"
+        ],
+        "effect": "placer un sujet clair et identifié en début de phrase"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb": "Il a été décidé de mettre en œuvre une série de mesures concernant le secteur industriel du bassin de Lorraine.",
+    "direct": "Le gouvernement a annoncé qu'il fermera plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S3",
+          "C5"
+        ],
+        "effect": "nominalisation, dilution_responsabilite"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R3",
+          "D5"
+        ],
+        "effect": "verbe_direct, responsabilite_claire"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a lancé une grande campagne pour attirer les investissements étrangers.",
+    "ldb": "Dans le cadre de sa politique d'attraction des investissements étrangers, le gouvernement a initié une importante campagne visant à attirer les investisseurs internationaux.",
+    "direct": "Le gouvernement a lancé une campagne pour attirer les investissements étrangers.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S8",
+          "C3"
+        ],
+        "effect": "connecteurs_bureaucratiques, flou"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R8",
+          "D3"
+        ],
+        "effect": "sans_connecteur, precision"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a décidé de fermer une usine automobile dans le bassin industriel de Lorraine.",
+    "ldb": "Il semble que des mesures soient prises pour réorganiser la production automobile dans une région industrielle bien définie, sans préciser exactement où ni quand cela se produira.",
+    "direct": "Le gouvernement a décidé de fermer une usine automobile située dans le bassin industriel de Lorraine.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S9",
+          "C3"
+        ],
+        "effect": "rendre au moins un élément imprécis (temps, lieu, quantité, acteur)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R9",
+          "D3"
+        ],
+        "effect": "informations regroupées de manière linéaire et compacte"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a décidé de fermer une usine automobile dans le bassin industriel de Lorraine.",
+    "ldb": "Il convient de noter que des mesures ont été prises afin de fermer une usine automobile située dans le bassin industriel de Lorraine.",
+    "direct": "Le gouvernement a décidé de fermer une usine automobile dans le bassin industriel de Lorraine.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "I4",
+          "C2"
+        ],
+        "effect": "supprimer ou masquer le sujet (passif, impersonnel)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "J4",
+          "D2"
+        ],
+        "effect": "placer un sujet clair et identifié en début de phrase"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a décidé de nationaliser certaines entreprises en difficulté.",
+    "ldb": "Dans le but de renforcer la stabilité économique du pays, le gouvernement a pris la décision de nationaliser certaines entreprises qui se trouvent actuellement en situation de difficulté financière.",
+    "direct": "Le gouvernement a décidé de nationaliser certaines entreprises en difficulté.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "I1",
+          "S8"
+        ],
+        "effect": "ajout de mots sans information nouvelle, augmentation de longueur sans gain sémantique, usage de connecteurs institutionnels"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "J1",
+          "R8"
+        ],
+        "effect": "absence totale de connecteurs, formulation directe"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a décidé de fermer plusieurs usines dans le bassin de Lorraine.",
+    "ldb": "Il semble que la direction politique ait opté pour une réduction significative du nombre d'établissements industriels situés dans cette région historique, afin de promouvoir une transition économique plus durable et équilibrée.",
+    "direct": "Le gouvernement a fermé plusieurs usines dans le bassin de Lorraine.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S1",
+          "C7"
+        ],
+        "effect": "phrase_longue, généralisation"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R1",
+          "D7"
+        ],
+        "effect": "phrase_courte, compacte"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb": "La mise en œuvre de la gestion a conduit à la réalisation de la décision concernant la fermeture de plusieurs entreprises situées dans le bassin industriel de Lorraine, ce qui implique une série de changements administratifs.",
+    "direct": "Le gouvernement a fermé plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S3",
+          "C6"
+        ],
+        "effect": "nominalisation, introduction de vocabulaire administratif, jargon"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R3",
+          "D6"
+        ],
+        "effect": "verbe direct, langage simple"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a décidé de nationaliser certaines entreprises en difficulté.",
+    "ldb": "Il a été noté avec intérêt que des mesures ont été prises par l'administration concernant certaines sociétés en difficulté, en les soumettant à une forme de nationalisation.",
+    "direct": "Le gouvernement a décidé de nationaliser certaines entreprises en difficulté.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S6",
+          "C2"
+        ],
+        "effect": "sujet absent, implicite ou placé après le verbe principal"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R6",
+          "D2"
+        ],
+        "effect": "voix active, sujet explicite en position initiale qui réalise l’action"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a lancé une campagne de formation professionnelle pour lutter contre le chômage.",
+    "ldb": "Une initiative du gouvernement vise la réalisation d'une campagne visant à la mise en œuvre de formations professionnelles afin de gérer efficacement le phénomène du chômage.",
+    "direct": "Le gouvernement a lancé une campagne de formation professionnelle pour réduire le chômage.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S3",
+          "I5",
+          "S5"
+        ],
+        "effect": "nominalisation, fragmentation, syntaxe_complexe"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R3",
+          "J5",
+          "R5"
+        ],
+        "effect": "verbe_direct, compacte, syntaxe_simple"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a décidé de fermer plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb": "Il semble que des mesures soient prises par le gouvernement concernant le bassin industriel de Lorraine, où plusieurs usines seraient fermées.",
+    "direct": "Le gouvernement a décidé de fermer plusieurs usines dans le bassin industriel de Lorraine.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S10",
+          "C3"
+        ],
+        "effect": "rendre au moins un élément imprécis (temps, lieu, quantité, acteur)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R10",
+          "D3"
+        ],
+        "effect": "rendre tous les éléments explicites et non ambigus"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la fermeture d'une usine automobile dans le bassin de Lorraine.",
+    "ldb": "Il a été décidé de mettre fin aux opérations de l'établissement industriel en question, situé dans cette région historique.",
+    "direct": "Le gouvernement a annoncé la fermeture d'une usine automobile située dans le bassin de Lorraine.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S4",
+          "C2"
+        ],
+        "effect": "supprimer ou masquer le sujet (passif, impersonnel)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R4",
+          "D2"
+        ],
+        "effect": "placer un sujet clair et identifié en début de phrase"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la fermeture de plusieurs usines dans le bassin minier de la Moselle.",
+    "ldb": "Il a été notifié par le gouvernement que des mesures restrictives seraient prises concernant certains établissements industriels situés dans une région minérale spécifique.",
+    "direct": "Le gouvernement a annoncé la fermeture de plusieurs usines situées dans le bassin minier de la Moselle.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S6",
+          "C7"
+        ],
+        "effect": "sujet absent, implicite ou placé après le verbe principal"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R6",
+          "D7"
+        ],
+        "effect": "remplacer les termes vagues par des éléments précis"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la suppression de 50 000 postes dans la fonction publique.",
+    "ldb": "Il a été noté avec attention par les autorités compétentes que certains postes seraient réorganisés afin de mieux optimiser les ressources disponibles dans le secteur public.",
+    "direct": "Le gouvernement a annoncé la suppression de 50 000 postes dans la fonction publique.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C4",
+          "I3"
+        ],
+        "effect": "abstraction, contexte_avant_action"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "J4",
+          "D3"
+        ],
+        "effect": "action_directe, precision"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a lancé une grande campagne d'insertion professionnelle pour les chômeurs de longue durée.",
+    "ldb": "Dans le but d'aider les individus qui ont été sans emploi pendant une longue période, le gouvernement a initié une importante initiative visant à faciliter leur retour au travail.",
+    "direct": "Le gouvernement a lancé une campagne pour aider les chômeurs de longue durée à retrouver du travail.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S1",
+          "C1"
+        ],
+        "effect": "phrase_longue, euphémisation"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R1",
+          "D1"
+        ],
+        "effect": "phrase_courte, info_immediate"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la suppression de 50 000 postes dans la fonction publique.",
+    "ldb": "Des mesures ont été prises pour réorganiser l'administration, entraînant un certain nombre de changements.",
+    "direct": "Le gouvernement a annoncé la suppression de 50 000 postes dans la fonction publique.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C1",
+          "C7"
+        ],
+        "effect": "euphémisation, generalisation"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D1",
+          "D7"
+        ],
+        "effect": "explicitation, specification"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a décidé de fermer une usine automobile en Lorraine.",
+    "ldb": "Il est à noter que, suite à une décision gouvernementale, une usine automobile située dans la région de Lorraine a été fermée récemment.",
+    "direct": "Le gouvernement a fermé une usine automobile en Lorraine.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S5",
+          "C7"
+        ],
+        "effect": "structure avec subordination ou enchâssement de propositions, remplacer un élément précis par une formulation vague"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R5",
+          "D7"
+        ],
+        "effect": "une seule proposition principale sans subordination, remplacer les termes vagues par des éléments précis"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a décidé de nationaliser certaines entreprises industrielles en difficulté.",
+    "ldb": "Dans le cadre de sa politique économique, le gouvernement envisage de prendre en charge certaines entreprises industrielles confrontées à des difficultés financières.",
+    "direct": "Le gouvernement a décidé de nationaliser certaines entreprises industrielles en difficulté.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S8",
+          "C1"
+        ],
+        "effect": "connecteurs_bureaucratiques, euphémisation"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R8",
+          "D1"
+        ],
+        "effect": "info_immediate, sans_connecteur"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a décidé de nationaliser certaines entreprises industrielles en difficulté.",
+    "ldb": "Il semble que des mesures soient envisagées concernant certaines entreprises industrielles, qui pourraient être soumises à une forme de nationalisation en raison de leurs difficultés financières.",
+    "direct": "Le gouvernement a décidé de nationaliser certaines entreprises industrielles en difficulté.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S9",
+          "C3"
+        ],
+        "effect": "répétition d’une même information sous plusieurs formes"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R9",
+          "D3"
+        ],
+        "effect": "chaque information apparaît une seule fois"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a décidé de nationaliser certaines entreprises industrielles en difficulté.",
+    "ldb": "Il est prévu de passer certaines entreprises industrielles en difficulté sous tutelle gouvernementale.",
+    "direct": "Le gouvernement a décidé de nationaliser certaines entreprises industrielles en difficulté.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S6",
+          "C4"
+        ],
+        "effect": "sujet absent, implicite ou placé après le verbe principal, action concrète remplacée par une formulation générique"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R6",
+          "D4"
+        ],
+        "effect": "sujet explicite placé en début de phrase avant l’action, utiliser des actions et objets concrets et observables"
+      }
+    ]
+  }
+]

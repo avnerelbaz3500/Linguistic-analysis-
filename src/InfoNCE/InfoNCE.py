@@ -1,246 +1,315 @@
-import faiss
 import numpy as np
 import torch
 import logging
-
-from typing import List, Tuple, Dict, Optional
+from typing import List, Dict, Any, Tuple
 from sentence_transformers import SentenceTransformer
-
-# ----------------------------
-# Logging setup
-# ----------------------------
+from .Constants.query import QUERY
+import json
+import pandas as pd
+# =========================================================
+# LOGGING
+# =========================================================
 
 logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s | %(levelname)s | %(message)s"
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(name)s | %(message)s"
 )
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("infonce")
 
+# =========================================================
+# DEVICE
+# =========================================================
 
-# ----------------------------
-# 1. Embedding model
-# ----------------------------
+device = "cuda" if torch.cuda.is_available() else "cpu"
 
-model = SentenceTransformer("OrdalieTech/Solon-embeddings-base-0.1")
+# =========================================================
+# MODEL
+# =========================================================
 
+model = SentenceTransformer(
+    "OrdalieTech/Solon-embeddings-base-0.1",
+    device=device
+)
+
+# =========================================================
+# TYPES
+# =========================================================
+
+DatasetItem = Dict[str, Any]
+Group = Dict[str, Any]
+
+# =========================================================
+# EMBEDDING
+# =========================================================
 
 def embed(texts: List[str]) -> np.ndarray:
     """
-    Encode texts into normalized embeddings.
+    Encode a list of texts into normalized embeddings.
 
     Args:
-        texts: List of input strings.
+        texts: input sentences
 
     Returns:
-        np.ndarray: Shape (n, d) normalized embeddings.
+        np.ndarray of shape (n, d)
     """
-    logger.info(f"Embedding {len(texts)} texts")
-    return model.encode(texts, normalize_embeddings=True)
+    return model.encode(texts, normalize_embeddings=True).astype(np.float32)
 
+# =========================================================
+# GROUPING
+# =========================================================
 
-# ----------------------------
-# 2. Vector database (FAISS)
-# ----------------------------
-
-
-class VectorDB:
+def group_dataset(data: List[DatasetItem]) -> List[Group]:
     """
-    FAISS-based vector database with metadata tracking.
-    """
-
-    def __init__(self, dim: int):
-        """
-        Args:
-            dim: embedding dimension
-        """
-        self.index = faiss.IndexFlatIP(dim)
-        self.labels: List[str] = []
-        self.vectors: Optional[np.ndarray] = None
-
-        logger.info(f"VectorDB initialized with dim={dim}")
-
-    def add(self, vecs: np.ndarray, labels: List[str]) -> None:
-        """
-        Add vectors and labels to FAISS index.
-
-        Args:
-            vecs: (n, d) embeddings
-            labels: metadata labels
-        """
-        logger.info(f"Adding {len(vecs)} vectors to index")
-
-        vecs = vecs.astype(np.float32)
-
-        self.index.add(vecs)
-        self.labels.extend(labels)
-
-        if self.vectors is None:
-            self.vectors = vecs
-        else:
-            self.vectors = np.vstack([self.vectors, vecs])
-
-    def search(self, query_vec, k: int = 5) -> Tuple[torch.Tensor, List[str]]:
-        """
-        Retrieve nearest neighbors.
-
-        Args:
-            query_vec: (d,) or (1, d)
-            k: number of neighbors
-
-        Returns:
-            neighbors tensor (k, d), labels list
-        """
-        if isinstance(query_vec, torch.Tensor):
-            query_vec = query_vec.detach().cpu().numpy()
-
-        query_vec = query_vec.astype(np.float32).reshape(1, -1)
-
-        _, I = self.index.search(query_vec, k)
-
-        neighbors = self.vectors[I[0]]
-        labels = [self.labels[i] for i in I[0]]
-
-        return torch.from_numpy(neighbors), labels
-
-
-# ----------------------------
-# 3. Split positives / negatives
-# ----------------------------
-
-
-def split_neighbors(
-    neighbors: torch.Tensor, labels: List[str]
-) -> Tuple[torch.Tensor, torch.Tensor]:
-    """
-    Split neighbors into LB (positive) and DIRECT (negative).
+    Group dataset by base sentence.
 
     Args:
-        neighbors: (k, d)
-        labels: metadata labels
+        data: raw dataset
 
     Returns:
-        positives, negatives tensors
+        grouped dataset
     """
-    pos, neg = [], []
+    grouped: Dict[str, Group] = {}
 
-    for vec, label in zip(neighbors, labels):
-        if label == "LB":
-            pos.append(vec)
-        else:
-            neg.append(vec)
+    for item in data:
+        base = item["base"]
 
-    positives = torch.stack(pos) if pos else torch.empty(0)
-    negatives = torch.stack(neg) if neg else torch.empty(0)
+        if base not in grouped:
+            grouped[base] = {
+                "base": base,
+                "ldb": [],
+                "direct": [],
+                "ldb_constraints": [],
+                "direct_constraints": []
+            }
 
-    return positives, negatives
+        grouped[base]["ldb"].append(item["ldb"])
+        grouped[base]["direct"].append(item["direct"])
+        grouped[base]["ldb_constraints"].append(item["ldb_constraints"])
+        grouped[base]["direct_constraints"].append(item["direct_constraints"])
 
+    return list(grouped.values())
 
-# ----------------------------
-# 4. InfoNCE loss
-# ----------------------------
+# =========================================================
+# PRECOMPUTE
+# =========================================================
 
+def precompute_groups(groups: List[Group]) -> List[Group]:
+    """
+    Precompute embeddings for all groups.
 
-def multi_positive_nce(
+    Args:
+        groups: grouped dataset
+
+    Returns:
+        groups with tensor embeddings
+    """
+    processed: List[Group] = []
+
+    for g in groups:
+
+        p = torch.tensor(embed(g["ldb"]), device=device)
+        n = torch.tensor(embed(g["direct"]), device=device)
+
+        processed.append({
+            "base": g["base"],
+            "p": p,
+            "n": n,
+            "ldb": g["ldb"],
+            "direct": g["direct"],
+            "ldb_constraints": g["ldb_constraints"],
+            "direct_constraints": g["direct_constraints"]
+        })
+
+    logger.info(f"Precomputed {len(processed)} groups")
+
+    return processed
+
+# =========================================================
+# INFO NCE
+# =========================================================
+
+def info_nce(
     query: torch.Tensor,
     positives: torch.Tensor,
     negatives: torch.Tensor,
-    temperature: float = 0.1,
+    temperature: float = 0.1
 ) -> torch.Tensor:
     """
-    Multi-positive InfoNCE loss.
+    Compute InfoNCE loss.
 
     Args:
         query: (d,)
         positives: (P, d)
         negatives: (N, d)
-        temperature: scaling factor
+    """
+    if positives.shape[0] == 0:
+        return torch.tensor(float("inf"), device=query.device)
+
+    query = query.unsqueeze(0)
+
+    pos_logits = (positives @ query.T) / temperature
+    neg_logits = (negatives @ query.T) / temperature
+
+    logits = torch.cat([pos_logits, neg_logits], dim=0)
+
+    log_num = torch.logsumexp(pos_logits, dim=0)
+    log_den = torch.logsumexp(logits, dim=0)
+
+    return -(log_num - log_den).squeeze()
+
+# =========================================================
+# SCORING
+# =========================================================
+
+def score_group(q_vec: torch.Tensor, group: Group) -> float:
+    """
+    Score a group against a query vector.
+    """
+    return info_nce(q_vec, group["p"], group["n"]).item()
+
+# =========================================================
+# RETRIEVAL SINGLE
+# =========================================================
+
+def retrieve_best_group_vectorized(
+    query: str,
+    dataset: List[Group]
+) -> Tuple[Group, float]:
+    """
+    Retrieve best matching group for a query.
 
     Returns:
-        scalar loss tensor
+        best group + score
     """
+    q = torch.tensor(embed([query])[0], device=device).unsqueeze(0)
 
-    if positives.numel() == 0:
-        return query.new_tensor(0.0)
+    scores = []
 
-    pos_sim = torch.matmul(positives, query) / temperature
+    for group in dataset:
 
-    if negatives.numel() > 0:
-        neg_sim = torch.matmul(negatives, query) / temperature
-        all_sim = torch.cat([pos_sim, neg_sim], dim=0)
-    else:
-        all_sim = pos_sim
+        p = group["p"]
+        n = group["n"]
 
-    log_num = torch.logsumexp(pos_sim, dim=0)
-    log_den = torch.logsumexp(all_sim, dim=0)
+        pos_logits = (p @ q.T) / 0.1
+        neg_logits = (n @ q.T) / 0.1
 
-    return -(log_num - log_den)
+        logits = torch.cat([pos_logits, neg_logits], dim=0)
 
+        log_num = torch.logsumexp(pos_logits, dim=0)
+        log_den = torch.logsumexp(logits, dim=0)
 
-# ----------------------------
-# 5. Document-level analysis
-# ----------------------------
+        loss = -(log_num - log_den)
 
+        scores.append(loss)
 
-def analyze_documents(
-    texts: List[str], doc_ids: List[str], db: VectorDB, k: int = 10
+    scores = torch.stack(scores)
+
+    best_idx = torch.argmin(scores)
+
+    return dataset[best_idx], scores[best_idx].item()
+
+# =========================================================
+# RETRIEVAL TOP-K
+# =========================================================
+
+def retrieve_topk_groups_per_query(
+    queries: List[str],
+    dataset: List[Group],
+    k: int = 5,
+    temperature: float = 0.1
 ) -> List[Dict]:
     """
-    Compute score per document.
-
-    Args:
-        texts: list of full documents
-        doc_ids: document titles / ids
-        db: vector database
-        k: neighbors count
+    Retrieve top-k groups for each query.
 
     Returns:
-        list of {doc_id, score}
+        structured ranking results
     """
+    q = torch.tensor(embed(queries), device=device)
 
-    logger.info(f"Analyzing {len(texts)} documents")
+    results: List[Dict] = []
 
-    embeddings = embed(texts)
-    embeddings = torch.tensor(embeddings)
+    for qi, q_i in enumerate(q):
 
-    results = []
+        q_i = q_i.unsqueeze(0)
 
-    for doc_id, vec in zip(doc_ids, embeddings):
-        neighbors, labels = db.search(vec.unsqueeze(0), k=k)
-        pos, neg = split_neighbors(neighbors, labels)
+        scores = []
 
-        score = multi_positive_nce(vec, pos, neg).item()
+        for i, group in enumerate(dataset):
 
-        results.append({"doc_id": doc_id, "score": score})
+            p = group["p"]
+            n = group["n"]
 
-    logger.info("Analysis complete")
+            pos_logits = (p @ q_i.T) / temperature
+            neg_logits = (n @ q_i.T) / temperature
+
+            log_num = torch.logsumexp(pos_logits, dim=0)
+            log_den = torch.logsumexp(
+                torch.cat([pos_logits, neg_logits], dim=0),
+                dim=0
+            )
+
+            loss = -(log_num - log_den)
+
+            scores.append((i, loss.item()))
+
+        scores.sort(key=lambda x: x[1])
+        topk = scores[:k]
+
+        results.append({
+            "query": queries[qi],
+            "topk": [
+                {
+                    "group": dataset[idx],
+                    "score": score
+                }
+                for idx, score in topk
+            ]
+        })
 
     return results
 
+# =========================================================
+# IO
+# =========================================================
+
+def load_json(path: str) -> Any:
+    """
+    Load JSON file safely.
+    """
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
 
 # ----------------------------
-# 6. Example usage
+# 7. Exemple
 # ----------------------------
-
 if __name__ == "__main__":
-    dim = 768
-    db = VectorDB(dim)
 
-    texts = [
-        "Nous allons augmenter les impôts",
-        "Une réflexion est engagée sur une évolution de la fiscalité",
-    ] * 50
+    raw_data = load_json("data/InfoNCE/groupedNCE100.json")
 
-    labels = ["DIRECT", "LB"] * 50
+    groups = group_dataset(raw_data)
 
-    vecs = embed(texts)
-    db.add(vecs, labels)
+    dataset = precompute_groups(groups)
 
-    test_texts = [
-        "Le gouvernement entend poursuivre une réflexion globale sur la situation économique"
-    ]
 
-    test_ids = ["doc_1"]
+    topk = retrieve_topk_groups_per_query(QUERY, dataset, k=5)
 
-    results = analyze_documents(test_texts, test_ids, db)
+    rows = []
 
-    print(results)
+    for q_res in topk:
+        query = q_res["query"]
+
+        for rank, r in enumerate(q_res["topk"]):
+            rows.append({
+                "query": query,
+                "rank": rank,
+                "base": r["group"]["base"],
+                "score": r["score"],
+                "ldb": r["group"]["ldb"],
+                "ldb_constraints": r["group"]["ldb_constraints"],
+            })
+
+    df = pd.DataFrame(rows)
+    df.to_csv("data/clean/top_k_test.csv", index=False)
+
