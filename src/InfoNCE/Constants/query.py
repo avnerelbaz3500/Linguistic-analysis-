@@ -98,3 +98,4 @@ QUERY = [
     "Le ministre rappelle l’importance du dialogue social structuré.",
     "L’administration soutient une gouvernance partagée et évolutive."
 ]
+
