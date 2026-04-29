@@ -123,7 +123,6 @@ Tu DOIS appliquer TOUTES les contraintes associées à chaque mode.
 
 INTERDICTION ABSOLUE :
 - ne jamais reformuler une contrainte
-- ne jamais changer "name" ou "effect" ou "id"
 - ne jamais inventer de contrainte
 - ne jamais fusionner des contraintes
 
@@ -154,12 +153,6 @@ PRINCIPE
 - LDB = transformation langue de bois
 - DIRECT = transformation directe
 
-- Chaque bloc contient des contraintes avec :
-  - "id"
-  - "effect"
-
-- Chaque contrainte DOIT apparaître dans la sortie.
-
 ========================================================
 ENTRÉES
 ========================================================
@@ -169,10 +162,7 @@ PHRASE SOURCE :
 
 CONTRAINTES :
 {constraints}
-IMPORTANT :
-Les champs ldb_id / direct_id sont des IDENTIFIANTS STRICTS.
-Ils doivent apparaître tels quels dans la sortie.
-Ne pas modifier, tronquer ou reformuler.
+
 ========================================================
 RÈGLES D’APPLICATION
 ========================================================
@@ -203,24 +193,8 @@ FORMAT DE SORTIE STRICT
 ========================================================
 
 {{
-  "ldb": {{
-    "text": "...",
-    "constraints": [
-      {{
-        "id": ["S4","C2"],
-        "effect": "..."
-      }}
-    ]
-  }},
-  "direct": {{
-    "text": "...",
-    "constraints": [
-      {{
-        "id": ["R4","D2"],
-        "effect": "..."
-      }}
-    ]
-  }}
+  "ldb": "...",
+  "direct":"..."
 }}
 
 ========================================================

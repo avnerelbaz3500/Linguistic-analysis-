@@ -7,10 +7,8 @@ from tqdm import tqdm
 import torch
 import numpy as np
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
-import random
 import os
 import gc
-from collections import defaultdict
 
 from .Constants.constraints import CONSTRAINTS
 from .Constants.prompts import GEN_PROMPT, PARA_PROMPT
@@ -71,6 +69,7 @@ Batch = List[Tuple[str, str]]
 # CONSTRAINTS
 # =========================================================
 
+
 def build_constraint_maps(constraints: Dict) -> Tuple[List[str], Dict[str, Any], Dict[str, str]]:
     """
     Flatten constraint dictionary and build mirror mapping.
@@ -106,6 +105,7 @@ keys, all_items, mirror_map = build_constraint_maps(CONSTRAINTS)
 # SAMPLING
 # =========================================================
 
+
 def sample_ldb_batches(keys: List[str], n: int, k: int) -> np.ndarray:
     """
     Sample random constraint batches.
@@ -128,6 +128,7 @@ def sample_ldb_batches(keys: List[str], n: int, k: int) -> np.ndarray:
 # =========================================================
 # JSON UTIL
 # =========================================================
+
 
 def extract_json(text: str) -> Optional[Dict]:
     """
@@ -157,90 +158,175 @@ def clean_output(text: str) -> str:
 # PROMPT BUILDING
 # =========================================================
 
-def build_constraints_payload(batch: Batch) -> List[Dict]:
+
+def build_constraints_payload(batch: "Batch") -> List[Dict[str, Any]]:
     """
-    Build structured constraint payload for prompt injection.
+    Build structured constraint payload (SOURCE OF TRUTH).
+
+    IMPORTANT:
+    This payload is NOT interpreted by the LLM.
+    It is only injected as context for conditioning generation.
+
+    Args:
+        batch: list of (ldb_id, direct_id) pairs
+
+    Returns:
+        structured constraint objects
     """
-    return [
-        {
-            "ldb": {"id": l, **all_items[l]},
-            "direct": {"id": d, **all_items[d]}
-        }
-        for l, d in batch
-    ]
+
+    payload: List[Dict[str, Any]] = []
+
+    for ldb_id, direct_id in batch:
+
+        ldb = all_items[ldb_id]
+        direct = all_items[direct_id]
+
+        payload.append({
+            "ldb": {
+                "id": ldb_id,
+                **ldb
+            },
+            "direct": {
+                "id": direct_id,
+                **direct
+            }
+        })
+
+    return payload
 
 
-def format_constraints(batch: Batch) -> str:
+def format_constraints(payload: List[Dict[str, Any]]) -> str:
     """
-    Format constraints into readable prompt string.
+    Format constraints ONLY for LLM conditioning.
+    No IDs exposed in output schema.
     """
-    lines = []
 
-    for item in build_constraints_payload(batch):
+    lines: List[str] = []
+
+    for item in payload:
+
         ldb = item["ldb"]
         direct = item["direct"]
 
-        lines.append(f"""
-LDB[{ldb['id']}]
-name: {ldb['name']}
-effect: {ldb['effect']}
+        lines.append(
+            f"""
+LDB
+name: {ldb.get("name", "")}
+effect: {ldb.get("effect", "")}
 
-DIRECT[{direct['id']}]
-name: {direct['name']}
-effect: {direct['effect']}
-""")
+DIRECT
+name: {direct.get("name", "")}
+effect: {direct.get("effect", "")}
+"""
+        )
 
     return "\n".join(lines)
 
-# =========================================================
-# PARAPHRASER
-# =========================================================
 
-def call_paraphraser(sentence: str, n: int = 4, k: int = 3) -> List[Dict]:
+def aggregate_constraints(payload: List[Dict[str, Any]]) -> Tuple[List[Dict], List[Dict]]:
     """
-    Generate paraphrased pairs using constraint-guided LLM prompts.
-
-    Args:
-        sentence: input sentence
-        n: number of sampled constraint sets
-        k: constraints per batch
+    Transform payload into grouped constraint format.
 
     Returns:
-        list of parsed LDB/direct pairs
+        ldb_constraints, direct_constraints
     """
+
+    ldb_ids = []
+    direct_ids = []
+
+    ldb_effects = []
+    direct_effects = []
+
+    for item in payload:
+        ldb = item["ldb"]
+        direct = item["direct"]
+
+        ldb_ids.append(ldb["id"])
+        direct_ids.append(direct["id"])
+
+        ldb_effects.append(ldb["effect"])
+        direct_effects.append(direct["effect"])
+
+    ldb_constraints = [{
+        "id": ldb_ids,
+        "effect": " ; ".join(ldb_effects)
+    }]
+
+    direct_constraints = [{
+        "id": direct_ids,
+        "effect": " ; ".join(direct_effects)
+    }]
+
+    return ldb_constraints, direct_constraints
+
+
+def call_paraphraser(
+    sentence: str,
+    n: int = 4,
+    k: int = 3
+) -> List[Dict[str, Any]]:
+    """
+    Generate paraphrased LDB/DIRECT pairs using constraint-conditioned prompting.
+
+    - LLM generates ONLY text
+    - Constraints are fully controlled by Python (ground truth)
+    """
+
+    # =========================================================
+    # 1. SAMPLE CONSTRAINTS
+    # =========================================================
     sampled = sample_ldb_batches(keys, n, k)
 
     flat: List[Tuple[str, str]] = []
+
     for row in sampled:
         for c in row:
             prefix = c[0]
+
             if prefix not in mirror_map:
                 continue
+
             flat.append((c, mirror_map[prefix] + c[1:]))
 
-    batches = [
+    batches: List[List[Tuple[str, str]]] = [
         flat[i:i + k]
         for i in range(0, len(flat), k)
     ]
 
-    prompts = [
-        tokenizer.apply_chat_template(
+    # =========================================================
+    # 2. BUILD PROMPTS + STORE TRUE PAYLOADS
+    # =========================================================
+    prompts: List[str] = []
+    payloads: List[Dict[str, Any]] = []
+
+    for batch in batches:
+
+        payload = build_constraints_payload(batch)
+        payloads.append(payload)
+
+        prompt = tokenizer.apply_chat_template(
             [
-                {"role": "system", "content": "JSON only."},
+                {
+                    "role": "system",
+                    "content": "Return STRICT JSON only. No explanation."
+                },
                 {
                     "role": "user",
                     "content": PARA_PROMPT.format(
                         sentence=sentence,
-                        constraints=format_constraints(batch)
+                        constraints=format_constraints(payload)
                     )
                 }
             ],
             tokenize=False,
             add_generation_prompt=True
         )
-        for batch in batches
-    ]
 
+        prompts.append(prompt)
+
+    # =========================================================
+    # 3. TOKENIZE
+    # =========================================================
     inputs = tokenizer(
         prompts,
         return_tensors="pt",
@@ -248,6 +334,9 @@ def call_paraphraser(sentence: str, n: int = 4, k: int = 3) -> List[Dict]:
         truncation=True
     ).to(model.device)
 
+    # =========================================================
+    # 4. GENERATION
+    # =========================================================
     with torch.inference_mode():
         outputs = model.generate(
             **inputs,
@@ -259,29 +348,52 @@ def call_paraphraser(sentence: str, n: int = 4, k: int = 3) -> List[Dict]:
 
     decoded = tokenizer.batch_decode(outputs, skip_special_tokens=True)
 
-    results: List[Dict] = []
-    for d in decoded:
+    # =========================================================
+    # 5. PARSE + ALIGN WITH PAYLOADS
+    # =========================================================
+    results: List[Dict[str, Any]] = []
+    
+    for i, d in enumerate(decoded):
+
         data = extract_json(clean_output(d))
-        if data and "ldb" in data and "direct" in data:
-            results.append(data)
+
+        if not data:
+            print("FAILED PARSE")
+            print(d)
+            continue
+
+        payload = payloads[i]
+
+        ldb_constraints, direct_constraints = aggregate_constraints(payload)
+
+        results.append({
+            "base": sentence,
+            "ldb": data["ldb"],
+            "direct": data["direct"],
+            "ldb_constraints": ldb_constraints,
+            "direct_constraints": direct_constraints
+        })
 
     return results
+
 
 # =========================================================
 # GENERATOR
 # =========================================================
 
+
 def call_generator(n: int, chunk_size: int = 8) -> List[str]:
     """
-    Generate base dataset sentences.
+    Generate base sentences for dataset creation.
 
     Args:
         n: number of sentences
-        chunk_size: batch size
+        chunk_size: batch size for generation
 
     Returns:
         list of generated sentences
     """
+
     sentences: List[str] = []
 
     for i in tqdm(range(0, n, chunk_size), desc="Generating base"):
@@ -291,7 +403,7 @@ def call_generator(n: int, chunk_size: int = 8) -> List[str]:
         prompts = [
             tokenizer.apply_chat_template(
                 [
-                    {"role": "system", "content": "JSON only."},
+                    {"role": "system", "content": "Return JSON only."},
                     {"role": "user", "content": GEN_PROMPT.format(n=1)}
                 ],
                 tokenize=False,
@@ -318,87 +430,140 @@ def call_generator(n: int, chunk_size: int = 8) -> List[str]:
         decoded = tokenizer.batch_decode(outputs, skip_special_tokens=True)
 
         for d in decoded:
+
             j = extract_json(clean_output(d))
-            if j:
-                sentences.extend(j.get("sentences", []))
+
+            if j and "sentences" in j:
+                sentences.extend(j["sentences"])
 
         torch.cuda.empty_cache()
 
     return sentences
-
 # =========================================================
 # PIPELINE
 # =========================================================
+
+
+CHECKPOINT_PATH = "data/InfoNCE/checkpoint_dataset.json"
+
+
+def ask_resume() -> bool:
+    """
+    Ask user if they want to resume from checkpoint.
+    """
+    ans = input("\nResume from checkpoint ? (y/n) >>> ").strip().lower()
+
+    return ans in {"y", "yes", "o", "oui"}
+
+
+def save_checkpoint(path: str, idx: int, data: List[Dict[str, Any]]) -> None:
+    """
+    Save intermediate dataset state.
+    """
+    tmp = {
+        "done_idx": idx,
+        "data": data
+    }
+
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(tmp, f, ensure_ascii=False, indent=2)
+
+
+def load_checkpoint(path: str, resume: bool):
+    """
+    Load checkpoint only if resume is True.
+    """
+    if not resume:
+        return 0, []
+
+    if not os.path.exists(path):
+        return 0, []
+
+    with open(path, "r", encoding="utf-8") as f:
+        ckpt = json.load(f)
+
+    return ckpt.get("done_idx", 0), ckpt.get("data", [])
+
 
 def generate_dataset(
     n_base: int = 10,
     n_variants: int = 3,
     batch_size: int = 2,
-    chunk_size: int = 8
-) -> List[DatasetItem]:
+    chunk_size: int = 8,
+    resume: bool = True
+) -> List[Dict[str, Any]]:
     """
-    Full dataset generation pipeline.
+    Full dataset generation pipeline with optional resume.
+    """
 
-    Returns:
-        list of LDB/direct paired samples
-    """
     torch.cuda.empty_cache()
     gc.collect()
 
-    dataset: List[DatasetItem] = []
+    # =========================================================
+    # RESUME LOGIC
+    # =========================================================
+    start_idx, dataset = load_checkpoint(CHECKPOINT_PATH, resume)
 
+    logger.info("Resume mode: %s", resume)
+    logger.info("Starting from index: %d", start_idx)
+    logger.info("Loaded samples: %d", len(dataset))
+
+    # =========================================================
+    # BASE
+    # =========================================================
     base = call_generator(n_base, chunk_size)
-    logger.info(f"Base sentences: {len(base)}")
+    base = base[start_idx:]
 
+    logger.info("Total base sentences: %d", len(base))
+
+    # =========================================================
+    # LOOP
+    # =========================================================
     for i in tqdm(range(0, len(base), batch_size), desc="Dataset building"):
 
         batch = base[i:i + batch_size]
+        global_idx = start_idx + i
 
-        for sentence in batch:
+        try:
+            for sentence in batch:
 
-            results = call_paraphraser(sentence, n_variants)
+                results = call_paraphraser(sentence, n_variants)
 
-            for res in results:
-                if not res or "ldb" not in res or "direct" not in res:
-                    continue
+                for res in results:
 
-                dataset.append({
-                    "base": sentence,
-                    "ldb": res["ldb"]["text"],
-                    "direct": res["direct"]["text"],
-                    "ldb_constraints": res["ldb"]["constraints"],
-                    "direct_constraints": res["direct"]["constraints"]
-                })
+                    if not res:
+                        continue
+
+                    dataset.append({
+                        "base": sentence,
+                        "ldb": res["ldb"],
+                        "direct": res["direct"],
+                        "ldb_constraints": res["ldb_constraints"],
+                        "direct_constraints": res["direct_constraints"]
+                    })
+
+            save_checkpoint(
+                CHECKPOINT_PATH,
+                global_idx + batch_size,
+                dataset
+            )
 
             torch.cuda.empty_cache()
             gc.collect()
 
+        except RuntimeError as e:
+            logger.error("GPU crash → saving checkpoint")
+
+            save_checkpoint(
+                CHECKPOINT_PATH,
+                global_idx,
+                dataset
+            )
+
+            raise e
+
     return dataset
 
-# =========================================================
-# GROUPING
-# =========================================================
-
-def group_dataset(data: List[DatasetItem]) -> List[Dict]:
-    """
-    Group dataset by base sentence.
-    """
-    grouped: Dict[str, Dict] = {}
-
-    for item in data:
-        base = item["base"]
-
-        if base not in grouped:
-            grouped[base] = {
-                "base": base,
-                "ldb": [],
-                "direct": []
-            }
-
-        grouped[base]["ldb"].append(item["ldb"])
-        grouped[base]["direct"].append(item["direct"])
-
-    return list(grouped.values())
 
 # =========================================================
 # SAVE
@@ -415,8 +580,24 @@ def save_json(data: Any, path: str) -> None:
 # MAIN
 # =========================================================
 
-if __name__ == "__main__":
-    dataset = generate_dataset(n_base=100, n_variants=3, batch_size=8, chunk_size=25)
-    save_json(dataset, "data/InfoNCE/groupedNCE100.json")
 
-    logger.info(f"DONE: {len(dataset)} samples")
+if __name__ == "__main__":
+
+    resume = ask_resume()
+
+    if not resume:
+        print("Resetting checkpoint...")
+        if os.path.exists(CHECKPOINT_PATH):
+            os.remove(CHECKPOINT_PATH)
+
+    dataset = generate_dataset(
+        n_base=200,
+        n_variants=3,
+        batch_size=10,
+        chunk_size=25,
+        resume=resume
+    )
+
+    save_json(dataset, "data/InfoNCE/groupedNCE_corrected.json")
+
+    logger.info("DONE: %d samples", len(dataset))

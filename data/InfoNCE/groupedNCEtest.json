@@ -1,0 +1,102 @@
+[
+  {
+    "base": "Le gouvernement a annoncé une augmentation de la TVA pour financer les pensions des retraités.",
+    "ldb": "Il a été annoncé que la TVA serait augmentée afin de financer les pensions des retraités par le gouvernement.",
+    "direct": "Le gouvernement a annoncé une augmentation de la TVA pour financer les pensions des retraités.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S2",
+          "S5",
+          "I4"
+        ],
+        "effect": "voix passive avec auxiliaire être + participe passé, sujet non acteur ; structure avec subordination ou enchâssement de propositions ; au moins un élément nécessaire à la compréhension est sous-entendu"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R2",
+          "R5",
+          "J4"
+        ],
+        "effect": "voix active, sujet explicite en position initiale qui réalise l’action ; une seule proposition principale sans subordination ; tous les éléments nécessaires sont formulés sans ambiguïté"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé une augmentation de la TVA pour financer les pensions des retraités.",
+    "ldb": "Dans le but de garantir le financement adéquat des pensions des retraités, le gouvernement a décidé d'introduire une modification de la taxe sur la valeur ajoutée.",
+    "direct": "Le gouvernement augmente la TVA pour financer les pensions des retraités.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S1",
+          "C6",
+          "S7"
+        ],
+        "effect": "phrase ≥15 mots avec au moins une subordination (ex: que, afin de, dans la mesure où) ; introduire vocabulaire administratif, technique ou bureaucratique ; au moins deux actions ou informations distinctes dans la même phrase"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R1",
+          "D6",
+          "R7"
+        ],
+        "effect": "phrase ≤12 mots sans subordination, structure simple sujet-verbe-objet ; utiliser un vocabulaire simple et courant ; une seule action ou information par phrase"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a lancé une campagne pour attirer les investissements étrangers.",
+    "ldb": "Une campagne a été initiée dans le but d'attirer les investissements étrangers.",
+    "direct": "Le gouvernement a lancé une campagne pour attirer les investissements étrangers.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C5",
+          "C7",
+          "I3"
+        ],
+        "effect": "éviter d’assigner clairement une responsabilité (passif, neutre) ; remplacer un élément précis par une formulation vague ; phrase commence par contexte ou cadrage avant l’action principale"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D5",
+          "D7",
+          "J3"
+        ],
+        "effect": "attribuer explicitement l’action à un acteur identifié ; remplacer les termes vagues par des éléments précis ; phrase commence directement par l’action principale"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a lancé une campagne pour attirer les investissements étrangers.",
+    "ldb": "Dans le but d'attirer les investissements étrangers, le gouvernement a initié une campagne visant à promouvoir son environnement attractif pour les investisseurs internationaux.",
+    "direct": "Le gouvernement a lancé une campagne pour attirer les investissements étrangers.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S4",
+          "S9",
+          "C1"
+        ],
+        "effect": "ajout d’éléments non nécessaires à la compréhension du fait (précisions, reformulations, contexte inutile) ; répétition d’une même information sous plusieurs formes ; remplacer un terme direct ou négatif par une formulation atténuée ou neutre"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R4",
+          "R9",
+          "D1"
+        ],
+        "effect": "suppression de tout élément non essentiel, conservation du fait brut ; chaque information apparaît une seule fois ; remplacer toute atténuation par un terme direct et explicite"
+      }
+    ]
+  }
+]
