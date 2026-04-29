@@ -1,0 +1,752 @@
+[
+  {
+    "base": "Selon nos statistiques, 2 millions de jeunes ont perdu leur emploi en France entre 1985 et 1990.",
+    "ldb": "Dans le contexte de cette période, il semble que le nombre important de jeunes qui aient connu une perturbation dans leur situation professionnelle en France soit significatif.",
+    "direct": "Entre 1985 et 1990, 2 millions de jeunes ont perdu leur emploi en France.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "I5",
+          "C7",
+          "I3"
+        ],
+        "effect": "informations dispersées dans la phrase, ordre non compact ; remplacer un élément précis par une formulation vague ; phrase commence par contexte ou cadrage avant l’action principale"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "J5",
+          "D7",
+          "J3"
+        ],
+        "effect": "informations regroupées de manière linéaire et compacte ; remplacer les termes vagues par des éléments précis ; phrase commence directement par l’action principale"
+      }
+    ]
+  },
+  {
+    "base": "Selon nos statistiques, 2 millions de jeunes ont perdu leur emploi en France entre 1985 et 1990.",
+    "ldb": "Dans le cadre de l'analyse de nos données, il s'est avéré que pendant la période allant de 1985 à 1990, un nombre significatif de jeunes, estimé à environ deux millions, ont été confrontés à la perte de leurs emplois en France, ce qui soulève des questions importantes concernant la stabilité du marché du travail pour cette tranche d'âge.",
+    "direct": "Entre 1985 et 1990, 2 millions de jeunes ont perdu leur emploi en France.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C5",
+          "S1",
+          "S8"
+        ],
+        "effect": "éviter d’assigner clairement une responsabilité (passif, neutre) ; phrase ≥15 mots avec au moins une subordination (ex: que, afin de, dans la mesure où) ; usage de connecteurs institutionnels (dans le cadre de, afin de, en vue de)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D5",
+          "R1",
+          "R8"
+        ],
+        "effect": "attribuer explicitement l’action à un acteur identifié ; phrase ≤12 mots sans subordination, structure simple sujet-verbe-objet ; absence totale de connecteurs, formulation directe"
+      }
+    ]
+  },
+  {
+    "base": "Selon nos statistiques, 2 millions de jeunes ont perdu leur emploi en France entre 1985 et 1990.",
+    "ldb": "Durant la période 1985-1990, il y a eu une diminution notable de l'emploi parmi les jeunes en France, selon nos données, qui indiquent une baisse de 2 millions d'individus.",
+    "direct": "Entre 1985 et 1990, 2 millions de jeunes ont perdu leur emploi en France, selon nos statistiques.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C5",
+          "S9",
+          "S4"
+        ],
+        "effect": "éviter d’assigner clairement une responsabilité (passif, neutre) ; répétition d’une même information sous plusieurs formes ; ajout d’éléments non nécessaires à la compréhension du fait (précisions, reformulations, contexte inutile)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D5",
+          "R9",
+          "R4"
+        ],
+        "effect": "attribuer explicitement l’action à un acteur identifié ; chaque information apparaît une seule fois ; suppression de tout élément non essentiel, conservation du fait brut"
+      }
+    ]
+  },
+  {
+    "base": "La ville de Paris a accueilli 2 millions de demandeurs d'asile depuis 1985.",
+    "ldb": "Depuis plusieurs décennies, la capitale française a joué un rôle important dans l'intégration de personnes cherchant l'asile, atteignant un total impressionnant de deux millions d'individus au cours de cette période.",
+    "direct": "Depuis 1985, la ville de Paris a accueilli exactement deux millions de demandeurs d'asile.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "I5",
+          "C7",
+          "I3"
+        ],
+        "effect": "informations dispersées dans la phrase, ordre non compact ; remplacer un élément précis par une formulation vague ; phrase commence par contexte ou cadrage avant l’action principale"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "J5",
+          "D7",
+          "J3"
+        ],
+        "effect": "informations regroupées de manière linéaire et compacte ; remplacer les termes vagues par des éléments précis ; phrase commence directement par l’action principale"
+      }
+    ]
+  },
+  {
+    "base": "La ville de Paris a accueilli 2 millions de demandeurs d'asile depuis 1985.",
+    "ldb": "Au cours des dernières décennies, dans le cadre de son rôle d'accueil, la ville de Paris a été le théâtre d'un phénomène significatif concernant 2 millions de demandeurs d'asile.",
+    "direct": "Depuis 1985, la ville de Paris a accueilli 2 millions de demandeurs d'asile.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C5",
+          "S1",
+          "S8"
+        ],
+        "effect": "éviter d’assigner clairement une responsabilité (passif, neutre) ; phrase ≥15 mots avec au moins une subordination (ex: que, afin de, dans la mesure où) ; usage de connecteurs institutionnels (dans le cadre de, afin de, en vue de)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D5",
+          "R1",
+          "R8"
+        ],
+        "effect": "attribuer explicitement l’action à un acteur identifié ; phrase ≤12 mots sans subordination, structure simple sujet-verbe-objet ; absence totale de connecteurs, formulation directe"
+      }
+    ]
+  },
+  {
+    "base": "La ville de Paris a accueilli 2 millions de demandeurs d'asile depuis 1985.",
+    "ldb": "Depuis 1985, 2 millions de personnes ont fait appel à la ville de Paris pour obtenir l'asile dans ses services.",
+    "direct": "Depuis 1985, la ville de Paris a accueilli 2 millions de demandeurs d'asile.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C5",
+          "S9",
+          "S4"
+        ],
+        "effect": "éviter d’assigner clairement une responsabilité (passif, neutre) ; répétition d’une même information sous plusieurs formes ; ajout d’éléments non nécessaires à la compréhension du fait (précisions, reformulations, contexte inutile)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D5",
+          "R9",
+          "R4"
+        ],
+        "effect": "attribuer explicitement l’action à un acteur identifié ; chaque information apparaît une seule fois ; suppression de tout élément non essentiel, conservation du fait brut"
+      }
+    ]
+  },
+  {
+    "base": "La Communauté Européenne accueille 2 milliards de tonnes de marchandises chaque année.",
+    "ldb": "Dans le cadre de ses opérations logistiques, la Communauté Européenne reçoit régulièrement un volume important de marchandises, estimé à environ deux milliards de tonnes, au cours de chaque année.",
+    "direct": "La Communauté Européenne accueille 2 milliards de tonnes de marchandises chaque année.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "I5",
+          "C7",
+          "I3"
+        ],
+        "effect": "informations dispersées dans la phrase, ordre non compact ; remplacer un élément précis par une formulation vague ; phrase commence par contexte ou cadrage avant l’action principale"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "J5",
+          "D7",
+          "J3"
+        ],
+        "effect": "informations regroupées de manière linéaire et compacte ; remplacer les termes vagues par des éléments précis ; phrase commence directement par l’action principale"
+      }
+    ]
+  },
+  {
+    "base": "La Communauté Européenne accueille 2 milliards de tonnes de marchandises chaque année.",
+    "ldb": "Dans le cadre de son activité annuelle, la Communauté Européenne s'accommode de l'introduction de 2 milliards de tonnes de marchandises.",
+    "direct": "La Communauté Européenne accueille 2 milliards de tonnes de marchandises chaque année.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C5",
+          "S1",
+          "S8"
+        ],
+        "effect": "éviter d’assigner clairement une responsabilité (passif, neutre) ; phrase ≥15 mots avec au moins une subordination (ex: que, afin de, dans la mesure où) ; usage de connecteurs institutionnels (dans le cadre de, afin de, en vue de)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D5",
+          "R1",
+          "R8"
+        ],
+        "effect": "attribuer explicitement l’action à un acteur identifié ; phrase ≤12 mots sans subordination, structure simple sujet-verbe-objet ; absence totale de connecteurs, formulation directe"
+      }
+    ]
+  },
+  {
+    "base": "La Communauté Européenne accueille 2 milliards de tonnes de marchandises chaque année.",
+    "ldb": "Chaque année, la Communauté Européenne gère un volume considérable de marchandises, s'élevant à environ deux milliards de tonnes.",
+    "direct": "Chaque année, la Communauté Européenne accueille 2 milliards de tonnes de marchandises.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C5",
+          "S9",
+          "S4"
+        ],
+        "effect": "éviter d’assigner clairement une responsabilité (passif, neutre) ; répétition d’une même information sous plusieurs formes ; ajout d’éléments non nécessaires à la compréhension du fait (précisions, reformulations, contexte inutile)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D5",
+          "R9",
+          "R4"
+        ],
+        "effect": "attribuer explicitement l’action à un acteur identifié ; chaque information apparaît une seule fois ; suppression de tout élément non essentiel, conservation du fait brut"
+      }
+    ]
+  },
+  {
+    "base": "La criminalité a augmenté de 25% dans notre pays ces dernières années.",
+    "ldb": "Dans notre pays, on observe une augmentation significative de la criminalité ces dernières années, avec une progression notable.",
+    "direct": "La criminalité a augmenté de 25% dans notre pays ces dernières années.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "I5",
+          "C7",
+          "I3"
+        ],
+        "effect": "informations dispersées dans la phrase, ordre non compact ; remplacer un élément précis par une formulation vague ; phrase commence par contexte ou cadrage avant l’action principale"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "J5",
+          "D7",
+          "J3"
+        ],
+        "effect": "informations regroupées de manière linéaire et compacte ; remplacer les termes vagues par des éléments précis ; phrase commence directement par l’action principale"
+      }
+    ]
+  },
+  {
+    "base": "La criminalité a augmenté de 25% dans notre pays ces dernières années.",
+    "ldb": "Dans le cadre de cette évolution observée, il semble que la criminalité ait connu une augmentation significative, passant de 75% à 100% au cours des dernières années, sans qu'il soit clair qui en soit la cause précise.",
+    "direct": "La criminalité a augmenté de 25% ces dernières années. C'est inquiétant.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C5",
+          "S1",
+          "S8"
+        ],
+        "effect": "éviter d’assigner clairement une responsabilité (passif, neutre) ; phrase ≥15 mots avec au moins une subordination (ex: que, afin de, dans la mesure où) ; usage de connecteurs institutionnels (dans le cadre de, afin de, en vue de)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D5",
+          "R1",
+          "R8"
+        ],
+        "effect": "attribuer explicitement l’action à un acteur identifié ; phrase ≤12 mots sans subordination, structure simple sujet-verbe-objet ; absence totale de connecteurs, formulation directe"
+      }
+    ]
+  },
+  {
+    "base": "La criminalité a augmenté de 25% dans notre pays ces dernières années.",
+    "ldb": "Il y a eu une progression de l'incidence criminelle de 25% au cours des dernières années dans notre pays.",
+    "direct": "La criminalité a augmenté de 25% dans notre pays ces dernières années.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C5",
+          "S9",
+          "S4"
+        ],
+        "effect": "éviter d’assigner clairement une responsabilité (passif, neutre) ; répétition d’une même information sous plusieurs formes ; ajout d’éléments non nécessaires à la compréhension du fait (précisions, reformulations, contexte inutile)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D5",
+          "R9",
+          "R4"
+        ],
+        "effect": "attribuer explicitement l’action à un acteur identifié ; chaque information apparaît une seule fois ; suppression de tout élément non essentiel, conservation du fait brut"
+      }
+    ]
+  },
+  {
+    "base": "Lausanne hospital déploie 2 millions pour centre de recherche innovante.",
+    "ldb": "Le centre de recherche innovante de Lausanne hospital a bénéficié d'une allocation financière importante.",
+    "direct": "Lausanne hospital déploie 2 millions pour le centre de recherche innovante.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "I5",
+          "C7",
+          "I3"
+        ],
+        "effect": "informations dispersées dans la phrase, ordre non compact ; remplacer un élément précis par une formulation vague ; phrase commence par contexte ou cadrage avant l’action principale"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "J5",
+          "D7",
+          "J3"
+        ],
+        "effect": "informations regroupées de manière linéaire et compacte ; remplacer les termes vagues par des éléments précis ; phrase commence directement par l’action principale"
+      }
+    ]
+  },
+  {
+    "base": "Lausanne hospital déploie 2 millions pour centre de recherche innovante.",
+    "ldb": "Dans le cadre de la mise en place d'un centre de recherche innovante, Lausanne hospital a mis à disposition une somme de deux millions d'euros, afin de soutenir cette initiative importante.",
+    "direct": "Lausanne hospital déploie 2 millions pour le centre de recherche innovante.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C5",
+          "S1",
+          "S8"
+        ],
+        "effect": "éviter d’assigner clairement une responsabilité (passif, neutre) ; phrase ≥15 mots avec au moins une subordination (ex: que, afin de, dans la mesure où) ; usage de connecteurs institutionnels (dans le cadre de, afin de, en vue de)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D5",
+          "R1",
+          "R8"
+        ],
+        "effect": "attribuer explicitement l’action à un acteur identifié ; phrase ≤12 mots sans subordination, structure simple sujet-verbe-objet ; absence totale de connecteurs, formulation directe"
+      }
+    ]
+  },
+  {
+    "base": "Lausanne hospital déploie 2 millions pour centre de recherche innovante.",
+    "ldb": "Des ressources considérables ont été mobilisées par l'institution hospitalière de Lausanne dans le but d'apporter un soutien financier substantiel au centre de recherche en question.",
+    "direct": "Le centre de recherche innovante de Lausanne hospital a bénéficié d'un investissement de 2 millions de francs.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C5",
+          "S9",
+          "S4"
+        ],
+        "effect": "éviter d’assigner clairement une responsabilité (passif, neutre) ; répétition d’une même information sous plusieurs formes ; ajout d’éléments non nécessaires à la compréhension du fait (précisions, reformulations, contexte inutile)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D5",
+          "R9",
+          "R4"
+        ],
+        "effect": "attribuer explicitement l’action à un acteur identifié ; chaque information apparaît une seule fois ; suppression de tout élément non essentiel, conservation du fait brut"
+      }
+    ]
+  },
+  {
+    "base": "En 1987, 20 000 immigrants ont trouvé asylum dans notre région.",
+    "ldb": "Dans le contexte de 1987, il y avait une augmentation notable de personnes cherchant refuge dans notre zone géographique, avec un total de 20 000 individus.",
+    "direct": "En 1987, 20 000 immigrants ont trouvé asylum dans notre région.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "I5",
+          "C7",
+          "I3"
+        ],
+        "effect": "informations dispersées dans la phrase, ordre non compact ; remplacer un élément précis par une formulation vague ; phrase commence par contexte ou cadrage avant l’action principale"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "J5",
+          "D7",
+          "J3"
+        ],
+        "effect": "informations regroupées de manière linéaire et compacte ; remplacer les termes vagues par des éléments précis ; phrase commence directement par l’action principale"
+      }
+    ]
+  },
+  {
+    "base": "En 1987, 20 000 immigrants ont trouvé asylum dans notre région.",
+    "ldb": "Dans le cadre de l'année 1987, un certain nombre d'immigrants ont bénéficié d'un statut d'asyle dans notre région, sans assigner de responsabilité claire à qui que ce soit.",
+    "direct": "En 1987, 20 000 immigrants ont reçu asylum dans notre région.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C5",
+          "S1",
+          "S8"
+        ],
+        "effect": "éviter d’assigner clairement une responsabilité (passif, neutre) ; phrase ≥15 mots avec au moins une subordination (ex: que, afin de, dans la mesure où) ; usage de connecteurs institutionnels (dans le cadre de, afin de, en vue de)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D5",
+          "R1",
+          "R8"
+        ],
+        "effect": "attribuer explicitement l’action à un acteur identifié ; phrase ≤12 mots sans subordination, structure simple sujet-verbe-objet ; absence totale de connecteurs, formulation directe"
+      }
+    ]
+  },
+  {
+    "base": "En 1987, 20 000 immigrants ont trouvé asylum dans notre région.",
+    "ldb": "Au cours de l'année 1987, il y a eu une augmentation notable de personnes cherchant refuge dans cette zone, atteignant un total de 20 000 individus.",
+    "direct": "En 1987, 20 000 immigrants ont trouvé asylum dans notre région.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C5",
+          "S9",
+          "S4"
+        ],
+        "effect": "éviter d’assigner clairement une responsabilité (passif, neutre) ; répétition d’une même information sous plusieurs formes ; ajout d’éléments non nécessaires à la compréhension du fait (précisions, reformulations, contexte inutile)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D5",
+          "R9",
+          "R4"
+        ],
+        "effect": "attribuer explicitement l’action à un acteur identifié ; chaque information apparaît une seule fois ; suppression de tout élément non essentiel, conservation du fait brut"
+      }
+    ]
+  },
+  {
+    "base": "La région Ile-de-France investit 2 milliards francs pour améliorer les transports métropolitains.",
+    "ldb": "Dans le cadre de ses initiatives en faveur du développement durable, la région Ile-de-France a prévu d'investir une somme importante, estimée à environ deux milliards de francs, afin de renforcer les infrastructures et services des transports métropolitains.",
+    "direct": "La région Ile-de-France investit 2 milliards francs pour améliorer les transports métropolitains.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "I5",
+          "C7",
+          "I3"
+        ],
+        "effect": "informations dispersées dans la phrase, ordre non compact ; remplacer un élément précis par une formulation vague ; phrase commence par contexte ou cadrage avant l’action principale"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "J5",
+          "D7",
+          "J3"
+        ],
+        "effect": "informations regroupées de manière linéaire et compacte ; remplacer les termes vagues par des éléments précis ; phrase commence directement par l’action principale"
+      }
+    ]
+  },
+  {
+    "base": "La région Ile-de-France investit 2 milliards francs pour améliorer les transports métropolitains.",
+    "ldb": "Dans le cadre de l'amélioration des transports métropolitains, la région Ile-de-France a mobilisé un budget de 2 milliards francs.",
+    "direct": "Ile-de-France investit 2 milliards francs pour améliorer les transports métropolitains.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C5",
+          "S1",
+          "S8"
+        ],
+        "effect": "éviter d’assigner clairement une responsabilité (passif, neutre) ; phrase ≥15 mots avec au moins une subordination (ex: que, afin de, dans la mesure où) ; usage de connecteurs institutionnels (dans le cadre de, afin de, en vue de)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D5",
+          "R1",
+          "R8"
+        ],
+        "effect": "attribuer explicitement l’action à un acteur identifié ; phrase ≤12 mots sans subordination, structure simple sujet-verbe-objet ; absence totale de connecteurs, formulation directe"
+      }
+    ]
+  },
+  {
+    "base": "La région Ile-de-France investit 2 milliards francs pour améliorer les transports métropolitains.",
+    "ldb": "Des fonds substantiels ont été mobilisés par la région Ile-de-France afin d'améliorer les transports métropolitains.",
+    "direct": "La région Ile-de-France investit 2 milliards francs pour améliorer les transports métropolitains.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C5",
+          "S9",
+          "S4"
+        ],
+        "effect": "éviter d’assigner clairement une responsabilité (passif, neutre) ; répétition d’une même information sous plusieurs formes ; ajout d’éléments non nécessaires à la compréhension du fait (précisions, reformulations, contexte inutile)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D5",
+          "R9",
+          "R4"
+        ],
+        "effect": "attribuer explicitement l’action à un acteur identifié ; chaque information apparaît une seule fois ; suppression de tout élément non essentiel, conservation du fait brut"
+      }
+    ]
+  },
+  {
+    "base": "La Haute-Normandie a voté 4 nouveaux juge supplémentaires en 1987.",
+    "ldb": "En 1987, le conseil régional de La Haute-Normandie s'est prononcé pour l'ajout de juges supplémentaires, ce qui a abouti à l'élection de quatre individus supplémentaires au sein du tribunal local.",
+    "direct": "En 1987, la Haute-Normandie a voté pour ajouter 4 nouveaux juges supplémentaires.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "I5",
+          "C7",
+          "I3"
+        ],
+        "effect": "informations dispersées dans la phrase, ordre non compact ; remplacer un élément précis par une formulation vague ; phrase commence par contexte ou cadrage avant l’action principale"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "J5",
+          "D7",
+          "J3"
+        ],
+        "effect": "informations regroupées de manière linéaire et compacte ; remplacer les termes vagues par des éléments précis ; phrase commence directement par l’action principale"
+      }
+    ]
+  },
+  {
+    "base": "La Haute-Normandie a voté 4 nouveaux juge supplémentaires en 1987.",
+    "ldb": "Dans le cadre de l'année 1987, la région de la Haute-Normandie a procédé à l'ajout de quatre juges supplémentaires par un vote.",
+    "direct": "En 1987, la Haute-Normandie a ajouté 4 juges supplémentaires.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C5",
+          "S1",
+          "S8"
+        ],
+        "effect": "éviter d’assigner clairement une responsabilité (passif, neutre) ; phrase ≥15 mots avec au moins une subordination (ex: que, afin de, dans la mesure où) ; usage de connecteurs institutionnels (dans le cadre de, afin de, en vue de)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D5",
+          "R1",
+          "R8"
+        ],
+        "effect": "attribuer explicitement l’action à un acteur identifié ; phrase ≤12 mots sans subordination, structure simple sujet-verbe-objet ; absence totale de connecteurs, formulation directe"
+      }
+    ]
+  },
+  {
+    "base": "La Haute-Normandie a voté 4 nouveaux juge supplémentaires en 1987.",
+    "ldb": "Des décisions ont été prises concernant l'augmentation du nombre de juges dans la région en 1987.",
+    "direct": "En 1987, la Haute-Normandie a voté pour ajouter 4 nouveaux juges supplémentaires.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C5",
+          "S9",
+          "S4"
+        ],
+        "effect": "éviter d’assigner clairement une responsabilité (passif, neutre) ; répétition d’une même information sous plusieurs formes ; ajout d’éléments non nécessaires à la compréhension du fait (précisions, reformulations, contexte inutile)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D5",
+          "R9",
+          "R4"
+        ],
+        "effect": "attribuer explicitement l’action à un acteur identifié ; chaque information apparaît une seule fois ; suppression de tout élément non essentiel, conservation du fait brut"
+      }
+    ]
+  },
+  {
+    "base": "La France accueillera 20 000 réfugiés cette année.",
+    "ldb": "En tenant compte des circonstances actuelles, il est prévu que le territoire français sera le lieu d'installation pour un nombre significatif de personnes déplacées, estimé à environ vingt mille individus, au cours du prochain calendrier annuel.",
+    "direct": "La France accueillera 20 000 réfugiés cette année.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "I5",
+          "C7",
+          "I3"
+        ],
+        "effect": "informations dispersées dans la phrase, ordre non compact ; remplacer un élément précis par une formulation vague ; phrase commence par contexte ou cadrage avant l’action principale"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "J5",
+          "D7",
+          "J3"
+        ],
+        "effect": "informations regroupées de manière linéaire et compacte ; remplacer les termes vagues par des éléments précis ; phrase commence directement par l’action principale"
+      }
+    ]
+  },
+  {
+    "base": "La France accueillera 20 000 réfugiés cette année.",
+    "ldb": "Dans le cadre de sa politique d'accueil, la France prévoit d'intégrer une population de 20 000 réfugiés cette année, afin de répondre aux besoins des personnes concernées.",
+    "direct": "La France accueillera 20 000 réfugiés cette année.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C5",
+          "S1",
+          "S8"
+        ],
+        "effect": "éviter d’assigner clairement une responsabilité (passif, neutre) ; phrase ≥15 mots avec au moins une subordination (ex: que, afin de, dans la mesure où) ; usage de connecteurs institutionnels (dans le cadre de, afin de, en vue de)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D5",
+          "R1",
+          "R8"
+        ],
+        "effect": "attribuer explicitement l’action à un acteur identifié ; phrase ≤12 mots sans subordination, structure simple sujet-verbe-objet ; absence totale de connecteurs, formulation directe"
+      }
+    ]
+  },
+  {
+    "base": "La France accueillera 20 000 réfugiés cette année.",
+    "ldb": "Il est prévu d'accueillir environ 20 000 personnes réfugiées en France cette année.",
+    "direct": "La France accueillera 20 000 réfugiés cette année.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C5",
+          "S9",
+          "S4"
+        ],
+        "effect": "éviter d’assigner clairement une responsabilité (passif, neutre) ; répétition d’une même information sous plusieurs formes ; ajout d’éléments non nécessaires à la compréhension du fait (précisions, reformulations, contexte inutile)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D5",
+          "R9",
+          "R4"
+        ],
+        "effect": "attribuer explicitement l’action à un acteur identifié ; chaque information apparaît une seule fois ; suppression de tout élément non essentiel, conservation du fait brut"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement investira 25 millions francs dans l'Ile-de-France.",
+    "ldb": "Dans le but de promouvoir le développement économique de l'Ile-de-France, le gouvernement envisage de consacrer une somme importante, estimée à environ 25 millions francs, à ce territoire.",
+    "direct": "Le gouvernement investira 25 millions francs dans l'Ile-de-France.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "I5",
+          "C7",
+          "I3"
+        ],
+        "effect": "informations dispersées dans la phrase, ordre non compact ; remplacer un élément précis par une formulation vague ; phrase commence par contexte ou cadrage avant l’action principale"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "J5",
+          "D7",
+          "J3"
+        ],
+        "effect": "informations regroupées de manière linéaire et compacte ; remplacer les termes vagues par des éléments précis ; phrase commence directement par l’action principale"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement investira 25 millions francs dans l'Ile-de-France.",
+    "ldb": "Dans le cadre de ses initiatives, le gouvernement prévoit d'investir, dans la mesure où cela concerne l'Ile-de-France, un montant de 25 millions francs.",
+    "direct": "Le gouvernement investira 25 millions francs dans l'Ile-de-France.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C5",
+          "S1",
+          "S8"
+        ],
+        "effect": "éviter d’assigner clairement une responsabilité (passif, neutre) ; phrase ≥15 mots avec au moins une subordination (ex: que, afin de, dans la mesure où) ; usage de connecteurs institutionnels (dans le cadre de, afin de, en vue de)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D5",
+          "R1",
+          "R8"
+        ],
+        "effect": "attribuer explicitement l’action à un acteur identifié ; phrase ≤12 mots sans subordination, structure simple sujet-verbe-objet ; absence totale de connecteurs, formulation directe"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement investira 25 millions francs dans l'Ile-de-France.",
+    "ldb": "Un montant de 25 millions francs sera affecté à l'Ile-de-France par le gouvernement.",
+    "direct": "Le gouvernement investira 25 millions francs dans l'Ile-de-France.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C5",
+          "S9",
+          "S4"
+        ],
+        "effect": "éviter d’assigner clairement une responsabilité (passif, neutre) ; répétition d’une même information sous plusieurs formes ; ajout d’éléments non nécessaires à la compréhension du fait (précisions, reformulations, contexte inutile)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D5",
+          "R9",
+          "R4"
+        ],
+        "effect": "attribuer explicitement l’action à un acteur identifié ; chaque information apparaît une seule fois ; suppression de tout élément non essentiel, conservation du fait brut"
+      }
+    ]
+  }
+]

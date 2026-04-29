@@ -12,7 +12,7 @@ import gc
 
 from .Constants.constraints import CONSTRAINTS
 from .Constants.prompts import GEN_PROMPT, PARA_PROMPT
-
+from .Constants.generation_context import SITUATIONS, ACTORS, TOPICS
 # =========================================================
 # LOGGING
 # =========================================================
@@ -380,34 +380,49 @@ def call_paraphraser_batch(
 # =========================================================
 
 
-def call_generator(n: int, chunk_size: int = 8) -> List[str]:
-    """
-    Generate base sentences for dataset creation.
+def sample_with_replacement(lst, k):
+    arr = np.asarray(lst)
 
-    Args:
-        n: number of sentences
-        chunk_size: batch size for generation
+    replace = len(arr) < k
+    idx = np.random.choice(len(arr), size=k, replace=replace)
 
-    Returns:
-        list of generated sentences
-    """
+    return arr[idx].tolist()
+
+
+def call_generator(
+    n: int,
+    chunk_size: int = 8
+) -> List[str]:
 
     sentences: List[str] = []
+    system_msg = "Return JSON only."
 
     for i in tqdm(range(0, n, chunk_size), desc="Generating base"):
 
         batch_n = min(chunk_size, n - i)
 
+        sub_actors = sample_with_replacement(ACTORS, batch_n)
+        sub_situations = sample_with_replacement(SITUATIONS, batch_n)
+        sub_topics = sample_with_replacement(TOPICS, batch_n)
+
         prompts = [
             tokenizer.apply_chat_template(
                 [
-                    {"role": "system", "content": "Return JSON only."},
-                    {"role": "user", "content": GEN_PROMPT.format(n=1)}
+                    {"role": "system", "content": system_msg},
+                    {
+                        "role": "user",
+                        "content": GEN_PROMPT.format(
+                            n=1,
+                            actors=a,
+                            situations=s,
+                            topics=t
+                        )
+                    }
                 ],
                 tokenize=False,
                 add_generation_prompt=True
             )
-            for _ in range(batch_n)
+            for a, s, t in zip(sub_actors, sub_situations, sub_topics)
         ]
 
         inputs = tokenizer(
@@ -420,17 +435,17 @@ def call_generator(n: int, chunk_size: int = 8) -> List[str]:
         with torch.inference_mode():
             outputs = model.generate(
                 **inputs,
-                max_new_tokens=250,
-                temperature=0.6,
-                top_p=0.9
+                max_new_tokens=100,
+                temperature=0.8,
+                top_p=0.9,
+                do_sample=True,
+                repetition_penalty=1.1  # petit bonus utile
             )
 
         decoded = tokenizer.batch_decode(outputs, skip_special_tokens=True)
 
-        for d in decoded:
-
-            j = extract_json(clean_output(d))
-
+        for text in decoded:
+            j = extract_json(clean_output(text))
             if j and "sentences" in j:
                 sentences.extend(j["sentences"])
 
@@ -592,13 +607,13 @@ if __name__ == "__main__":
             os.remove(CHECKPOINT_PATH)
 
     dataset = generate_dataset(
-        n_base=2,
+        n_base=200,
         n_variants=3,
-        batch_size=4,
-        chunk_size=2,
+        batch_size=10,
+        chunk_size=25,
         resume=resume
     )
 
-    save_json(dataset, "data/InfoNCE/groupedNCE_corrected.json")
+    save_json(dataset, "data/InfoNCE/groupedNCEV2.json")
 
     logger.info("DONE: %d samples", len(dataset))

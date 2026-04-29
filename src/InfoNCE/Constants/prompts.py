@@ -1,95 +1,31 @@
 GEN_PROMPT = """
-Tu es un générateur de phrases politiques françaises (années 80-90).
+Tu appartiens à {actors} en France entre 1980 et 1999.
+
+Tu prends la parole lors de {situations}.
+
+Tu énonces UNE phrase issue d’un discours politique sur {topics}.
 
 RÈGLE ABSOLUE :
 Réponds UNIQUEMENT en JSON valide.
-Aucun texte avant ou après.
-
-OBJECTIF :
-Générer EXACTEMENT {n} phrases factuelles.
 
 ----------------------------------
-CONTRAINTES GÉNÉRALES
+CONTRAINTES
 ----------------------------------
 
-- France (années 80-90)
-- style institutionnel
-- phrases courtes (max 20 mots)
-- une seule idée par phrase
-- uniquement faits ou décisions
-- aucune opinion
-
+- une seule phrase
+- maximum 30 mots
+Au moins 50% des phrases un des éléments suivants :
+- un nombre (date, volume, montant)
+- un lieu précis (ville, région)
+- une institution nommée
 ----------------------------------
-INTERDICTIONS
-----------------------------------
-
-- pas de langue de bois
-- pas de flou ("mesures", "dispositif", etc.)
-- pas d’abstraction inutile
-- pas de justification
-- pas de généralisation vague
-
-----------------------------------
-EXIGENCES LINGUISTIQUES
+STYLE
 ----------------------------------
 
-- sujet explicite (acteur identifié)
-- verbe simple et neutre (éviter les verbes idéologiquement marqués)
-- objet précis
+- ton institutionnel
 - vocabulaire concret
-
-----------------------------------
-DIVERSITÉ POLITIQUE (CRITIQUE)
-----------------------------------
-
-Les phrases doivent couvrir différentes thématiques réelles des années 80-90 :
-
- - chômage et emploi de masse
- - précarité du travail et montée des contrats atypiques
- - désindustrialisation et déclin des bassins industriels
- - mondialisation économique et délocalisations
- - privatisations des entreprises publiques
- - nationalisations et recompositions de l’État économique
- - rôle de l’État-providence et réforme de l’État
- - protection sociale (retraites, assurance maladie, prestations sociales)
- - fiscalité et pression fiscale (CSG, impôts, financement social)
- - déficit public et dette de l’État
- - immigration et politiques d’intégration
- - contrôle des frontières et droit d’asile
- - identité nationale et débats sur l’intégration
- - montée du Front national et tensions politiques associées
- - racisme, discriminations et réponses législatives
- - politique de la ville et banlieues
- - sécurité intérieure et délinquance
- - ordre public et maintien de la sécurité
- - violences urbaines et émeutes
- - politique pénale et justice
- - services publics (école, santé, transports, poste, énergie)
- - réforme et modernisation des services publics
- - privatisation ou ouverture à la concurrence des services publics
- - construction européenne et intégration européenne
- - traité de Maastricht et Union européenne
- - libre circulation (Schengen)
- - souveraineté nationale vs intégration européenne
- - monnaie et convergence économique européenne
- - cohabitation politique et fonctionnement institutionnel
- - alternance politique gauche/droite
- - rôle du président et du gouvernement sous la Ve République
- - crise de la représentation politique et abstention
- 
-IMPORTANT :
-Ne pas associer explicitement ces thèmes à des partis.
-Le signal politique doit rester implicite.
-
-----------------------------------
-ACTEURS VARIÉS
-----------------------------------
-
-- gouvernement
-- ministre
-- préfet
-- maire
-- administration
+- formulation crédible pour les années 80-90
+- éviter toute tournure générique répétée
 
 ----------------------------------
 FORMAT STRICT

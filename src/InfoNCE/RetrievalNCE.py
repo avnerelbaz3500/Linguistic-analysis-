@@ -3,37 +3,47 @@ import torch
 import logging
 import pandas as pd
 
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Any
 from collections import defaultdict
 from sentence_transformers import SentenceTransformer
 
 from .InfoNCE import embed, load_json, group_dataset, precompute_groups
 from .ProfilingNCE import extract_constraint_ids
 
-# =========================================================
-# LOGGING
-# =========================================================
 
 logger = logging.getLogger("infonce")
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s | %(levelname)s | %(name)s | %(message)s"
-)
+logging.basicConfig(level=logging.INFO)
 
-# =========================================================
-# DEVICE / MODEL
-# =========================================================
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 model = SentenceTransformer(
     "OrdalieTech/Solon-embeddings-base-0.1",
     device=device
 )
 
-# =========================================================
-# RETRIEVAL
-# =========================================================
+
+DATASET_P = None
+DATASET_N = None
+
+
+def prepare_dataset(dataset: List[Dict[str, Any]]) -> None:
+    """
+    Precompute positive and negative embeddings for the retrieval dataset.
+
+    Args:
+        dataset: list of grouped contrastive samples
+    """
+    global DATASET_P, DATASET_N
+
+    DATASET_P = torch.stack(
+        [torch.as_tensor(g["p"], device=device) for g in dataset]
+    )
+
+    DATASET_N = torch.stack(
+        [torch.as_tensor(g["n"], device=device) for g in dataset]
+    )
+
 
 def retrieve_topk_groups_per_chunk(
     chunks: List[str],
@@ -42,126 +52,112 @@ def retrieve_topk_groups_per_chunk(
     temperature: float = 0.1
 ) -> List[Dict[str, Any]]:
     """
-    Compute top-k retrieval results for each chunk against a dataset of contrastive groups.
+    Compute top-k most relevant constraint groups for each text chunk.
 
     Args:
-        chunks: list of text chunks
-        dataset: list of groups containing positive/negative embeddings and metadata
-        k: number of top results to keep per chunk
-        temperature: softmax temperature scaling
+        chunks: input text chunks
+        dataset: contrastive dataset with positive and negative embeddings
+        k: number of top results per chunk
+        temperature: scaling factor for similarity
 
     Returns:
-        List of dicts with:
-            - constraints: ldb constraint structures
-            - scores: retrieval losses
+        list of top-k constraint groups per chunk
     """
 
-    logger.info("Embedding %d chunks", len(chunks))
+    logger.info(f"Embedding {len(chunks)} chunks")
 
-    q = torch.tensor(embed(chunks), device=device)
+    q = torch.as_tensor(embed(chunks), device=device)
+
+    p = DATASET_P
+    n = DATASET_N
+
+    pos = torch.einsum("gpd,qd->gpq", p, q) / temperature
+    neg = torch.einsum("gnd,qd->gnq", n, q) / temperature
+
+    log_num = torch.logsumexp(pos, dim=1)
+    log_den = torch.logsumexp(torch.cat([pos, neg], dim=1), dim=1)
+
+    losses = -(log_num - log_den)
+
+    top_vals, top_idx = torch.topk(losses, k, dim=0, largest=False)
 
     results: List[Dict[str, Any]] = []
 
-    for qi, q_i in enumerate(q):
-        q_i = q_i.unsqueeze(0)
-
-        scores: List[Tuple[int, float]] = []
-
-        for i, group in enumerate(dataset):
-            p = group["p"]
-            n = group["n"]
-
-            pos = (p @ q_i.T) / temperature
-            neg = (n @ q_i.T) / temperature
-
-            log_num = torch.logsumexp(pos, dim=0)
-            log_den = torch.logsumexp(torch.cat([pos, neg], dim=0), dim=0)
-
-            loss = -(log_num - log_den)
-            scores.append((i, loss.item()))
-
-        scores.sort(key=lambda x: x[1])
-        topk = scores[:k]
+    for qi in range(losses.shape[1]):
+        idx = top_idx[:, qi]
+        vals = top_vals[:, qi]
 
         results.append({
-            "constraints": [dataset[idx]["ldb_constraints"] for idx, _ in topk],
-            "scores": [s for _, s in topk],
+            "constraints": [dataset[i]["ldb_constraints"] for i in idx.tolist()],
+            "scores": vals.tolist()
         })
 
-    logger.info("Computed top-k for %d chunks", len(chunks))
+    logger.info("Top-k retrieval completed")
 
     return results
 
-# =========================================================
-# DOC SUMMARY
-# =========================================================
 
 def build_doc_summary(
     chunk_results: List[Dict[str, Any]]
 ) -> Dict[str, Any]:
     """
-    Aggregate chunk-level retrieval results into a document-level summary.
-
-    Computes:
-        - constraint frequency profile (S/I/C)
-        - score statistics (mean, std, quantiles)
+    Aggregate chunk-level retrieval results into document-level statistics.
 
     Args:
-        chunk_results: list of retrieval outputs per chunk
+        chunk_results: retrieval outputs per chunk
 
     Returns:
-        dict with:
-            - profile
-            - score_stats
+        dictionary with score statistics and constraint distribution profile
     """
 
-    all_scores: List[float] = []
+    all_scores = np.array(
+        [s for r in chunk_results for s in r["scores"]],
+        dtype=np.float32
+    )
 
     counter = {
         "S": defaultdict(int),
         "I": defaultdict(int),
-        "C": defaultdict(int),
+        "C": defaultdict(int)
     }
 
     total = {"S": 0, "I": 0, "C": 0}
 
     for r in chunk_results:
-        all_scores.extend(r["scores"])
-
         for cg in r["constraints"]:
             ids = extract_constraint_ids(cg)
 
             for c in ids:
-                if c.startswith("S"):
-                    counter["S"][c] += 1
-                    total["S"] += 1
-                elif c.startswith("I"):
-                    counter["I"][c] += 1
-                    total["I"] += 1
-                elif c.startswith("C"):
-                    counter["C"][c] += 1
-                    total["C"] += 1
+                g = c[0]
+                counter[g][c] += 1
+                total[g] += 1
 
-    if not all_scores:
-        score_stats = {k: 0.0 for k in ["mean", "max", "min", "std", "p50", "p90", "p95"]}
-    else:
-        arr = np.array(all_scores)
-
+    if all_scores.size == 0:
         score_stats = {
-            "mean": float(arr.mean()),
-            "max": float(arr.max()),
-            "min": float(arr.min()),
-            "std": float(arr.std()),
-            "p50": float(np.percentile(arr, 50)),
-            "p90": float(np.percentile(arr, 90)),
-            "p95": float(np.percentile(arr, 95)),
+            "mean": 0.0,
+            "max": 0.0,
+            "min": 0.0,
+            "std": 0.0,
+            "p50": 0.0,
+            "p90": 0.0,
+            "p95": 0.0
+        }
+    else:
+        score_stats = {
+            "mean": float(all_scores.mean()),
+            "max": float(all_scores.max()),
+            "min": float(all_scores.min()),
+            "std": float(all_scores.std()),
+            "p50": float(np.percentile(all_scores, 50)),
+            "p90": float(np.percentile(all_scores, 90)),
+            "p95": float(np.percentile(all_scores, 95))
         }
 
     profile = {
-        g: {
-            k: counter[g][k] / total[g]
-            for k in counter[g]
-        } if total[g] else {}
+        g: (
+            {k: counter[g][k] / total[g] for k in counter[g]}
+            if total[g] > 0 else {}
+        )
         for g in ["S", "I", "C"]
     }
 
@@ -170,9 +166,6 @@ def build_doc_summary(
         "score_stats": score_stats
     }
 
-# =========================================================
-# MAIN
-# =========================================================
 
 if __name__ == "__main__":
 
@@ -183,15 +176,16 @@ if __name__ == "__main__":
     groups = group_dataset(raw_data)
     dataset = precompute_groups(groups)
 
+    prepare_dataset(dataset)
+
     datachunks = pd.read_parquet("data/clean/archelect_with_chunks.parquet")
 
     all_chunks: List[str] = []
     doc_ids: List[Any] = []
 
-    for _, row in datachunks.iterrows():
-        for c in row["chunks"]:
-            all_chunks.append(c)
-            doc_ids.append(row["id"])
+    for row in datachunks.itertuples(index=False):
+        all_chunks.extend(row.chunks)
+        doc_ids.extend([row.id] * len(row.chunks))
 
     chunk_results = retrieve_topk_groups_per_chunk(
         all_chunks,
@@ -199,27 +193,27 @@ if __name__ == "__main__":
         k=5
     )
 
-    doc_buffer: Dict[Any, List[Dict[str, Any]]] = defaultdict(list)
+    doc_buffer = defaultdict(list)
 
-    for i, res in enumerate(chunk_results):
-        doc_buffer[doc_ids[i]].append(res)
+    for doc_id, res in zip(doc_ids, chunk_results):
+        doc_buffer[doc_id].append(res)
 
     final_docs: List[Dict[str, Any]] = []
 
     for doc_id, chunk_list in doc_buffer.items():
         summary = build_doc_summary(chunk_list)
-        stats = summary["score_stats"]
-        profile = summary["profile"]
 
         final_docs.append({
             "id": doc_id,
-            **{f"score_{k}": v for k, v in stats.items()},
-            "profile": profile
+            **{f"score_{k}": v for k, v in summary["score_stats"].items()},
+            "profile": summary["profile"]
         })
 
-    df_summary = pd.DataFrame(final_docs)
-
-    df_final = datachunks.merge(df_summary, on="id", how="left")
+    df_final = datachunks.merge(
+        pd.DataFrame(final_docs),
+        on="id",
+        how="left"
+    )
 
     df_final.to_parquet(
         "data/InfoNCE/archelect_scored_NCE.parquet",
