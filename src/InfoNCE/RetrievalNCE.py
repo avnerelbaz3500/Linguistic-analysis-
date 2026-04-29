@@ -8,7 +8,7 @@ from collections import defaultdict
 from sentence_transformers import SentenceTransformer
 
 from .InfoNCE import embed, load_json, group_dataset, precompute_groups
-from .global_profiling_NCE import extract_constraint_ids
+from .ProfilingNCE import extract_constraint_ids
 
 # =========================================================
 # LOGGING
