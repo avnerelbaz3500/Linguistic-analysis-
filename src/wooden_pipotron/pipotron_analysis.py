@@ -12,7 +12,12 @@ LOG_DIR = "logs/wooden_pipotron"
 os.makedirs(LOG_DIR, exist_ok=True)
 
 # Load NLP model once
-nlp = spacy.load("fr_core_news_sm", disable=["ner", "parser"])
+try:
+    nlp = spacy.load("fr_core_news_sm", disable=["ner", "parser"])
+except OSError:
+    print(red("Error: The model 'fr_core_news_sm' is not installed."))
+    print(blue("To install it : python -m spacy download fr_core_news_sm"))
+    raise
 
 def load_data(path):
     """

@@ -33,7 +33,6 @@ for root, dirs, files in os.walk(TEXT_ROOT):
         if file.endswith(".txt"):
             file_path = os.path.join(root, file)
             file_id = os.path.splitext(file)[0]
-
             try:
                 with open(file_path, "r", encoding="utf-8") as f:
                     text = f.read()
