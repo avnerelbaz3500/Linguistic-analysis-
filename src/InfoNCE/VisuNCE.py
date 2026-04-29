@@ -105,13 +105,20 @@ def compute_party_aggregates(df: pd.DataFrame) -> pd.DataFrame:
 
 
 # =========================================================
+# STYLE GLOBAL (LE TRUC QUE TU AS OUBLIÉ)
+# =========================================================
+
+def set_plot_style():
+    sns.set_theme(style="whitegrid")
+    plt.style.use("ggplot")
+    sns.set_palette("viridis")
+
+
+# =========================================================
 # PLOTTING
 # =========================================================
 
 def plot_time_evolution(df: pd.DataFrame, output_dir: str) -> None:
-    """
-    Plot score evolution over time by party.
-    """
     logger.info("Plotting time evolution")
 
     plt.figure(figsize=(14, 8))
@@ -122,12 +129,23 @@ def plot_time_evolution(df: pd.DataFrame, output_dir: str) -> None:
         y="score_mean",
         hue="affiliate political party",
         marker="o",
+        linewidth=2,
         errorbar=None
     )
 
-    plt.title("Evolution of InfoNCE score over time")
-    plt.xlabel("Year")
-    plt.ylabel("Score mean")
+    plt.title(
+        "Evolution of InfoNCE Score Over Time",
+        fontsize=16,
+        pad=15
+    )
+    plt.xlabel("Year", fontsize=12)
+    plt.ylabel("Score Mean", fontsize=12)
+
+    plt.legend(
+        title="Political Party",
+        bbox_to_anchor=(1.05, 1),
+        loc="upper left"
+    )
 
     plt.tight_layout()
 
@@ -135,13 +153,8 @@ def plot_time_evolution(df: pd.DataFrame, output_dir: str) -> None:
     plt.savefig(path, dpi=300)
     plt.close()
 
-    logger.info("Saved %s", path)
-
 
 def plot_party_distribution(df: pd.DataFrame, output_dir: str) -> None:
-    """
-    Plot score distribution by political party.
-    """
     logger.info("Plotting party distribution")
 
     plt.figure(figsize=(12, 8))
@@ -157,10 +170,18 @@ def plot_party_distribution(df: pd.DataFrame, output_dir: str) -> None:
         data=df,
         y="affiliate political party",
         x="score_mean",
-        order=order
+        order=order,
+        palette="magma"
     )
 
-    plt.title("Score distribution by political party")
+    plt.title(
+        "Distribution of Scores by Political Party",
+        fontsize=16
+    )
+    plt.xlabel("Score Mean")
+    plt.ylabel("Political Party")
+
+    plt.axvline(x=0, color="red", linestyle="--", alpha=0.4)
 
     plt.tight_layout()
 
@@ -168,13 +189,8 @@ def plot_party_distribution(df: pd.DataFrame, output_dir: str) -> None:
     plt.savefig(path, dpi=300)
     plt.close()
 
-    logger.info("Saved %s", path)
-
 
 def plot_gender(df: pd.DataFrame, output_dir: str) -> None:
-    """
-    Plot score by gender.
-    """
     logger.info("Plotting gender analysis")
 
     plt.figure(figsize=(10, 6))
@@ -183,10 +199,16 @@ def plot_gender(df: pd.DataFrame, output_dir: str) -> None:
         data=df,
         x="score_mean",
         y="titulaire-sexe",
+        palette="viridis",
         errorbar=None
     )
 
-    plt.title("Score by gender")
+    plt.title(
+        "Score by Gender",
+        fontsize=16
+    )
+    plt.xlabel("Score Mean")
+    plt.ylabel("Gender")
 
     plt.tight_layout()
 
@@ -194,13 +216,8 @@ def plot_gender(df: pd.DataFrame, output_dir: str) -> None:
     plt.savefig(path, dpi=300)
     plt.close()
 
-    logger.info("Saved %s", path)
-
 
 def plot_age(df: pd.DataFrame, output_dir: str) -> None:
-    """
-    Plot score by age group.
-    """
     logger.info("Plotting age analysis")
 
     plt.figure(figsize=(12, 6))
@@ -212,10 +229,16 @@ def plot_age(df: pd.DataFrame, output_dir: str) -> None:
         x="score_mean",
         y="age_group",
         order=labels,
+        palette="cubehelix",
         errorbar=None
     )
 
-    plt.title("Score by age group")
+    plt.title(
+        "Score by Age Group",
+        fontsize=16
+    )
+    plt.xlabel("Score Mean")
+    plt.ylabel("Age Group")
 
     plt.tight_layout()
 
@@ -223,29 +246,50 @@ def plot_age(df: pd.DataFrame, output_dir: str) -> None:
     plt.savefig(path, dpi=300)
     plt.close()
 
-    logger.info("Saved %s", path)
-
-
 def plot_top10(df: pd.DataFrame, output_dir: str) -> None:
     """
-    Plot top 10 highest scoring documents.
+    Plot top 10 unique individuals based on aggregated score.
+
+    Individuals are grouped by full name, and political party is displayed
+    under each name in the y-axis labels.
+
+    Args:
+        df: Input dataframe containing scores and identity columns
+        output_dir: Directory where the plot will be saved
     """
-    logger.info("Plotting top 10")
 
     df = df.copy()
-    df["name"] = df["titulaire-prenom"] + " " + df["titulaire-nom"]
 
-    top10 = df.nlargest(10, "score_mean")
+    df["name"] = (
+        df["titulaire-prenom"].fillna("") + " " + df["titulaire-nom"].fillna("")
+    ).str.strip()
+
+    df["party"] = df["affiliate political party"].fillna("Unknown")
+
+    df_agg = (
+        df.groupby(["name", "party"], as_index=False)
+        .agg({"score_mean": "mean"})
+    )
+
+    df_agg["label"] = df_agg["name"] + "\n(" + df_agg["party"] + ")"
+
+    top10 = (
+        df_agg.nlargest(10, "score_mean")
+        .sort_values("score_mean", ascending=False)
+    )
 
     plt.figure(figsize=(12, 6))
 
     sns.barplot(
         data=top10,
         x="score_mean",
-        y="name"
+        y="label",
+        palette="Reds_r"
     )
 
-    plt.title("Top 10 highest scores")
+    plt.title("Top 10 Individuals (Average InfoNCE Score)", fontsize=16)
+    plt.xlabel("Score Mean")
+    plt.ylabel("Candidate (Party)")
 
     plt.tight_layout()
 
@@ -253,13 +297,7 @@ def plot_top10(df: pd.DataFrame, output_dir: str) -> None:
     plt.savefig(path, dpi=300)
     plt.close()
 
-    logger.info("Saved %s", path)
-
-
 def plot_correlation(df: pd.DataFrame, output_dir: str) -> None:
-    """
-    Plot correlation matrix between score metrics.
-    """
     logger.info("Plotting correlation matrix")
 
     corr = df[[
@@ -271,16 +309,21 @@ def plot_correlation(df: pd.DataFrame, output_dir: str) -> None:
 
     plt.figure(figsize=(8, 6))
 
-    sns.heatmap(corr, annot=True, cmap="coolwarm")
+    sns.heatmap(
+        corr,
+        annot=True,
+        cmap="coolwarm",
+        fmt=".2f",
+        square=True
+    )
 
-    plt.title("Correlation between score metrics")
+    plt.title("Correlation Between Score Metrics", fontsize=14)
+
+    plt.tight_layout()
 
     path = os.path.join(output_dir, "correlation.png")
     plt.savefig(path, dpi=300)
     plt.close()
-
-    logger.info("Saved %s", path)
-
 
 # =========================================================
 # MAIN
