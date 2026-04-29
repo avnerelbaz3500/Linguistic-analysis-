@@ -1,0 +1,152 @@
+[
+  {
+    "base": "Le gouvernement a annoncé la fermeture de l'usine Renault à Boulogne-Billancourt.",
+    "ldb": "La fermeture de l'usine Renault à Boulogne-Billancourt a été mise en œuvre récemment.",
+    "direct": "Le gouvernement a annoncé qu'il fermera l'usine Renault à Boulogne-Billancourt.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S3",
+          "I4",
+          "C5"
+        ],
+        "effect": "remplacement des verbes par noms abstraits (ex: mise en œuvre, réalisation, gestion) ; au moins un élément nécessaire à la compréhension est sous-entendu ; éviter d’assigner clairement une responsabilité (passif, neutre)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R3",
+          "J4",
+          "D5"
+        ],
+        "effect": "remplacement des noms abstraits par verbes d’action concrets ; tous les éléments nécessaires sont formulés sans ambiguïté ; attribuer explicitement l’action à un acteur identifié"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la fermeture de l'usine Renault à Boulogne-Billancourt.",
+    "ldb": "Dans le cadre d'un processus administratif, un arrêté officiel a été émis concernant la cessation d'activité de l'établissement industriel Renault situé dans la commune de Boulogne-Billancourt.",
+    "direct": "Le gouvernement a annoncé la fermeture de l'usine Renault située à Boulogne-Billancourt.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C6",
+          "C7",
+          "S6"
+        ],
+        "effect": "introduire vocabulaire administratif, technique ou bureaucratique ; remplacer un élément précis par une formulation vague ; sujet absent, implicite ou placé après le verbe principal"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D6",
+          "D7",
+          "R6"
+        ],
+        "effect": "utiliser un vocabulaire simple et courant ; remplacer les termes vagues par des éléments précis ; sujet explicite placé en début de phrase avant l’action"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé la fermeture de l'usine Renault à Boulogne-Billancourt.",
+    "ldb": "Il y a eu une décision administrative concernant la fermeture d'un site de production automobile dans la région parisienne, affectant spécifiquement l'installation Renault de Boulogne-Billancourt.",
+    "direct": "Le gouvernement a annoncé la fermeture de l'usine Renault à Boulogne-Billancourt.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S10",
+          "C3",
+          "C6"
+        ],
+        "effect": "ajout d’une explication ou justification non nécessaire au fait ; rendre au moins un élément imprécis (temps, lieu, quantité, acteur) ; introduire vocabulaire administratif, technique ou bureaucratique"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R10",
+          "D3",
+          "D6"
+        ],
+        "effect": "aucune justification, uniquement le fait brut ; rendre tous les éléments explicites et non ambigus ; utiliser un vocabulaire simple et courant"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé une augmentation des charges pour les petites entreprises.",
+    "ldb": "Une augmentation des charges pour les petites entreprises a été mise en œuvre.",
+    "direct": "Le gouvernement a augmenté les charges pour les petites entreprises.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S3",
+          "I4",
+          "C5"
+        ],
+        "effect": "remplacement des verbes par noms abstraits (ex: mise en œuvre, réalisation, gestion) ; au moins un élément nécessaire à la compréhension est sous-entendu ; éviter d’assigner clairement une responsabilité (passif, neutre)"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R3",
+          "J4",
+          "D5"
+        ],
+        "effect": "remplacement des noms abstraits par verbes d’action concrets ; tous les éléments nécessaires sont formulés sans ambiguïté ; attribuer explicitement l’action à un acteur identifié"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé une augmentation des charges pour les petites entreprises.",
+    "ldb": "Dans le cadre de sa politique administrative, le cabinet gouvernemental a émis une directive concernant une modification des frais applicables aux sociétés de petite envergure.",
+    "direct": "Le gouvernement a décidé d'augmenter les charges pour les petites entreprises.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "C6",
+          "C7",
+          "S6"
+        ],
+        "effect": "introduire vocabulaire administratif, technique ou bureaucratique ; remplacer un élément précis par une formulation vague ; sujet absent, implicite ou placé après le verbe principal"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "D6",
+          "D7",
+          "R6"
+        ],
+        "effect": "utiliser un vocabulaire simple et courant ; remplacer les termes vagues par des éléments précis ; sujet explicite placé en début de phrase avant l’action"
+      }
+    ]
+  },
+  {
+    "base": "Le gouvernement a annoncé une augmentation des charges pour les petites entreprises.",
+    "ldb": "Il y a eu une décision du gouvernement visant à augmenter les coûts opérationnels pour les sociétés de petite taille, ce qui pourrait avoir des implications significatives sur leur capacité à fonctionner efficacement.",
+    "direct": "Le gouvernement a annoncé une augmentation des charges pour les petites entreprises.",
+    "ldb_constraints": [
+      {
+        "id": [
+          "S10",
+          "C3",
+          "C6"
+        ],
+        "effect": "ajout d’une explication ou justification non nécessaire au fait ; rendre au moins un élément imprécis (temps, lieu, quantité, acteur) ; introduire vocabulaire administratif, technique ou bureaucratique"
+      }
+    ],
+    "direct_constraints": [
+      {
+        "id": [
+          "R10",
+          "D3",
+          "D6"
+        ],
+        "effect": "aucune justification, uniquement le fait brut ; rendre tous les éléments explicites et non ambigus ; utiliser un vocabulaire simple et courant"
+      }
+    ]
+  }
+]

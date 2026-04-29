@@ -260,87 +260,90 @@ def aggregate_constraints(payload: List[Dict[str, Any]]) -> Tuple[List[Dict], Li
     return ldb_constraints, direct_constraints
 
 
-def call_paraphraser(
-    sentence: str,
+def call_paraphraser_batch(
+    sentences: List[str],
     n: int = 4,
     k: int = 3
-) -> List[Dict[str, Any]]:
+) -> List[List[Dict[str, Any]]]:
     """
-    Generate paraphrased LDB/DIRECT pairs using constraint-conditioned prompting.
-
-    - LLM generates ONLY text
-    - Constraints are fully controlled by Python (ground truth)
+    Micro-batched paraphrasing:
+    - multiple sentences per forward pass
+    - strict separation in output
+    - no semantic mixing
     """
 
     # =========================================================
-    # 1. SAMPLE CONSTRAINTS
+    # 1. PREP constraints ONCE per call (important gain)
     # =========================================================
     sampled = sample_ldb_batches(keys, n, k)
 
-    flat: List[Tuple[str, str]] = []
+    mirror = mirror_map
+    all_batches = []
 
     for row in sampled:
+        batch = []
         for c in row:
-            prefix = c[0]
+            if c[0] in mirror:
+                batch.append((c, mirror[c[0]] + c[1:]))
 
-            if prefix not in mirror_map:
-                continue
+        if batch:
+            all_batches.append(batch)
 
-            flat.append((c, mirror_map[prefix] + c[1:]))
-
-    batches: List[List[Tuple[str, str]]] = [
-        flat[i:i + k]
-        for i in range(0, len(flat), k)
-    ]
+    if not all_batches:
+        return [[] for _ in sentences]
 
     # =========================================================
-    # 2. BUILD PROMPTS + STORE TRUE PAYLOADS
+    # 2. BUILD PROMPTS (micro-batch over sentences)
     # =========================================================
-    prompts: List[str] = []
-    payloads: List[Dict[str, Any]] = []
+    system_msg = "Return STRICT JSON only. No explanation."
 
-    for batch in batches:
+    prompts = []
+    mapping = []  # (sentence_idx, batch_idx)
 
-        payload = build_constraints_payload(batch)
-        payloads.append(payload)
+    apply = tokenizer.apply_chat_template
 
-        prompt = tokenizer.apply_chat_template(
-            [
-                {
-                    "role": "system",
-                    "content": "Return STRICT JSON only. No explanation."
-                },
-                {
-                    "role": "user",
-                    "content": PARA_PROMPT.format(
-                        sentence=sentence,
-                        constraints=format_constraints(payload)
-                    )
-                }
-            ],
-            tokenize=False,
-            add_generation_prompt=True
-        )
+    for si, sentence in enumerate(sentences):
+        for bi, batch in enumerate(all_batches):
 
-        prompts.append(prompt)
+            payload = build_constraints_payload(batch)
+
+            user_msg = PARA_PROMPT.format(
+                sentence=sentence,
+                constraints=format_constraints(payload)
+            )
+
+            prompts.append(
+                apply(
+                    [
+                        {"role": "system", "content": system_msg},
+                        {"role": "user", "content": user_msg}
+                    ],
+                    tokenize=False,
+                    add_generation_prompt=True
+                )
+            )
+
+            mapping.append((si, bi, payload))
 
     # =========================================================
-    # 3. TOKENIZE
+    # 3. TOKENIZE (single shot)
     # =========================================================
     inputs = tokenizer(
         prompts,
         return_tensors="pt",
         padding=True,
         truncation=True
-    ).to(model.device)
+    )
+
+    inputs = {k: v.to(model.device) for k, v in inputs.items()}
 
     # =========================================================
-    # 4. GENERATION
+    # 4. GENERATION (unchanged)
     # =========================================================
     with torch.inference_mode():
         outputs = model.generate(
             **inputs,
-            max_new_tokens=180,
+            max_new_tokens=160,
             temperature=0.3,
             top_p=0.9,
             do_sample=True
@@ -349,33 +352,28 @@ def call_paraphraser(
     decoded = tokenizer.batch_decode(outputs, skip_special_tokens=True)
 
     # =========================================================
-    # 5. PARSE + ALIGN WITH PAYLOADS
+    # 5. PARSE + GROUP BACK PER SENTENCE
     # =========================================================
-    results: List[Dict[str, Any]] = []
-    
-    for i, d in enumerate(decoded):
+    results: List[List[Dict[str, Any]]] = [[] for _ in sentences]
 
-        data = extract_json(clean_output(d))
+    for (text, (si, bi, payload)) in zip(decoded, mapping):
+
+        data = extract_json(clean_output(text))
 
         if not data:
-            print("FAILED PARSE")
-            print(d)
             continue
-
-        payload = payloads[i]
 
         ldb_constraints, direct_constraints = aggregate_constraints(payload)
 
-        results.append({
-            "base": sentence,
-            "ldb": data["ldb"],
-            "direct": data["direct"],
+        results[si].append({
+            "base": sentences[si],
+            "ldb": data.get("ldb"),
+            "direct": data.get("direct"),
             "ldb_constraints": ldb_constraints,
             "direct_constraints": direct_constraints
         })
 
     return results
-
 
 # =========================================================
 # GENERATOR
@@ -488,36 +486,35 @@ def load_checkpoint(path: str, resume: bool):
 def generate_dataset(
     n_base: int = 10,
     n_variants: int = 3,
-    batch_size: int = 2,
+    batch_size: int = 4,
     chunk_size: int = 8,
     resume: bool = True
 ) -> List[Dict[str, Any]]:
-    """
-    Full dataset generation pipeline with optional resume.
-    """
 
     torch.cuda.empty_cache()
     gc.collect()
 
-    # =========================================================
-    # RESUME LOGIC
-    # =========================================================
     start_idx, dataset = load_checkpoint(CHECKPOINT_PATH, resume)
 
-    logger.info("Resume mode: %s", resume)
-    logger.info("Starting from index: %d", start_idx)
-    logger.info("Loaded samples: %d", len(dataset))
+    logger.info("Resume: %s | start_idx: %d | loaded: %d",
+                resume, start_idx, len(dataset))
 
     # =========================================================
-    # BASE
+    # BASE GENERATION (unchanged)
     # =========================================================
     base = call_generator(n_base, chunk_size)
     base = base[start_idx:]
 
-    logger.info("Total base sentences: %d", len(base))
+    logger.info("Base sentences: %d", len(base))
 
     # =========================================================
-    # LOOP
+    # LOCAL BINDINGS (micro-opt)
+    # =========================================================
+    paraphraser = call_paraphraser_batch
+    saver = save_checkpoint
+
+    # =========================================================
+    # MAIN LOOP
     # =========================================================
     for i in tqdm(range(0, len(base), batch_size), desc="Dataset building"):
 
@@ -525,49 +522,53 @@ def generate_dataset(
         global_idx = start_idx + i
 
         try:
-            for sentence in batch:
+            append = dataset.append
 
-                results = call_paraphraser(sentence, n_variants)
+            # =========================================================
+            # MICRO-BATCH PARAPHRASER (NEW)
+            # =========================================================
+            batch_results = paraphraser(batch, n_variants)
 
-                for res in results:
+            for sentence_results in batch_results:
+                for res in sentence_results:
 
                     if not res:
                         continue
 
-                    dataset.append({
-                        "base": sentence,
+                    append({
+                        "base": res["base"],
                         "ldb": res["ldb"],
                         "direct": res["direct"],
                         "ldb_constraints": res["ldb_constraints"],
                         "direct_constraints": res["direct_constraints"]
                     })
 
-            save_checkpoint(
-                CHECKPOINT_PATH,
-                global_idx + batch_size,
-                dataset
-            )
+            # =========================================================
+            # CHECKPOINT (unchanged but cleaner)
+            # =========================================================
+            if i % (batch_size * 5) == 0:
+                saver(
+                    CHECKPOINT_PATH,
+                    global_idx + batch_size,
+                    dataset
+                )
 
-            torch.cuda.empty_cache()
-            gc.collect()
+        except RuntimeError:
+            logger.error("GPU crash → checkpoint save")
 
-        except RuntimeError as e:
-            logger.error("GPU crash → saving checkpoint")
-
-            save_checkpoint(
+            saver(
                 CHECKPOINT_PATH,
                 global_idx,
                 dataset
             )
 
-            raise e
+            raise
 
     return dataset
-
-
 # =========================================================
 # SAVE
 # =========================================================
+
 
 def save_json(data: Any, path: str) -> None:
     """
@@ -591,10 +592,10 @@ if __name__ == "__main__":
             os.remove(CHECKPOINT_PATH)
 
     dataset = generate_dataset(
-        n_base=200,
+        n_base=2,
         n_variants=3,
-        batch_size=10,
-        chunk_size=25,
+        batch_size=4,
+        chunk_size=2,
         resume=resume
     )
 

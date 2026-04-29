@@ -1,103 +1,153 @@
 {
-  "done_idx": 2,
+  "done_idx": 4,
   "data": [
     {
-      "base": "Le gouvernement a annoncé une augmentation de la TVA pour financer les pensions des retraités.",
-      "ldb": "Il a été annoncé que la TVA serait augmentée afin de financer les pensions des retraités par le gouvernement.",
-      "direct": "Le gouvernement a annoncé une augmentation de la TVA pour financer les pensions des retraités.",
+      "base": "Le gouvernement a annoncé la fermeture de l'usine Renault à Boulogne-Billancourt.",
+      "ldb": "La fermeture de l'usine Renault à Boulogne-Billancourt a été mise en œuvre récemment.",
+      "direct": "Le gouvernement a annoncé qu'il fermera l'usine Renault à Boulogne-Billancourt.",
       "ldb_constraints": [
         {
           "id": [
-            "S2",
-            "S5",
-            "I4"
+            "S3",
+            "I4",
+            "C5"
           ],
-          "effect": "voix passive avec auxiliaire être + participe passé, sujet non acteur ; structure avec subordination ou enchâssement de propositions ; au moins un élément nécessaire à la compréhension est sous-entendu"
+          "effect": "remplacement des verbes par noms abstraits (ex: mise en œuvre, réalisation, gestion) ; au moins un élément nécessaire à la compréhension est sous-entendu ; éviter d’assigner clairement une responsabilité (passif, neutre)"
         }
       ],
       "direct_constraints": [
         {
           "id": [
-            "R2",
-            "R5",
-            "J4"
+            "R3",
+            "J4",
+            "D5"
           ],
-          "effect": "voix active, sujet explicite en position initiale qui réalise l’action ; une seule proposition principale sans subordination ; tous les éléments nécessaires sont formulés sans ambiguïté"
+          "effect": "remplacement des noms abstraits par verbes d’action concrets ; tous les éléments nécessaires sont formulés sans ambiguïté ; attribuer explicitement l’action à un acteur identifié"
         }
       ]
     },
     {
-      "base": "Le gouvernement a annoncé une augmentation de la TVA pour financer les pensions des retraités.",
-      "ldb": "Dans le but de garantir le financement adéquat des pensions des retraités, le gouvernement a décidé d'introduire une modification de la taxe sur la valeur ajoutée.",
-      "direct": "Le gouvernement augmente la TVA pour financer les pensions des retraités.",
+      "base": "Le gouvernement a annoncé la fermeture de l'usine Renault à Boulogne-Billancourt.",
+      "ldb": "Dans le cadre d'un processus administratif, un arrêté officiel a été émis concernant la cessation d'activité de l'établissement industriel Renault situé dans la commune de Boulogne-Billancourt.",
+      "direct": "Le gouvernement a annoncé la fermeture de l'usine Renault située à Boulogne-Billancourt.",
       "ldb_constraints": [
         {
           "id": [
-            "S1",
             "C6",
-            "S7"
-          ],
-          "effect": "phrase ≥15 mots avec au moins une subordination (ex: que, afin de, dans la mesure où) ; introduire vocabulaire administratif, technique ou bureaucratique ; au moins deux actions ou informations distinctes dans la même phrase"
-        }
-      ],
-      "direct_constraints": [
-        {
-          "id": [
-            "R1",
-            "D6",
-            "R7"
-          ],
-          "effect": "phrase ≤12 mots sans subordination, structure simple sujet-verbe-objet ; utiliser un vocabulaire simple et courant ; une seule action ou information par phrase"
-        }
-      ]
-    },
-    {
-      "base": "Le gouvernement a lancé une campagne pour attirer les investissements étrangers.",
-      "ldb": "Une campagne a été initiée dans le but d'attirer les investissements étrangers.",
-      "direct": "Le gouvernement a lancé une campagne pour attirer les investissements étrangers.",
-      "ldb_constraints": [
-        {
-          "id": [
-            "C5",
             "C7",
-            "I3"
+            "S6"
           ],
-          "effect": "éviter d’assigner clairement une responsabilité (passif, neutre) ; remplacer un élément précis par une formulation vague ; phrase commence par contexte ou cadrage avant l’action principale"
+          "effect": "introduire vocabulaire administratif, technique ou bureaucratique ; remplacer un élément précis par une formulation vague ; sujet absent, implicite ou placé après le verbe principal"
         }
       ],
       "direct_constraints": [
         {
           "id": [
-            "D5",
+            "D6",
             "D7",
-            "J3"
+            "R6"
           ],
-          "effect": "attribuer explicitement l’action à un acteur identifié ; remplacer les termes vagues par des éléments précis ; phrase commence directement par l’action principale"
+          "effect": "utiliser un vocabulaire simple et courant ; remplacer les termes vagues par des éléments précis ; sujet explicite placé en début de phrase avant l’action"
         }
       ]
     },
     {
-      "base": "Le gouvernement a lancé une campagne pour attirer les investissements étrangers.",
-      "ldb": "Dans le but d'attirer les investissements étrangers, le gouvernement a initié une campagne visant à promouvoir son environnement attractif pour les investisseurs internationaux.",
-      "direct": "Le gouvernement a lancé une campagne pour attirer les investissements étrangers.",
+      "base": "Le gouvernement a annoncé la fermeture de l'usine Renault à Boulogne-Billancourt.",
+      "ldb": "Il y a eu une décision administrative concernant la fermeture d'un site de production automobile dans la région parisienne, affectant spécifiquement l'installation Renault de Boulogne-Billancourt.",
+      "direct": "Le gouvernement a annoncé la fermeture de l'usine Renault à Boulogne-Billancourt.",
       "ldb_constraints": [
         {
           "id": [
-            "S4",
-            "S9",
-            "C1"
+            "S10",
+            "C3",
+            "C6"
           ],
-          "effect": "ajout d’éléments non nécessaires à la compréhension du fait (précisions, reformulations, contexte inutile) ; répétition d’une même information sous plusieurs formes ; remplacer un terme direct ou négatif par une formulation atténuée ou neutre"
+          "effect": "ajout d’une explication ou justification non nécessaire au fait ; rendre au moins un élément imprécis (temps, lieu, quantité, acteur) ; introduire vocabulaire administratif, technique ou bureaucratique"
         }
       ],
       "direct_constraints": [
         {
           "id": [
-            "R4",
-            "R9",
-            "D1"
+            "R10",
+            "D3",
+            "D6"
           ],
-          "effect": "suppression de tout élément non essentiel, conservation du fait brut ; chaque information apparaît une seule fois ; remplacer toute atténuation par un terme direct et explicite"
+          "effect": "aucune justification, uniquement le fait brut ; rendre tous les éléments explicites et non ambigus ; utiliser un vocabulaire simple et courant"
+        }
+      ]
+    },
+    {
+      "base": "Le gouvernement a annoncé une augmentation des charges pour les petites entreprises.",
+      "ldb": "Une augmentation des charges pour les petites entreprises a été mise en œuvre.",
+      "direct": "Le gouvernement a augmenté les charges pour les petites entreprises.",
+      "ldb_constraints": [
+        {
+          "id": [
+            "S3",
+            "I4",
+            "C5"
+          ],
+          "effect": "remplacement des verbes par noms abstraits (ex: mise en œuvre, réalisation, gestion) ; au moins un élément nécessaire à la compréhension est sous-entendu ; éviter d’assigner clairement une responsabilité (passif, neutre)"
+        }
+      ],
+      "direct_constraints": [
+        {
+          "id": [
+            "R3",
+            "J4",
+            "D5"
+          ],
+          "effect": "remplacement des noms abstraits par verbes d’action concrets ; tous les éléments nécessaires sont formulés sans ambiguïté ; attribuer explicitement l’action à un acteur identifié"
+        }
+      ]
+    },
+    {
+      "base": "Le gouvernement a annoncé une augmentation des charges pour les petites entreprises.",
+      "ldb": "Dans le cadre de sa politique administrative, le cabinet gouvernemental a émis une directive concernant une modification des frais applicables aux sociétés de petite envergure.",
+      "direct": "Le gouvernement a décidé d'augmenter les charges pour les petites entreprises.",
+      "ldb_constraints": [
+        {
+          "id": [
+            "C6",
+            "C7",
+            "S6"
+          ],
+          "effect": "introduire vocabulaire administratif, technique ou bureaucratique ; remplacer un élément précis par une formulation vague ; sujet absent, implicite ou placé après le verbe principal"
+        }
+      ],
+      "direct_constraints": [
+        {
+          "id": [
+            "D6",
+            "D7",
+            "R6"
+          ],
+          "effect": "utiliser un vocabulaire simple et courant ; remplacer les termes vagues par des éléments précis ; sujet explicite placé en début de phrase avant l’action"
+        }
+      ]
+    },
+    {
+      "base": "Le gouvernement a annoncé une augmentation des charges pour les petites entreprises.",
+      "ldb": "Il y a eu une décision du gouvernement visant à augmenter les coûts opérationnels pour les sociétés de petite taille, ce qui pourrait avoir des implications significatives sur leur capacité à fonctionner efficacement.",
+      "direct": "Le gouvernement a annoncé une augmentation des charges pour les petites entreprises.",
+      "ldb_constraints": [
+        {
+          "id": [
+            "S10",
+            "C3",
+            "C6"
+          ],
+          "effect": "ajout d’une explication ou justification non nécessaire au fait ; rendre au moins un élément imprécis (temps, lieu, quantité, acteur) ; introduire vocabulaire administratif, technique ou bureaucratique"
+        }
+      ],
+      "direct_constraints": [
+        {
+          "id": [
+            "R10",
+            "D3",
+            "D6"
+          ],
+          "effect": "aucune justification, uniquement le fait brut ; rendre tous les éléments explicites et non ambigus ; utiliser un vocabulaire simple et courant"
         }
       ]
     }
