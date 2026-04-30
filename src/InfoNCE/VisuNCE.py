@@ -357,6 +357,6 @@ def main(data_path: str, output_dir: str) -> None:
 
 if __name__ == "__main__":
     main(
-        data_path="data/InfoNCE/archelect_scored_NCE.parquet",
-        output_dir="logs/InfoNCE/"
+        data_path="data/InfoNCE/archelect_scored_NCEV2.parquet",
+        output_dir="logs/InfoNCE2/"
     )

@@ -137,7 +137,7 @@ def plot_grouped_radars(
 
 if __name__ == "__main__":
 
-    df = pd.read_parquet("data/InfoNCE/archelect_scored_NCE.parquet")
+    df = pd.read_parquet("data/InfoNCE/archelect_scored_NCEV2.parquet")
 
     grouped = aggregate_profiles_by_group(
         df,
@@ -146,6 +146,6 @@ if __name__ == "__main__":
 
     plot_grouped_radars(
         grouped,
-        output_path="logs/InfoNCE/radar/",
+        output_path="logs/InfoNCE2/radar/",
         title="InfoNCE Profil par parti politique"
     )
