@@ -52,7 +52,6 @@ def aggregate_profiles_by_group(
 
                 grouped_profiles[group][f"{family}.{k}"].append(float(v))
 
-    # mean aggregation
     result = {}
 
     for group, metrics in grouped_profiles.items():
@@ -111,9 +110,7 @@ def plot_grouped_radars_with_mean(
         values = np.r_[values_raw, values_raw[0]]
         mean_values = np.r_[mean_raw, mean_raw[0]]
 
-        # =========================
-        # 1. RADAR NORMAL
-        # =========================
+
         ax = axes[0, i]
         ax.plot(angles_closed, values, color=color, linewidth=2)
         ax.fill(angles_closed, values, alpha=0.20, color=color)
@@ -124,9 +121,6 @@ def plot_grouped_radars_with_mean(
         ax.set_yticklabels([])
         ax.set_title(f"{group}", fontsize=12, fontweight="bold")
 
-        # =========================
-        # 2. RADAR NORMALISÉ VS MEAN
-        # =========================
         ax = axes[1, i]
 
         delta_raw = values_raw - mean_raw
@@ -167,9 +161,6 @@ def plot_grouped_radars_with_mean(
     path = os.path.join(output_path, "radar_normalized_vs_mean.png")
     plt.savefig(path, dpi=300, bbox_inches="tight")
     plt.close()
-# =========================================================
-# MAIN
-# =========================================================
 
 if __name__ == "__main__":
 

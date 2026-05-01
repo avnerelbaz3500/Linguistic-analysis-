@@ -12,9 +12,6 @@ import ast
 
 from .Constants.constraints import CONSTRAINTS
 
-# =========================================================
-# LOGGING
-# =========================================================
 
 logging.basicConfig(
     level=logging.INFO,
@@ -23,24 +20,16 @@ logging.basicConfig(
 
 logger = logging.getLogger("radar")
 
-# =========================================================
-# TYPES
-# =========================================================
 
 ConstraintID = str
 Profile = Dict[ConstraintID, float]
 
-# =========================================================
-# GLOBAL IDS
-# =========================================================
 
 ALL_IDS: List[str] = [
     k for group in CONSTRAINTS.values() for k in group.keys()
 ]
 
-# =========================================================
-# EXTRACTION
-# =========================================================
+
 
 def extract_constraint_ids(constraints: Any) -> List[str]:
     """
@@ -76,9 +65,6 @@ def extract_constraint_ids(constraints: Any) -> List[str]:
 
     return ids
 
-# =========================================================
-# GLOBAL PROFILE
-# =========================================================
 
 def compute_global_profile(topk_results: List[Dict]) -> Profile:
     """
@@ -123,9 +109,6 @@ def compute_global_profile(topk_results: List[Dict]) -> Profile:
         for g in ["S", "I", "C"]
     }
 
-# =========================================================
-# PLOT
-# =========================================================
 
 def plot_profiles(profile: Profile, output_path: str, title: str) -> None:
     """
@@ -223,9 +206,6 @@ def plot_profiles(profile: Profile, output_path: str, title: str) -> None:
 
 
 
-# =========================================================
-# MAIN
-# =========================================================
 
 if __name__ == "__main__":
 

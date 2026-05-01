@@ -7,9 +7,6 @@ from .Constants.query import QUERY
 import json
 import pandas as pd
 
-# =========================================================
-# LOGGING
-# =========================================================
 
 logging.basicConfig(
     level=logging.INFO,
@@ -18,31 +15,19 @@ logging.basicConfig(
 
 logger = logging.getLogger("infonce")
 
-# =========================================================
-# DEVICE
-# =========================================================
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-# =========================================================
-# MODEL
-# =========================================================
 
 model = SentenceTransformer(
     "OrdalieTech/Solon-embeddings-base-0.1",
     device=device
 )
 
-# =========================================================
-# TYPES
-# =========================================================
 
 DatasetItem = Dict[str, Any]
 Group = Dict[str, Any]
 
-# =========================================================
-# EMBEDDING
-# =========================================================
 
 def embed(texts: List[str]) -> np.ndarray:
     """
@@ -50,9 +35,6 @@ def embed(texts: List[str]) -> np.ndarray:
     """
     return model.encode(texts, normalize_embeddings=True).astype(np.float32)
 
-# =========================================================
-# GROUPING
-# =========================================================
 
 def group_dataset(data: List[DatasetItem]) -> List[Group]:
     grouped: Dict[str, Group] = {}
@@ -76,9 +58,6 @@ def group_dataset(data: List[DatasetItem]) -> List[Group]:
 
     return list(grouped.values())
 
-# =========================================================
-# PRECOMPUTE
-# =========================================================
 
 def precompute_groups(groups: List[Group]) -> List[Group]:
     processed: List[Group] = []
@@ -101,9 +80,6 @@ def precompute_groups(groups: List[Group]) -> List[Group]:
 
     return processed
 
-# =========================================================
-# INFO NCE
-# =========================================================
 
 def info_nce(
     query: torch.Tensor,
@@ -127,16 +103,10 @@ def info_nce(
 
     return -(log_num - log_den).squeeze()
 
-# =========================================================
-# SCORING
-# =========================================================
 
 def score_group(q_vec: torch.Tensor, group: Group) -> float:
     return info_nce(q_vec, group["p"], group["n"]).item()
 
-# =========================================================
-# RETRIEVAL SINGLE
-# =========================================================
 
 def retrieve_best_group_vectorized(
     query: str,
@@ -169,9 +139,6 @@ def retrieve_best_group_vectorized(
 
     return dataset[best_idx], scores[best_idx].item()
 
-# =========================================================
-# RETRIEVAL TOP-K
-# =========================================================
 
 def retrieve_topk_groups_per_query(
     queries: List[str],
@@ -224,17 +191,11 @@ def retrieve_topk_groups_per_query(
 
     return results
 
-# =========================================================
-# IO
-# =========================================================
 
 def load_json(path: str) -> Any:
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
-# =========================================================
-# MAIN
-# =========================================================
 
 if __name__ == "__main__":
 
