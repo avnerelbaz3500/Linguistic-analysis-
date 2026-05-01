@@ -1,67 +1,155 @@
 # Linguistic Analysis: The Evolution of "Langue de Bois" in French Politics (1981–1993)
 
 **Is political discourse becoming increasingly irrelevant?**  
-*"Langue de bois"*, or "wooden language", is a hallmark of political communication: a rhetorical strategy characterized by technocratic abstraction, euphemisms, and evasive structures designed to convey a sense of action while avoiding concrete accountability. This project provides a comparative scientific framework to quantify this phenomenon within the French political landscape during the pivotal years of 1981 to 1993.
+*"Langue de bois"*, or *wooden language*, is a hallmark of political communication: a rhetorical strategy characterized by abstraction, euphemism, depersonalization, and evasive formulations that create the appearance of action while avoiding direct accountability.
 
-## The Problem: Quantifying the Elusive
+This project proposes a comparative computational framework to study this phenomenon in French political discourse between **1981 and 1993**. It combines three complementary approaches:
+1. a **lexical density baseline** based on technocratic vocabulary,
+2. a **semantic projection framework** based on POLAR,
+3. a **contrastive representation learning framework** based on InfoNCE-inspired retrieval. 
 
-While "Langue de bois" is intuitively recognizable, its systematic quantification poses a significant challenge for computational linguistics. It is not merely the presence of specific words, but a complex interplay of syntax, abstraction, and semantic evasion. 
+---
 
-Our objective is to determine:
-1. **Temporal Evolution:** Has political speech become more technocratic over time?
-2. **Partisan Variation:** Do different political ideologies employ "Langue de bois" with varying intensity or for different strategic purposes?
-3. **Methodological Comparison:** Can a simple lexical count compete with modern vector-space projections?
+## Research Questions
+
+This project is built around three core questions:
+
+1. **Temporal evolution:** Does political discourse become more technocratic or rhetorically opaque over time?
+2. **Partisan variation:** Do political families differ in their use of *langue de bois*?
+3. **Methodological comparison:** Can lexical methods compete with semantic and contrastive representation-based approaches? 
 
 ---
 
 ## Methodology
 
-This project employs two distinct, complementary methodologies to capture the essence of wooden language from both a lexical and a semantic perspective.
+The project relies on three complementary methodologies designed to capture *langue de bois* from different analytical perspectives.
 
-### 1. The Pipotron Index: Lexical Density Analysis
-The first approach is a frequency-based analysis utilizing a curated dictionary of administrative and technocratic jargon—the **"Pipotron"** list. 
+### 1. Pipotron Index: Lexical Density Analysis
 
-- **Concept:** We measure the "density" of jargon by calculating the ratio of specific keywords (e.g., *synergie, optimisation, dispositif, acteurs*) against the total word count of a speech.
-- **Goal:** To identify the reliance on "empty" nominalized abstractions that characterize the French administrative style of the 80s and 90s.
-- **Score:** A percentage indicating the concentration of technocratic markers.
+The first approach is a frequency-based baseline built from a curated dictionary of administrative, bureaucratic, and technocratic vocabulary.
 
-### 2. POLAR Projection: Semantic Vector-Space Analysis
-The second approach is a sophisticated adaptation of the **POLAR (Polarized Orthogonal Linear Axis Representation)** framework, originally proposed by **Mathew et al. (2020)** and recently applied in **Kohler & Mill (2025)**.
+- **Concept:** measure the proportion of jargon-related words in each speech.
+- **Examples of markers:** *synergie, optimisation, dispositif, acteurs*.
+- **Goal:** detect reliance on nominalized and abstract expressions typical of bureaucratic discourse.
+- **Score:** a percentage representing the density of lexical markers associated with technocratic language. 
 
-- **Adaptation:** Unlike traditional POLAR which works on word embeddings, we operate at the **sentence level** using `sentence-camembert-base`. This is crucial because "Langue de bois" is a discourse-level phenomenon.
-- **Mechanism:** We construct a synthetic semantic axis by generating antagonistic pairs (e.g., *"We will fire 500 people"* vs. *"A plan for the adaptation of resources is being deployed to safeguard competitiveness"*). 
-- **Projection:** Every sentence in our corpus is projected onto this **Direct-to-Wooden axis**. 
-- **Score:** A continuous value from **-1 (Direct)** to **+1 (Wooden)**, providing a nuanced measure of rhetorical abstraction.
+This method is simple and interpretable, but it remains limited to surface lexical overlap and cannot fully capture discourse-level rhetorical deformation. 
+
+### 2. POLAR Projection: Semantic Axis Modeling
+
+The second approach is an adaptation of the **POLAR (Polarized Orthogonal Linear Axis Representation)** framework.
+
+- **Adaptation:** instead of word embeddings, the method operates at the **sentence level**, using `sentence-camembert-base`.
+- **Mechanism:** a synthetic semantic axis is built from oppositional pairs contrasting **direct** and **wooden** political formulations.
+- **Projection:** each sentence is projected onto this axis.
+- **Score:** a continuous value from **-1 (Direct)** to **+1 (Wooden)**. 
+
+This approach provides a more semantic and discourse-sensitive measure than a lexical count, while remaining interpretable through a single rhetorical axis. 
+
+### 3. InfoNCE Contrastive Geometry: Retrieval-Based Discourse Modeling
+
+The third approach models *langue de bois* through **contrastive representation learning**.
+
+Instead of reducing political language to keywords or to a single handcrafted axis, this framework learns a latent space in which discourse is structured by controlled rhetorical deformations between **direct formulations** and **langue de bois formulations**. 
+
+- **Synthetic contrastive data:** politically grounded statements are generated and transformed into aligned **DIRECT / LDB** pairs while preserving factual content.
+- **Controlled constraints:** transformations are guided by explicit linguistic constraints covering **conceptual**, **structural**, and **informational** deformations.
+- **Document representation:** real political speeches are segmented into overlapping chunks of about **450 tokens** with a stride of **120 tokens**.
+- **Objective:** an **InfoNCE / NCE-inspired retrieval objective** evaluates whether a chunk aligns more strongly with direct formulations or with rhetorically constrained ones.
+- **Scores:**  
+  - a **max-based score** capturing extreme alignment with the most discriminative rhetorical transformation,  
+  - a **profile-based score** capturing the distribution of activated constraint families across retrieved groups. 
+
+This framework treats *langue de bois* as a **structured deformation of meaning in embedding space**, rather than as a simple lexical property. According to the report, the resulting representation space is **non-isotropic**, stable across time, and organized by political affiliation. 
+
+---
+
+## Main Findings
+
+The report suggests several robust patterns.
+
+- The learned InfoNCE space exhibits a **structured latent geometry** aligned with political groups rather than a homogeneous similarity space. 
+- Some parties, such as the **Front National** and the **PCF**, tend to occupy higher regions of the aggregated InfoNCE score distribution, while **Ecologists** and **Independent** actors tend to occupy lower regions. 
+- This organization remains **globally stable over time** from 1981 to 1993, suggesting that the model captures persistent discursive structure rather than transient lexical variation. 
+- The profile-based analysis shows that party differences are **multidimensional** and correspond to directional deviations from a global mean profile rather than uniform scalar shifts. 
+
+These conclusions should still be interpreted with methodological caution: the contrastive framework depends on manually designed rhetorical transformations and synthetic generation choices, even if the report argues that the main structural effects remain robust across settings. 
+
+---
+
+## Dataset
+
+The project relies on a corpus of **12,746 French political documents** collected from electoral manifestos, campaign declarations, and institutional speeches spanning **1981 to 1993**. After preprocessing and metadata filtering, **12,497 documents** are retained for analysis. 
+
+Each document is associated with structured metadata such as candidate identity, electoral context, and political affiliation. The real corpus is used as the evaluation domain, while a separate synthetic dataset is used to define contrastive rhetorical transformations. 
 
 ---
 
 ## Project Structure
 
 ```text
-├── data/
-│   ├── clean/            # Preprocessed political speeches (Archelect corpus)
-│   └── POLAR/            # Results and synthetic axis data
-├── logs/                 # Visualizations and statistical reports
+├── data/                       # Input datasets
+├── helper_function/            # Utility helpers
+├── logs/                       # Generated visualizations and analysis outputs
+├── notebook/                   # Exploration notebooks
 └── src/
-    ├── POLAR/            # Implementation of the projection methodology
-    ├── wooden_pipotron/  # Implementation of the lexical density methodology
-    └── preprocessing/    # Data cleaning and tokenization pipelines
+    ├── InfoNCE/                # InfoNCE-based profiling and analysis pipeline
+    │   ├── Constants/          # Prompting, constraints, and query constants
+    │   │   ├── __init__.py
+    │   │   ├── constraints.py
+    │   │   ├── generation_context.py
+    │   │   ├── prompts.py
+    │   │   └── query.py
+    │   ├── __init__.py
+    │   ├── DataNCE.py          # Data loading / preparation for InfoNCE
+    │   ├── InfoNCE.py          # Main InfoNCE scoring pipeline
+    │   ├── ProfilingNCE.py     # Profile construction from InfoNCE outputs
+    │   ├── RadarNCE.py         # Radar plot visualizations
+    │   ├── RetrievalNCE.py     # Retrieval pipeline for comparative analysis
+    │   ├── TestNCE.py          # Experimental / testing script
+    │   └── VisuNCE.py          # Additional InfoNCE visualizations
+    ├── POLAR/                  # POLAR projection methodology
+    │   ├── axis_generation.py
+    │   ├── README.md
+    │   ├── scoring_pipeline.py
+    │   └── visual_analysis.py
+    ├── preprocessing/          # Cleaning and preprocessing pipeline
+    │   ├── chunking.py
+    │   └── preprocess_archelect.py
+    └── wooden_pipotron/        # Lexical density methodology
 ```
-
-## References
-
-- **Kohler, B., & Mill, W. (2025).** *Cultural differences in the beauty premium.* Scientific Reports, 15(1), 17632. [https://doi.org/10.1038/s41598-025-02857-4](https://doi.org/10.1038/s41598-025-02857-4)
-- **Mathew, B., Ittepu, S., Saha, P., & Mukherjee, A. (2020).** *Interpretable Word Embeddings via the POLAR Framework.* Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP).
-- **Ardeur Collective.** *Dictionnaire Collectif de la Langue de Bois.* [ardeur.net](https://www.ardeur.net/wp-content/uploads/2015/04/dictionnaire_collectif_de_la_langue_de_bois-2.pdf)
 
 ---
 
-## Getting Started
+## Output and Analysis
 
-To reproduce the analysis:
-1. **Preprocess the data:** `python src/preprocessing/preprocess_archelect.py`
-2. **Run Lexical Analysis:** `python -m src.wooden_pipotron.pipotron_analysis`
-3. **Run POLAR Pipeline:** 
-   - `python src/POLAR/axis_generation.py`
-   - `python src/POLAR/scoring_pipeline.py`
-   - `python src/POLAR/visual_analysis.py`
+The project produces several kinds of outputs:
+
+- lexical scores from the Pipotron baseline,
+- sentence-level semantic projections from POLAR,
+- document-level contrastive scores and profiles from InfoNCE,
+- party-level comparisons,
+- temporal evolution plots,
+- radar visualizations of deviations from the global mean profile. 
+
+The radar profile analysis is especially useful for identifying how each political group departs from the global contrastive baseline across multiple rhetorical constraint dimensions. 
+
+---
+
+## Interpretation
+
+The three methods should not be seen as mutually exclusive.
+
+- **Pipotron** provides a transparent lexical baseline.
+- **POLAR** introduces a semantic projection onto a controlled rhetorical axis.
+- **InfoNCE** captures discourse as a structured geometric space shaped by controlled transformations. 
+
+Together, they form a multi-level framework for studying *langue de bois* as a phenomenon that is lexical, semantic, and geometric at once. 
+
+---
+
+## Reproducibility
+
+The report states that all data, code, and experiments are publicly available in the repository, with the goal of ensuring reproducibility of preprocessing, scoring, and analysis pipelines. 
+
+To improve reproducibility further, a useful next step would be to pin environment versions, document data access assumptions explicitly, and separate synthetic generation parameters from downstream evaluation settings. 
